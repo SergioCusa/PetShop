@@ -13,7 +13,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun TopBar(location: String, onNotificationClick: () -> Unit) {
+fun TopBar(
+    location: String,
+    onSearchClick: () -> Unit,
+    onNotificationClick: () -> Unit
+) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -27,7 +31,7 @@ fun TopBar(location: String, onNotificationClick: () -> Unit) {
         }
 
         Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-            PlaceholderIcon()
+            PlaceholderIcon(onClick = onSearchClick)
             PlaceholderIcon(onClick = onNotificationClick)
         }
     }

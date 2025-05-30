@@ -11,7 +11,7 @@ import androidx.compose.ui.unit.dp
 import com.prueba.petsop.ui.components.tags.CategoryChip
 
 @Composable
-fun profileScreen() {
+fun ProfileScreen() {
     var selectedTab by remember { mutableStateOf("Product") }
 
     Column(modifier = Modifier.padding(16.dp)) {

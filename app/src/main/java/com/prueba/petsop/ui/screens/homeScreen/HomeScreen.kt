@@ -14,14 +14,19 @@ import com.prueba.petsop.ui.components.cards.ProductCard
 @Composable
 fun HomeScreen(
     onNavigateToProfile: () -> Unit,
-    onNotificationClick: () -> Unit
+    onNotificationClick: () -> Unit,
+    onSearchClick: () -> Unit
 ) {
     Column(
         modifier = Modifier
             .fillMaxSize()
             .padding(horizontal = 24.dp, vertical = 16.dp)
     ) {
-        TopBar(location = "Buenos Aires", onNotificationClick = onNotificationClick)
+        TopBar(
+            location = "Buenos Aires",
+            onSearchClick = onSearchClick,
+            onNotificationClick = onNotificationClick
+        )
 
         Spacer(modifier = Modifier.height(16.dp))
 

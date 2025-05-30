@@ -6,21 +6,26 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import com.prueba.petsop.ui.screens.homeScreen.HomeScreen
 import com.prueba.petsop.ui.screens.notificationScreen.NotificationScreen
-import com.prueba.petsop.ui.screens.profileScreen.profileScreen
+import com.prueba.petsop.ui.screens.profileScreen.ProfileScreen
+import com.prueba.petsop.ui.screens.searchScreen.SearchScreen
 
 fun NavGraphBuilder.appNavGraph(navController: NavHostController) {
     navigation(startDestination = "home", route = "app") {
         composable("home") {
             HomeScreen(
                 onNavigateToProfile = { navController.navigate("profile") },
-                onNotificationClick = { navController.navigate("notifications") }
+                onNotificationClick = { navController.navigate("notifications") },
+                onSearchClick = { navController.navigate("search") }
             )
         }
         composable("profile") {
-            profileScreen()
+            ProfileScreen()
         }
         composable("notifications") {
             NotificationScreen()
+        }
+        composable("search") {
+            SearchScreen()
         }
     }
 }
