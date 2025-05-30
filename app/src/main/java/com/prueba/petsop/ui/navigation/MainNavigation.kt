@@ -5,13 +5,12 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.compose.NavHost
 
-
 @Composable
 fun MainNavigation() {
+    val navController: NavHostController = rememberNavController()
 
-    val navController : NavHostController = rememberNavController()
-
-    NavHost(navController = navController, startDestination = "auth") {
+    NavHost(navController = navController, startDestination = "onboarding_graph") {
+        onboardingNavGraph(navController)
         authNavGraph(navController)
         appNavGraph(navController)
     }
