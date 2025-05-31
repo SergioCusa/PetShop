@@ -26,6 +26,9 @@ fun PrimaryButton(text: String, onClick: () -> Unit) {
             contentColor = MaterialTheme.colorScheme.onPrimary
         ),
     ) {
-        Text(text = text)
+        Text(
+            text = text,
+            style = MaterialTheme.typography.labelMedium
+        )
     }
 }

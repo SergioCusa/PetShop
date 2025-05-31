@@ -11,28 +11,49 @@ import androidx.compose.ui.unit.sp
 import com.prueba.petsop.R
 
 val poppinsFontFamily = FontFamily(
-    Font(resId = R.font.poppins_light),
-    Font(resId = R.font.poppins_regular),
-    Font(resId = R.font.poppins_medium),
-    Font(resId = R.font.poppins_semibold),
-    Font(resId = R.font.poppins_bold)
+    Font(R.font.poppins_light, FontWeight.Light),
+    Font(R.font.poppins_regular, FontWeight.Normal),
+    Font(R.font.poppins_medium, FontWeight.Medium),
+    Font(R.font.poppins_semibold, FontWeight.SemiBold),
+    Font(R.font.poppins_bold, FontWeight.Bold)
 )
 
 val AppTypography = Typography(
     displayLarge = TextStyle(
         fontFamily = poppinsFontFamily,
+        fontWeight = FontWeight.Bold,
         fontSize = 57.sp
     ),
     titleLarge = TextStyle(
         fontFamily = poppinsFontFamily,
+        fontWeight = FontWeight.SemiBold,
         fontSize = 22.sp
     ),
     bodyLarge = TextStyle(
         fontFamily = poppinsFontFamily,
+        fontWeight = FontWeight.Normal,
         fontSize = 16.sp
+    ),
+    bodyMedium = TextStyle(
+        fontFamily = poppinsFontFamily,
+        fontWeight = FontWeight.Medium,
+        fontSize = 12.sp
     ),
     labelLarge = TextStyle(
         fontFamily = poppinsFontFamily,
+        fontWeight = FontWeight.Medium,
         fontSize = 14.sp
-    )
+    ),
+    labelMedium = TextStyle(
+        fontFamily = poppinsFontFamily,
+        fontWeight = FontWeight.Bold,
+        fontSize = 16.sp
+    ),
+    labelSmall = TextStyle(
+        fontFamily = poppinsFontFamily,
+        fontWeight = FontWeight.Medium,
+        fontSize = 11.sp
+    ),
+
 )
+

@@ -1,5 +1,6 @@
 package com.prueba.petsop.ui.screens.homeScreen
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -10,6 +11,13 @@ import com.prueba.petsop.ui.components.buttons.PrimaryButton
 import com.prueba.petsop.ui.components.layout.TopBar
 import com.prueba.petsop.ui.components.tags.CategoryChip
 import com.prueba.petsop.ui.components.cards.ProductCard
+import androidx.compose.ui.res.painterResource
+import androidx.compose.foundation.Image
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.unit.dp
+import com.prueba.petsop.R
+
 
 @Composable
 fun HomeScreen(
@@ -23,7 +31,7 @@ fun HomeScreen(
             .padding(horizontal = 24.dp, vertical = 16.dp)
     ) {
         TopBar(
-            location = "Buenos Aires",
+            location = "Jebres, Surakarta",
             onSearchClick = onSearchClick,
             onNotificationClick = onNotificationClick
         )
@@ -33,10 +41,15 @@ fun HomeScreen(
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(120.dp)
-                .padding(8.dp)
+                .height(250.dp),
+            contentAlignment = Alignment.Center
         ) {
-            Text("Promo Placeholder")
+            Image(
+                painter = painterResource(id = R.drawable.promo_image_2),
+                contentDescription = "Descripción de la imagen",
+                modifier = Modifier
+                    .fillMaxSize()
+            )
         }
 
         Spacer(modifier = Modifier.height(24.dp))

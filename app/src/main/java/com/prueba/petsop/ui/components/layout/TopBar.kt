@@ -26,7 +26,7 @@ fun TopBar(
         verticalAlignment = Alignment.CenterVertically
     ) {
         Column {
-            Text(text = "Location", style = MaterialTheme.typography.labelSmall)
+            Text(text = "Location", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.outline)
             Text(text = location, style = MaterialTheme.typography.bodyLarge)
         }
 
