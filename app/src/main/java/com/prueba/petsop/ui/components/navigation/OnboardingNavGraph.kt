@@ -17,6 +17,12 @@ fun NavGraphBuilder.onboardingNavGraph(navController: NavHostController) {
                     navController.navigate("auth") {
                         popUpTo("onboarding_graph") { inclusive = true }
                     }
+                },
+                onProductListClick = {
+                    navController.navigate("product_list")
+                },
+                onLoginTestClick = {
+                    navController.navigate("login_test")
                 }
             )
         }
