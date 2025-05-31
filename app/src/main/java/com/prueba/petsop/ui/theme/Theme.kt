@@ -11,48 +11,30 @@ import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 
-private val DarkColorScheme = darkColorScheme(
-    primary = Purple80,
-    secondary = PurpleGrey80,
-    tertiary = Pink80
-)
+private val LightColors = lightColorScheme(
+    primary = PurplePrimary,
+    onPrimary = White,
+    background = White,
+    surface = White,
+    onBackground = Black,
+    onSurface = Black,
+    error = ErrorRed,
 
-private val LightColorScheme = lightColorScheme(
-    primary = Purple40,
-    secondary = PurpleGrey40,
-    tertiary = Pink40
-
-    /* Other default colors to override
-    background = Color(0xFFFFFBFE),
-    surface = Color(0xFFFFFBFE),
-    onPrimary = Color.White,
-    onSecondary = Color.White,
-    onTertiary = Color.White,
-    onBackground = Color(0xFF1C1B1F),
-    onSurface = Color(0xFF1C1B1F),
-    */
+    // Grises:
+    outline = GrayB3,                   // útil para bordes
+    outlineVariant = GrayE5,           // otro para bordes o inputs
+    surfaceVariant = GrayF8,           // fondo gris claro
+    onSurfaceVariant = Gray89,         // texto secundario
+    inverseSurface = GrayD9,           // fondos alternativos
+    inverseOnSurface = GrayB3          // texto sobre gris
 )
 
 @Composable
-fun PetSopTheme(
-    darkTheme: Boolean = isSystemInDarkTheme(),
-    // Dynamic color is available on Android 12+
-    dynamicColor: Boolean = true,
-    content: @Composable () -> Unit
-) {
-    val colorScheme = when {
-        dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
-            val context = LocalContext.current
-            if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
-        }
-
-        darkTheme -> DarkColorScheme
-        else -> LightColorScheme
-    }
-
+fun PetSopTheme(content: @Composable () -> Unit) {
     MaterialTheme(
-        colorScheme = colorScheme,
-        typography = Typography,
+        colorScheme = LightColors,
+        typography = AppTypography,
+        shapes = MaterialTheme.shapes,
         content = content
     )
 }
