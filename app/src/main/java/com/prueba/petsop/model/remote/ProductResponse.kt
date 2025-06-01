@@ -1,4 +1,6 @@
-package com.prueba.petsop.model
+package com.prueba.petsop.model.remote
+
+import com.prueba.petsop.model.Product
 
 data class ProductResponse(
     val products: List<Product>,
