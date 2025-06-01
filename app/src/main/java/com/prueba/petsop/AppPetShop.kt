@@ -14,6 +14,7 @@ import androidx.navigation.compose.rememberNavController
 import com.prueba.petsop.viewmodel.ProductViewModel
 import com.prueba.petsop.ui.ProductListScreen
 import com.prueba.petsop.ui.screens.FavoritesScreen
+import com.prueba.petsop.ui.screens.onboardingScreen.OnboardingScreen
 
 @Composable
 fun AppPetShop(viewModel: ProductViewModel) {
@@ -22,17 +23,36 @@ fun AppPetShop(viewModel: ProductViewModel) {
 
         NavHost(
             navController = navController,
-            startDestination = MainNavigation.Products.route
+            startDestination = "onboarding"
         ) {
-            composable(MainNavigation.Products.route) {
-                ProductListScreen(
-                    viewModel = viewModel,
-                    onNavigateToFavorites = {
-                        navController.navigate(MainNavigation.Favorites.route)
+            composable("onboarding") {
+                OnboardingScreen(
+                    onGetStartedClick = {
+                        navController.navigate("auth_graph") {
+                            popUpTo("onboarding") { inclusive = true }
+                        }
+                    },
+                    onProductListClick = {
+                        navController.navigate("product_list") {
+                            popUpTo("onboarding") { inclusive = true }
+                        }
+                    },
+                    onLoginTestClick = {
+                        navController.navigate("login_test") {
+                            popUpTo("onboarding") { inclusive = true }
+                        }
                     }
                 )
             }
-            composable(MainNavigation.Favorites.route) {
+            composable("product_list") {
+                ProductListScreen(
+                    viewModel = viewModel,
+                    onNavigateToFavorites = {
+                        navController.navigate("favorites")
+                    }
+                )
+            }
+            composable("favorites") {
                 FavoritesScreen(
                     viewModel = viewModel,
                     onNavigateBack = {
