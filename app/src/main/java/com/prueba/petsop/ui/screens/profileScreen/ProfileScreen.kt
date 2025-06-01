@@ -20,6 +20,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.prueba.petsop.R
 import com.prueba.petsop.ui.components.cards.ProductCard
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
+import com.prueba.petsop.ui.components.tags.CategoryChip
 
 
 @Composable
@@ -31,7 +34,7 @@ fun ProfileScreen() {
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(60.dp), // o 54.dp si querés más ajustado
+                    .height(60.dp),
                 contentAlignment = Alignment.Center
             ) {
                 ModeSwitchSelector(
@@ -69,8 +72,8 @@ fun ModeSwitchSelector(
     ) {
         Box(
             modifier = Modifier
-                .width(300.dp) // Aumenté más el ancho para que quepa con font-size 14
-                .height(48.dp)
+                .width(240.dp)
+                .height(45.dp)
                 .background(Color(0xFFF5F5F5), RoundedCornerShape(24.dp))
                 .padding(4.dp)
         ) {
@@ -78,7 +81,7 @@ fun ModeSwitchSelector(
                 Button(
                     onClick = { onToggle(false) },
                     colors = ButtonDefaults.buttonColors(
-                        containerColor = if (!isSeller) Color(0xFF6C4DF4) else Color.Transparent,
+                        containerColor = if (!isSeller) MaterialTheme.colorScheme.primary else Color.Transparent,
                         contentColor = if (!isSeller) Color.White else Color.Gray
                     ),
                     shape = RoundedCornerShape(20.dp),
@@ -89,8 +92,8 @@ fun ModeSwitchSelector(
                     Text(
                         "Profile",
                         fontSize = 14.sp,
-                        fontWeight = FontWeight.Medium, // Equivalente a font-weight: 500
-                        lineHeight = (14 * 1.5).sp // line-height: 150%
+                        fontWeight = FontWeight.Medium,
+                        lineHeight = (14 * 1.5).sp
                     )
                 }
 
@@ -108,8 +111,8 @@ fun ModeSwitchSelector(
                     Text(
                         "Seller Mode",
                         fontSize = 14.sp,
-                        fontWeight = FontWeight.Medium, // Equivalente a font-weight: 500
-                        lineHeight = (14 * 1.5).sp // line-height: 150%
+                        fontWeight = FontWeight.Medium,
+                        lineHeight = (14 * 1.5).sp
                     )
                 }
             }
@@ -122,6 +125,7 @@ fun ProfileHeader(backgroundImageRes: Int, tintColor: Color, iconRes: Int) {
     Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.TopCenter) {
         Box(
             modifier = Modifier
+                .padding(top = 16.5.dp)
                 .width(327.dp)
                 .height(159.dp)
                 .clip(RoundedCornerShape(24.dp))
@@ -139,7 +143,7 @@ fun ProfileHeader(backgroundImageRes: Int, tintColor: Color, iconRes: Int) {
             contentDescription = null,
             modifier = Modifier
                 .size(100.dp)
-                .offset(y = 109.dp)
+                .offset(y = 125.5.dp)
                 .clip(CircleShape)
                 .background(Color.White)
         )
@@ -148,24 +152,23 @@ fun ProfileHeader(backgroundImageRes: Int, tintColor: Color, iconRes: Int) {
 
 @Composable
 fun SellerProfileView() {
-    ProfileHeader(backgroundImageRes = R.drawable.banner_profile, tintColor = Color(0xFFE1BFA5), iconRes = R.drawable.profile_avatar_pittashop)
-    Spacer(modifier = Modifier.height(56.dp))
-    Text("Pittashop", fontSize = 20.sp, fontWeight = FontWeight.Bold, modifier = Modifier.alignCenter())
-    Spacer(modifier = Modifier.height(8.dp))
+    var selectedTab by remember { mutableStateOf("Product") }
+    ProfileHeader(backgroundImageRes = R.drawable.banner_profile, tintColor = Color(0xFFFD9340), iconRes = R.drawable.profile_avatar_pittashop)
+    Text("Pittashop", fontSize = 20.sp, fontWeight = FontWeight.Bold, modifier = Modifier.alignCenter().padding(top = 74.dp))
     SellerStats(followers = 109, following = 992, sales = 80)
-    Spacer(modifier = Modifier.height(12.dp))
-    CustomTabSelector(listOf("Product", "Sold", "Stats"), "Product")
+    Spacer(modifier = Modifier.height(50.dp))
+    CategoryChip(text = "Food", selected = true)
     Spacer(modifier = Modifier.height(12.dp))
     ProductGrid()
 }
 
 @Composable
 fun PersonalProfileView() {
-    ProfileHeader(backgroundImageRes = R.drawable.banner_profile, tintColor = Color(0xFFD7D9DD), iconRes = R.drawable.profile_avatar_abduldul)
-    Spacer(modifier = Modifier.height(56.dp))
-    Text("Abduldul", fontSize = 20.sp, fontWeight = FontWeight.Bold, modifier = Modifier.alignCenter())
+    var selectedTab by remember { mutableStateOf("Saved") }
+    ProfileHeader(backgroundImageRes = R.drawable.banner_profile, tintColor = Color(0xFFF8F8F8), iconRes = R.drawable.profile_avatar_abduldul)
+    Text("Abduldul", fontSize = 20.sp, fontWeight = FontWeight.Bold, modifier = Modifier.alignCenter().padding(top = 74.dp))
     Spacer(modifier = Modifier.height(8.dp))
-    CustomTabSelector(listOf("Saved", "Edit Profile"), "Saved")
+    CategoryChipRow(listOf("Saved", "Edit Profile"), selected = selectedTab,onSelectedChange = { selectedTab = it }, modifier = Modifier.alignCenter())
     Spacer(modifier = Modifier.height(12.dp))
     ProductGrid()
 }
@@ -173,42 +176,54 @@ fun PersonalProfileView() {
 @Composable
 fun SellerStats(followers: Int, following: Int, sales: Int) {
     Row(
-        modifier = Modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.SpaceEvenly
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(top = 24.dp),
+        horizontalArrangement = Arrangement.Center
     ) {
-        StatItem(value = followers, label = "Followers")
-        StatItem(value = following, label = "Following")
-        StatItem(value = sales, label = "Sales")
+        Row(
+            horizontalArrangement = Arrangement.spacedBy(40.dp)
+        ) {
+            StatItem(value = followers, label = "Followers")
+            StatItem(value = following, label = "Following")
+            StatItem(value = sales, label = "Sales")
+        }
     }
 }
 
 @Composable
 fun StatItem(value: Int, label: String) {
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
-        Text("$value", fontWeight = FontWeight.Bold)
-        Text(label, fontSize = 12.sp)
+        Text(
+            text = "$value",
+            fontWeight = FontWeight.Bold,
+            fontSize = 16.sp // Agregado para mejor visibilidad
+        )
+        Text(
+            text = label,
+            fontSize = 12.sp,
+            color = Color.Gray // Agregado para diferenciarlo del número
+        )
     }
 }
 
 @Composable
-fun CustomTabSelector(tabs: List<String>, selected: String) {
+fun CategoryChipRow(
+    options: List<String>,
+    selected: String,
+    onSelectedChange: (String) -> Unit,
+    modifier: Modifier = Modifier
+) {
     Row(
-        modifier = Modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.Center
+        horizontalArrangement = Arrangement.spacedBy(8.dp),
+        modifier = modifier
     ) {
-        tabs.forEach { tab ->
-            val selectedColor = if (tab == selected) Color(0xFF6C4DF4) else Color(0xFFEFEFEF)
-            val textColor = if (tab == selected) Color.White else Color.Black
-            Box(
-                modifier = Modifier
-                    .clip(RoundedCornerShape(50))
-                    .background(selectedColor)
-                    .padding(horizontal = 20.dp, vertical = 8.dp)
-                    .padding(4.dp)
-            ) {
-                Text(tab, color = textColor, fontSize = 14.sp)
-            }
-            Spacer(modifier = Modifier.width(8.dp))
+        options.forEach { option ->
+            CategoryChip(
+                text = option,
+                selected = option == selected,
+                onClick = { onSelectedChange(option) }
+            )
         }
     }
 }
