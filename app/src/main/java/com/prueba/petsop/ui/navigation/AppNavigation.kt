@@ -15,7 +15,8 @@ fun NavGraphBuilder.appNavGraph(navController: NavHostController) {
             HomeScreen(
                 onNavigateToProfile = { navController.navigate("profile") },
                 onNotificationClick = { navController.navigate("notifications") },
-                onSearchClick = { navController.navigate("search") }
+                onSearchClick = { navController.navigate("search") },
+                onNavigateToPurchase = { navController.navigate("cart") }
             )
         }
         composable("profile") {
@@ -25,6 +26,9 @@ fun NavGraphBuilder.appNavGraph(navController: NavHostController) {
             NotificationScreen()
         }
         composable("search") {
+            SearchScreen()
+        }
+        composable("cart") {
             SearchScreen()
         }
     }
