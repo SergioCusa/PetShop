@@ -1,38 +1,127 @@
 package com.prueba.petsop.ui.screens.paymentMethodScreen
 
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
-import com.prueba.petsop.ui.components.buttons.PrimaryButton
+import androidx.compose.material3.LocalTextStyle
+
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.focus.onFocusChanged
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.sp
+import com.prueba.petsop.ui.components.buttons.SaveButton
+import com.prueba.petsop.ui.components.icons.GetBackIcon
+import com.prueba.petsop.ui.components.text.PaymentTextField
+
 
 @Composable
-fun PaymentMethodScreen() {
+fun PaymentMethodScreen(
+    onBackClick: () -> Unit,
+    onCheckoutClick: () -> Unit
+) {
     var cardNumber by remember { mutableStateOf("") }
     var name by remember { mutableStateOf("") }
-    var expiry by remember { mutableStateOf("") }
+    var expiration by remember { mutableStateOf("") }
     var cvv by remember { mutableStateOf("") }
 
-    Column(modifier = Modifier.padding(24.dp)) {
-        Text("Add New Payment")
-        Spacer(modifier = Modifier.height(16.dp))
-        OutlinedTextField(
-            value = cardNumber,
-            onValueChange = { cardNumber = it },
-            placeholder = { Text("Card Number") },
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
-        )
-        Spacer(modifier = Modifier.height(12.dp))
-        OutlinedTextField(value = name, onValueChange = { name = it }, placeholder = { Text("Card Name") })
-        Spacer(modifier = Modifier.height(12.dp))
-        OutlinedTextField(value = expiry, onValueChange = { expiry = it }, placeholder = { Text("Expired") })
-        Spacer(modifier = Modifier.height(12.dp))
-        OutlinedTextField(value = cvv, onValueChange = { cvv = it }, placeholder = { Text("CVV") })
-        Spacer(modifier = Modifier.height(24.dp))
-        PrimaryButton(text = "Save", onClick = {})
+    val allValid =
+            cardNumber.isNotBlank() &&
+            name.isNotBlank() &&
+            expiration.isNotBlank() &&
+            cvv.isNotBlank()
+
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp)
+    ) {
+        Spacer(modifier = Modifier.height(10.dp))
+
+        Row(
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            GetBackIcon(onClick = onBackClick)
+            Spacer(modifier = Modifier.width(30.dp))
+            Text(
+                text = "Payment Method",
+                style = MaterialTheme.typography.titleMedium.copy(
+                    fontSize = 17.sp,
+                    fontWeight = FontWeight.Bold
+                ),
+                modifier = Modifier.align(Alignment.CenterVertically)
+            )
+        }
+
+        Column(modifier = Modifier
+            .padding(horizontal = 20.dp)
+        ) {
+
+            Text(
+                text = "Add New Payment",
+                style = MaterialTheme.typography.titleMedium.copy(
+                    fontSize = 17.sp,
+                    fontWeight = FontWeight.Bold
+                )
+            )
+
+            Spacer(modifier = Modifier.height(20.dp))
+
+            PaymentTextField(
+                value = cardNumber,
+                onValueChange = { cardNumber = it },
+                placeholder = "Card number",
+                showError = cardNumber.isEmpty()
+            )
+            Spacer(modifier = Modifier.height(16.dp))
+            PaymentTextField(
+                value = name,
+                onValueChange = { name = it },
+                placeholder = "Card Name",
+                showError = name.isEmpty()
+            )
+            Spacer(modifier = Modifier.height(16.dp))
+            PaymentTextField(
+                value = expiration,
+                onValueChange = { expiration = it },
+                placeholder = "Expire",
+                showError = expiration.isEmpty()
+            )
+            Spacer(modifier = Modifier.height(16.dp))
+            PaymentTextField(
+                value = cvv,
+                onValueChange = { cvv = it },
+                placeholder = "CVV",
+                showError = cvv.isEmpty()
+            )
+
+            Spacer(modifier = Modifier.weight(1f))
+
+            SaveButton(text = "Save", enabled = allValid, onClick = onCheckoutClick)
+
+            Spacer(modifier = Modifier.height(16.dp))
+        }
     }
 }
+

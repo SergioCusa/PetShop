@@ -6,6 +6,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import com.prueba.petsop.ui.screens.cartScreen.CartScreen
+import com.prueba.petsop.ui.screens.checkoutScreen.CheckoutScreen
 import com.prueba.petsop.ui.screens.homeScreen.HomeScreen
 import com.prueba.petsop.ui.screens.notificationScreen.NotificationScreen
 import com.prueba.petsop.ui.screens.profileScreen.ProfileScreen
@@ -78,7 +79,14 @@ fun NavGraphBuilder.appNavGraph(navController: NavHostController) {
 
         // Navegacion Payment Method
         composable("payment-method"){
-            PaymentMethodScreen()
+            PaymentMethodScreen(
+                onBackClick = { navController.popBackStack() },
+                onCheckoutClick = { navController.navigate("checkout") }
+            )
+        }
+
+        composable("checkout"){
+            CheckoutScreen(onBackClick = { navController.popBackStack() })
         }
     }
 }

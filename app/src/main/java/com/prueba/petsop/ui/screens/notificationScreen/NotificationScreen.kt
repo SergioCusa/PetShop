@@ -58,7 +58,6 @@ fun NotificationScreen(
 
         Spacer(modifier = Modifier.height(24.dp))
 
-        // Contenido según pestaña seleccionada
         when (selectedTab) {
             "Activity" -> {
                 LazyColumn(verticalArrangement = Arrangement.spacedBy(18.dp)) {
@@ -70,13 +69,6 @@ fun NotificationScreen(
                         )
                     }
                 }
-//                Column(verticalArrangement = Arrangement.spacedBy(16.dp)){
-//                    NotificationItem(
-//                        imageRes = null,
-//                        title = "SALE 50%",
-//                        subtitle = "Check the details!"
-//                    )
-//                }
             }
             "Seller Mode" -> {
                 Column(verticalArrangement = Arrangement.spacedBy(18.dp)){
