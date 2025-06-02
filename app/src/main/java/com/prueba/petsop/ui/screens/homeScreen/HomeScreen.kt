@@ -55,11 +55,6 @@ fun HomeScreen(
                     .fillMaxWidth()
                     .padding(horizontal = 24.dp)
             ) {
-//            TopBar(
-//                location = "Jebres, Surakarta",
-//                onSearchClick = onSearchClick,
-//                onNotificationClick = onNotificationClick
-//            )
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()

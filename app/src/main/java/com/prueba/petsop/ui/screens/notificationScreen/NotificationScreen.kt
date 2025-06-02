@@ -16,6 +16,10 @@ import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.KeyboardArrowLeft
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.sp
+import com.prueba.petsop.R
+import com.prueba.petsop.ui.components.cards.NotificationItemSeller
 
 @Composable
 fun NotificationScreen(
@@ -28,7 +32,6 @@ fun NotificationScreen(
             .fillMaxSize()
             .padding(16.dp)
     ) {
-        // Top bar con ícono de volver y título
         Row(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier.fillMaxWidth()
@@ -41,7 +44,7 @@ fun NotificationScreen(
             }
             Text(
                 text = "Notification",
-                style = MaterialTheme.typography.titleMedium,
+                style = MaterialTheme.typography.titleMedium.copy(fontSize = 17.sp, fontWeight = FontWeight.Bold),
                 modifier = Modifier.padding(start = 93.dp)
             )
 
@@ -49,7 +52,6 @@ fun NotificationScreen(
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        // Selector de pestañas
         NotificationTabSelector(
             selectedTab = selectedTab,
             onTabSelected = { selectedTab = it }
@@ -60,7 +62,7 @@ fun NotificationScreen(
         // Contenido según pestaña seleccionada
         when (selectedTab) {
             "Activity" -> {
-                LazyColumn(verticalArrangement = Arrangement.spacedBy(16.dp)) {
+                LazyColumn(verticalArrangement = Arrangement.spacedBy(18.dp)) {
                     items(4) {
                         NotificationItem(
                             imageRes = null,
@@ -69,17 +71,57 @@ fun NotificationScreen(
                         )
                     }
                 }
+//                Column(verticalArrangement = Arrangement.spacedBy(16.dp)){
+//                    NotificationItem(
+//                        imageRes = null,
+//                        title = "SALE 50%",
+//                        subtitle = "Check the details!"
+//                    )
+//                }
             }
-            "Updates" -> {
-                LazyColumn(verticalArrangement = Arrangement.spacedBy(16.dp)) {
+            "Seller Mode" -> {
+                Column(verticalArrangement = Arrangement.spacedBy(18.dp)){
+                    NotificationItem(
+                        imageRes = null,
+                        title = "SALE 50%",
+                        subtitle = "Check the details!"
+                    )
+                    NotificationItemSeller(
+                        imageRes = null,
+                        title = "Momon",
+                        subtitle = "Liked your Product",
+                        idSeller = R.drawable.seller_momon
+                    )
+                    NotificationItemSeller(
+                        imageRes = null,
+                        title = "Ola",
+                        subtitle = "Liked your Product",
+                        idSeller = R.drawable.seller_ola
+                    )
+                    NotificationItemSeller(
+                        imageRes = null,
+                        title = "Raul",
+                        subtitle = "Liked your Product",
+                        idSeller = R.drawable.seller_raul
+                    )
+                }
+                Spacer(modifier = Modifier.height(18.dp))
+                LazyColumn(verticalArrangement = Arrangement.spacedBy(18.dp)) {
                     items(3) {
                         NotificationItem(
                             imageRes = null,
-                            title = "App Update",
-                            subtitle = "Version 2.0 is now available!"
+                            title = "You Got New Order!",
+                            subtitle = "Please arrange delivery"
                         )
                     }
                 }
+                Spacer(modifier = Modifier.height(18.dp))
+                NotificationItemSeller(
+                    imageRes = null,
+                    title = "Vito",
+                    subtitle = "Liked your Product",
+                    idSeller = R.drawable.seller_vito
+                )
             }
         }
     }
