@@ -24,6 +24,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.unit.sp
+import com.prueba.petsop.ui.components.icons.PlaceholderIcon
 
 @Composable
 fun TopBar(
@@ -58,27 +59,27 @@ fun TopBar(
         }
     }
 }
-
-@Composable
-fun PlaceholderIcon(
-    onClick: (() -> Unit)? = null,
-    icon: ImageVector) {
-    Box(
-        modifier = Modifier
-            .size(46.dp)
-            .shadow(8.dp, shape = RoundedCornerShape(12.dp))
-            .background(MaterialTheme.colorScheme.background, RoundedCornerShape(10.dp))
-            .then(
-                if (onClick != null) Modifier.clickable { onClick() }
-                else Modifier
-            ),
-        contentAlignment = Alignment.Center
-    ){
-        Icon(
-            imageVector = icon,
-            contentDescription = null,
-            tint = MaterialTheme.colorScheme.onBackground,
-            modifier = Modifier.size(28.dp)
-        )
-    }
-}
+//
+//@Composable
+//fun PlaceholderIcon(
+//    onClick: (() -> Unit)? = null,
+//    icon: ImageVector) {
+//    Box(
+//        modifier = Modifier
+//            .size(46.dp)
+//            .shadow(8.dp, shape = RoundedCornerShape(12.dp))
+//            .background(MaterialTheme.colorScheme.background, RoundedCornerShape(10.dp))
+//            .then(
+//                if (onClick != null) Modifier.clickable { onClick() }
+//                else Modifier
+//            ),
+//        contentAlignment = Alignment.Center
+//    ){
+//        Icon(
+//            imageVector = icon,
+//            contentDescription = null,
+//            tint = MaterialTheme.colorScheme.onBackground,
+//            modifier = Modifier.size(28.dp)
+//        )
+//    }
+//}

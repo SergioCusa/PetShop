@@ -23,7 +23,9 @@ fun NavGraphBuilder.appNavGraph(navController: NavHostController) {
             ProfileScreen()
         }
         composable("notifications") {
-            NotificationScreen()
+            NotificationScreen(
+                onBackClick = { navController.popBackStack() }
+            )
         }
         composable("search") {
             SearchScreen()

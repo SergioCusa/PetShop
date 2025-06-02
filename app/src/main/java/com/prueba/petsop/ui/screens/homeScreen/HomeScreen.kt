@@ -32,7 +32,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import com.prueba.petsop.ui.components.layout.ModalLocation
-import com.prueba.petsop.ui.components.layout.PlaceholderIcon
+import com.prueba.petsop.ui.components.icons.PlaceholderIcon
 
 
 @Composable
