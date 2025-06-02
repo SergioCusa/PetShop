@@ -20,7 +20,7 @@ fun PrimaryButton(text: String, onClick: () -> Unit) {
         shape = RoundedCornerShape(50),
         modifier = Modifier
             .fillMaxWidth()
-            .height(48.dp),
+            .height(55.dp),
         colors = ButtonDefaults.buttonColors(
             containerColor = MaterialTheme.colorScheme.primary,
             contentColor = MaterialTheme.colorScheme.onPrimary
