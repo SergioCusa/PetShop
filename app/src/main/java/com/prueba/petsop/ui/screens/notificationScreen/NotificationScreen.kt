@@ -2,7 +2,6 @@ package com.prueba.petsop.ui.screens.notificationScreen
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
@@ -11,39 +10,102 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.prueba.petsop.ui.components.buttons.NotificationTabSelector
 import com.prueba.petsop.ui.components.cards.NotificationItem
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.sp
+import com.prueba.petsop.R
+import com.prueba.petsop.ui.components.cards.NotificationItemSeller
+import com.prueba.petsop.ui.components.icons.GetBackIcon
+import com.prueba.petsop.ui.components.layout.HomeHeader
 
 @Composable
-fun NotificationScreen() {
+fun NotificationScreen(
+    onBackClick: () -> Unit
+) {
     var selectedTab by remember { mutableStateOf("Activity") }
 
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp)
+            .padding(6.dp)
     ) {
-        Text(
-            text = "Notification",
-            style = MaterialTheme.typography.titleMedium,
-            modifier = Modifier.align(Alignment.CenterHorizontally)
+
+        Spacer(modifier = Modifier.height(20.dp))
+
+        HomeHeader(
+            onBackClick = onBackClick,
+            title = "Notification"
         )
 
-        Spacer(modifier = Modifier.height(16.dp))
+        Column(modifier = Modifier.padding(20.dp)) {
 
-        NotificationTabSelector(
-            selectedTab = selectedTab,
-            onTabSelected = { selectedTab = it }
-        )
+            Spacer(modifier = Modifier.height(2.dp))
 
-        Spacer(modifier = Modifier.height(24.dp))
+            NotificationTabSelector(
+                selectedTab = selectedTab,
+                onTabSelected = { selectedTab = it }
+            )
 
-        LazyColumn(verticalArrangement = Arrangement.spacedBy(16.dp)) {
-            items(4) {
-                NotificationItem(
-                    imageRes = null,
-                    title = "SALE 50%",
-                    subtitle = "Check the details!"
-                )
+            Spacer(modifier = Modifier.height(24.dp))
+
+            when (selectedTab) {
+                "Activity" -> {
+                    LazyColumn(verticalArrangement = Arrangement.spacedBy(18.dp)) {
+                        items(4) {
+                            NotificationItem(
+                                imageRes = null,
+                                title = "SALE 50%",
+                                subtitle = "Check the details!"
+                            )
+                        }
+                    }
+                }
+
+                "Seller Mode" -> {
+                    Column(verticalArrangement = Arrangement.spacedBy(18.dp)) {
+                        NotificationItem(
+                            imageRes = null,
+                            title = "SALE 50%",
+                            subtitle = "Check the details!"
+                        )
+                        NotificationItemSeller(
+                            imageRes = null,
+                            title = "Momon",
+                            subtitle = "Liked your Product",
+                            idSeller = R.drawable.seller_momon
+                        )
+                        NotificationItemSeller(
+                            imageRes = null,
+                            title = "Ola",
+                            subtitle = "Liked your Product",
+                            idSeller = R.drawable.seller_ola
+                        )
+                        NotificationItemSeller(
+                            imageRes = null,
+                            title = "Raul",
+                            subtitle = "Liked your Product",
+                            idSeller = R.drawable.seller_raul
+                        )
+                    }
+                    Spacer(modifier = Modifier.height(18.dp))
+                    LazyColumn(verticalArrangement = Arrangement.spacedBy(18.dp)) {
+                        items(3) {
+                            NotificationItem(
+                                imageRes = null,
+                                title = "You Got New Order!",
+                                subtitle = "Please arrange delivery"
+                            )
+                        }
+                    }
+                    Spacer(modifier = Modifier.height(18.dp))
+                    NotificationItemSeller(
+                        imageRes = null,
+                        title = "Vito",
+                        subtitle = "Liked your Product",
+                        idSeller = R.drawable.seller_vito
+                    )
+                }
             }
         }
     }
 }
+

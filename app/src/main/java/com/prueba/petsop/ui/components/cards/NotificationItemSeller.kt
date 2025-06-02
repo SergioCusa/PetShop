@@ -1,5 +1,6 @@
 package com.prueba.petsop.ui.components.cards
 
+import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -17,7 +18,7 @@ import androidx.compose.ui.unit.dp
 import com.prueba.petsop.R
 
 @Composable
-fun NotificationItem(imageRes: Int?, title: String, subtitle: String) {
+fun NotificationItemSeller(imageRes: Int?, title: String, subtitle: String, idSeller: Int) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -30,7 +31,7 @@ fun NotificationItem(imageRes: Int?, title: String, subtitle: String) {
                 .background(Color.LightGray, CircleShape)
         ) {
             Image(
-                painter = painterResource(id = R.drawable.notification_item_photo),
+                painter = painterResource(id = idSeller),
                 contentDescription = "Promo",
                 modifier = Modifier
                     .fillMaxSize()
@@ -45,10 +46,17 @@ fun NotificationItem(imageRes: Int?, title: String, subtitle: String) {
             Text(text = subtitle, style = MaterialTheme.typography.bodySmall, color = Color.Gray)
         }
 
-        Icon(
-            imageVector = Icons.Default.KeyboardArrowRight,
-            contentDescription = null,
-            tint = Color.Gray
-        )
+        Box(
+            modifier = Modifier
+                .size(48.dp)
+                .background(Color.LightGray, CircleShape)
+        ) {
+            Image(
+                painter = painterResource(id = R.drawable.notification_item_photo),
+                contentDescription = "Promo",
+                modifier = Modifier
+                    .fillMaxSize()
+            )
+        }
     }
 }

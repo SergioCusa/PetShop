@@ -48,7 +48,7 @@ fun ModalBottomSheet(
                         .background(
                             color = Color.White,
                             shape = RoundedCornerShape(topStart = 24.dp, topEnd = 24.dp)
-                        ).padding(16.dp)
+                        )
                 ) {
                     content()
                 }

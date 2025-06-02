@@ -7,24 +7,32 @@ import androidx.navigation.navigation
 import com.prueba.petsop.ui.screens.authScreens.forgotPassScreen.ForgotPasswordScreen
 import com.prueba.petsop.ui.screens.authScreens.loginScreen.LoginScreen
 import com.prueba.petsop.ui.screens.authScreens.registerScreen.RegisterScreen
-
+import com.prueba.petsop.ui.LoginScreen as LoginTestScreen
 
 fun NavGraphBuilder.authNavGraph(navController: NavHostController) {
-    navigation(startDestination = "login", route = "auth") {
-        composable("login") {
+    navigation(startDestination = NavRoutes.LOGIN, route = NavRoutes.AUTH_GRAPH) {
+        composable(NavRoutes.LOGIN) {
             LoginScreen(
-                onLoginClick = { navController.navigate("app") },
-                onRegisterClick = { navController.navigate("register") },
-                onForgotClick = { navController.navigate("forgot") }
+                onLoginClick = { navController.navigate(NavRoutes.APP_GRAPH) },
+                onRegisterClick = { navController.navigate(NavRoutes.REGISTER) },
+                onForgotClick = { navController.navigate(NavRoutes.FORGOT) }
             )
         }
-        composable("register") {
-            RegisterScreen(onBackClick = { navController.popBackStack() })
+        
+        composable(NavRoutes.LOGIN_TEST) {
+            LoginTestScreen()
         }
-        composable("forgot") {
-            ForgotPasswordScreen(onBackClick = { navController.popBackStack() })
+
+        composable(NavRoutes.REGISTER) {
+            RegisterScreen(
+                onBackClick = { navController.popBackStack() }
+            )
+        }
+
+        composable(NavRoutes.FORGOT) {
+            ForgotPasswordScreen(
+                onBackClick = { navController.popBackStack() }
+            )
         }
     }
-
-
 }

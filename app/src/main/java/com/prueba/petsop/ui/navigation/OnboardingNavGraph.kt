@@ -7,22 +7,19 @@ import androidx.navigation.navigation
 import com.prueba.petsop.ui.screens.onboardingScreen.OnboardingScreen
 
 fun NavGraphBuilder.onboardingNavGraph(navController: NavHostController) {
-    navigation(
-        startDestination = "onboarding",
-        route = "onboarding_graph"
-    ) {
-        composable("onboarding") {
+    navigation(startDestination = NavRoutes.ONBOARDING, route = NavRoutes.ONBOARDING_GRAPH) {
+        composable(route = NavRoutes.ONBOARDING) {
             OnboardingScreen(
                 onGetStartedClick = {
-                    navController.navigate("auth") {
-                        popUpTo("onboarding_graph") { inclusive = true }
+                    navController.navigate(NavRoutes.AUTH_GRAPH) {
+                        popUpTo(NavRoutes.ONBOARDING_GRAPH) { inclusive = true }
                     }
                 },
                 onProductListClick = {
-                    navController.navigate("product_list")
+                    navController.navigate(NavRoutes.PRODUCT_LIST) 
                 },
                 onLoginTestClick = {
-                    navController.navigate("login_test")
+                    navController.navigate(NavRoutes.LOGIN_TEST)
                 }
             )
         }

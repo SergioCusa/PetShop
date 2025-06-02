@@ -19,6 +19,8 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.icons.filled.Notifications
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
@@ -31,8 +33,10 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
+import com.prueba.petsop.ui.components.cards.ProductCardSeller
 import com.prueba.petsop.ui.components.layout.ModalLocation
-import com.prueba.petsop.ui.components.layout.PlaceholderIcon
+import com.prueba.petsop.ui.components.icons.PlaceholderIcon
+import com.prueba.petsop.ui.components.tags.CategoryChipsRow
 
 
 @Composable
@@ -40,7 +44,9 @@ fun HomeScreen(
     onNavigateToProfile: () -> Unit,
     onNotificationClick: () -> Unit,
     onSearchClick: () -> Unit,
-    onNavigateToPurchase: () -> Unit
+    onNavigateToPurchase: () -> Unit,
+    onNavigateToBestSeller: () -> Unit,
+    onNavigateToProductDetail: () -> Unit
 ) {
     var showModal by remember { mutableStateOf(false) }
 
@@ -55,11 +61,7 @@ fun HomeScreen(
                     .fillMaxWidth()
                     .padding(horizontal = 24.dp)
             ) {
-//            TopBar(
-//                location = "Jebres, Surakarta",
-//                onSearchClick = onSearchClick,
-//                onNotificationClick = onNotificationClick
-//            )
+                Spacer(modifier = Modifier.height(24.dp))
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -105,7 +107,7 @@ fun HomeScreen(
                     )
                 }
 
-                Spacer(modifier = Modifier.height(24.dp))
+                Spacer(modifier = Modifier.height(35.dp))
 
                 Row(
                     modifier = Modifier.fillMaxWidth(),
@@ -114,30 +116,16 @@ fun HomeScreen(
                     Text(text = "Category", style = MaterialTheme.typography.labelMedium)
                     Text(
                         text = "View All",
-                        style = MaterialTheme.typography.labelSmall.copy(fontSize = 12.sp),
+                        style = MaterialTheme.typography.labelSmall.copy(fontSize = 13.sp),
                         color = MaterialTheme.colorScheme.primary
                     )
                 }
 
-                Spacer(modifier = Modifier.height(12.dp))
+                Spacer(modifier = Modifier.height(20.dp))
 
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.spacedBy(12.dp)
-                ) {
-                    Image(
-                        painter = painterResource(id = R.drawable.shufle_icon),
-                        contentDescription = "Shuffle",
-                        modifier = Modifier
-                            .height(60.dp)
-                            .width(60.dp)
-                    )
-                    CategoryChip(text = "Food", selected = true)
-                    CategoryChip(text = "Toys", selected = false)
-                    CategoryChip(text = "Accessories", selected = false)
-                }
+                CategoryChipsRow()
 
-                Spacer(modifier = Modifier.height(24.dp))
+                Spacer(modifier = Modifier.height(50.dp))
 
                 Row(
                     modifier = Modifier.fillMaxWidth(),
@@ -146,19 +134,22 @@ fun HomeScreen(
                     Text(text = "Best Seller", style = MaterialTheme.typography.labelMedium)
                     Text(
                         text = "View All",
-                        style = MaterialTheme.typography.labelSmall.copy(fontSize = 12.sp),
-                        color = MaterialTheme.colorScheme.primary
+                        style = MaterialTheme.typography.labelSmall.copy(fontSize = 13.sp),
+                        color = MaterialTheme.colorScheme.primary,
+                        modifier = Modifier.clickable {
+                            onNavigateToBestSeller()
+                        },
                     )
                 }
 
-                Spacer(modifier = Modifier.height(12.dp))
+                Spacer(modifier = Modifier.height(20.dp))
 
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
-                    ProductCard(name = "RC Kitten", price = "$20.99")
-                    ProductCard(name = "RC Persian", price = "$22.99")
+                    ProductCardSeller(name = "RC Kitten", price = "$20.99", onNavigateToProductDetail = onNavigateToProductDetail, photo = "pink")
+                    ProductCardSeller(name = "RC Persian", price = "$22.99", onNavigateToProductDetail = onNavigateToProductDetail, photo = "yellow")
                 }
             }
             Spacer(modifier = Modifier.weight(1f))

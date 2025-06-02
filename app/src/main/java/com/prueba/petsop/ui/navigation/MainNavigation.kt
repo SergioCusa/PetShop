@@ -5,7 +5,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.prueba.petsop.ui.ProductListScreen
+import com.prueba.petsop.ui.screens.productListScreen.ProductListScreen
 import com.prueba.petsop.ui.LoginScreen
 import com.prueba.petsop.viewmodel.ProductViewModel
 
