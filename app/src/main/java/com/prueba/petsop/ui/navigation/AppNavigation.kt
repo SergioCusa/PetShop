@@ -11,6 +11,8 @@ import com.prueba.petsop.ui.screens.profileScreen.ProfileScreen
 import com.prueba.petsop.ui.screens.searchScreen.SearchScreen
 import com.prueba.petsop.ui.screens.productDetailsScreen.ProductDetailsScreen
 import com.prueba.petsop.ui.screens.favoritesScreen.FavoritesScreen
+import com.prueba.petsop.ui.screens.homeScreen.BestSellerScreen
+import com.prueba.petsop.ui.screens.product.ProductDetailScreen
 import com.prueba.petsop.ui.screens.productListScreen.ProductListScreen
 
 fun NavGraphBuilder.appNavGraph(navController: NavHostController) {
@@ -20,20 +22,22 @@ fun NavGraphBuilder.appNavGraph(navController: NavHostController) {
                 onNavigateToProfile = { navController.navigate("profile") },
                 onNotificationClick = { navController.navigate("notifications") },
                 onSearchClick = { navController.navigate("search") },
-                onNavigateToPurchase = { navController.navigate("cart") }
+                onNavigateToPurchase = { navController.navigate("cart") },
+                onNavigateToBestSeller = { navController.navigate("best-seller") },
+                onNavigateToProductDetail = { navController.navigate("product-detail") }
             )
         }
         composable("profile") {
             ProfileScreen()
         }
         composable("notifications") {
-            NotificationScreen()
+            NotificationScreen(onBackClick = { navController.popBackStack() })
         }
         composable("search") {
-            SearchScreen()
+            SearchScreen(onBackClick = { navController.popBackStack() })
         }
         composable("cart") {
-            SearchScreen()
+            SearchScreen(onBackClick = { navController.popBackStack() })
         }
         composable(route = NavRoutes.PRODUCT_LIST) {
             ProductListScreen(
@@ -50,6 +54,12 @@ fun NavGraphBuilder.appNavGraph(navController: NavHostController) {
                 viewModel = hiltViewModel(),
                 onNavigateBack = { navController.navigateUp() }
             )
+        }
+        composable("best-seller") {
+            BestSellerScreen(onNavigateToProductDetail = { navController.navigate("product-detail") }, onBackClick = { navController.popBackStack() })
+        }
+        composable("product-detail") {
+            ProductDetailScreen(onBackClick = { navController.popBackStack() }, onFavouriteClick = { println("Added to favourites") })
         }
     }
 }
