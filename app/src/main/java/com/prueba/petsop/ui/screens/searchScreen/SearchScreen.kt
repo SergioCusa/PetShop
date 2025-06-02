@@ -18,6 +18,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.prueba.petsop.ui.components.icons.GetBackIcon
 import com.prueba.petsop.ui.components.icons.PlaceholderIcon
 import com.prueba.petsop.ui.components.icons.SimpleIcon
 import com.prueba.petsop.ui.components.tags.CategoryChip
@@ -38,18 +39,16 @@ fun SearchScreen(
             .padding(horizontal = 25.dp)
     ) {
         Spacer(modifier = Modifier.height(30.dp))
+
         Row(
-            verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier.fillMaxWidth()
         ) {
-            IconButton(onClick = onBackClick) {
-                PlaceholderIcon(onClick = onBackClick,
-                    icon = Icons.Default.KeyboardArrowLeft)
-            }
+            GetBackIcon(onClick = onBackClick)
+            Spacer(modifier = Modifier.width(53.dp))
             Text(
                 text = "Search",
                 style = MaterialTheme.typography.titleMedium.copy(fontSize = 17.sp, fontWeight = FontWeight.Bold),
-                modifier = Modifier.padding(start = 93.dp)
+                modifier = Modifier.align(Alignment.CenterVertically)
             )
         }
 

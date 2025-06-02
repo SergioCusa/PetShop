@@ -21,6 +21,7 @@ fun NavGraphBuilder.appNavGraph(navController: NavHostController) {
                 onSearchClick = { navController.navigate("search") },
                 onNavigateToPurchase = { navController.navigate("cart") },
                 onNavigateToBestSeller = { navController.navigate("best-seller") },
+                onNavigateToProductDetail = { navController.navigate("product-detail") }
             )
         }
         composable("profile") {
@@ -38,10 +39,10 @@ fun NavGraphBuilder.appNavGraph(navController: NavHostController) {
             SearchScreen(onBackClick = { navController.popBackStack() })
         }
         composable("best-seller") {
-            BestSellerScreen(onNavigateToProductDetail = { navController.navigate("product-detail") })
+            BestSellerScreen(onNavigateToProductDetail = { navController.navigate("product-detail") }, onBackClick = { navController.popBackStack() })
         }
         composable("product-detail") {
-            ProductDetailScreen()
+            ProductDetailScreen(onBackClick = { navController.popBackStack() }, onFavouriteClick = { println("Added to favourites") })
         }
     }
 }
