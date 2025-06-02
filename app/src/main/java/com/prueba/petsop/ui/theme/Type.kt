@@ -1,5 +1,6 @@
 package com.prueba.petsop.ui.theme
 
+import android.R.attr.fontWeight
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
@@ -15,7 +16,8 @@ val poppinsFontFamily = FontFamily(
     Font(R.font.poppins_regular, FontWeight.Normal),
     Font(R.font.poppins_medium, FontWeight.Medium),
     Font(R.font.poppins_semibold, FontWeight.SemiBold),
-    Font(R.font.poppins_bold, FontWeight.Bold)
+    Font(R.font.poppins_bold, FontWeight.Bold),
+    Font(R.font.poppins_black, FontWeight.Black)
 )
 
 val AppTypography = Typography(
@@ -54,6 +56,11 @@ val AppTypography = Typography(
         fontWeight = FontWeight.Medium,
         fontSize = 11.sp
     ),
+    titleMedium = TextStyle(
+        fontFamily = poppinsFontFamily,
+        fontWeight = FontWeight.Black,
+        fontSize = 15.sp
+    )
 
 )
 
