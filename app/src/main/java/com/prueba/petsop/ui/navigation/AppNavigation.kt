@@ -25,7 +25,9 @@ fun NavGraphBuilder.appNavGraph(navController: NavHostController) {
             )
         }
         composable("profile") {
-            ProfileScreen()
+            ProfileScreen(
+                onNavigateToProductDetail = { navController.navigate("product-detail") }
+            )
         }
         composable("notifications") {
             NotificationScreen(
