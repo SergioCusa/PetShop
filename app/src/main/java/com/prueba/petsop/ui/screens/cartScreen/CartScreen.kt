@@ -15,6 +15,7 @@ import com.prueba.petsop.ui.components.buttons.PrimaryButton
 @Composable
 fun CartScreen(
     onBackClick: () -> Unit,
+    onNavigateToPaymentMethod: () -> Unit
 ) {
     Column(modifier = Modifier.padding(16.dp)) {
         Text("Cart", style = MaterialTheme.typography.titleMedium)
@@ -55,6 +56,6 @@ fun CartScreen(
 
         Spacer(modifier = Modifier.height(24.dp))
 
-        PrimaryButton(text = "Checkout", onClick = {})
+        PrimaryButton(text = "Checkout", onClick = onNavigateToPaymentMethod)
     }
 }

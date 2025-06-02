@@ -13,6 +13,7 @@ import com.prueba.petsop.ui.screens.searchScreen.SearchScreen
 import com.prueba.petsop.ui.screens.productDetailsScreen.ProductDetailsScreen
 import com.prueba.petsop.ui.screens.favoritesScreen.FavoritesScreen
 import com.prueba.petsop.ui.screens.homeScreen.BestSellerScreen
+import com.prueba.petsop.ui.screens.paymentMethodScreen.PaymentMethodScreen
 import com.prueba.petsop.ui.screens.product.ProductDetailScreen
 import com.prueba.petsop.ui.screens.productListScreen.ProductListScreen
 
@@ -39,7 +40,8 @@ fun NavGraphBuilder.appNavGraph(navController: NavHostController) {
         }
         composable("cart") {
             CartScreen(
-                onBackClick = { navController.popBackStack() }
+                onBackClick = { navController.popBackStack() },
+                onNavigateToPaymentMethod = { navController.navigate("payment-method") }
                 )
         }
         composable(route = NavRoutes.PRODUCT_LIST) {
@@ -72,6 +74,11 @@ fun NavGraphBuilder.appNavGraph(navController: NavHostController) {
                 onBackClick = { navController.popBackStack() },
                 onFavouriteClick = { println("Added to favourites") },
                 onNavigateToCart = { navController.navigate("cart") })
+        }
+
+        // Navegacion Payment Method
+        composable("payment-method"){
+            PaymentMethodScreen()
         }
     }
 }
