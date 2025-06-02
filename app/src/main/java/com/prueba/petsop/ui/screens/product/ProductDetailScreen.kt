@@ -2,20 +2,14 @@ package com.prueba.petsop.ui.screens.product
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.KeyboardArrowLeft
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -24,32 +18,27 @@ import com.prueba.petsop.R
 import com.prueba.petsop.ui.components.buttons.PrimaryButton
 import com.prueba.petsop.ui.components.icons.FavouriteIcon
 import com.prueba.petsop.ui.components.icons.GetBackIcon
-import com.prueba.petsop.ui.components.icons.PlaceholderIcon
-import kotlin.io.println
+import com.prueba.petsop.ui.components.layout.HomeHeader
 
 @Composable
 fun ProductDetailScreen(
     onBackClick: () -> Unit,
     onFavouriteClick: () -> Unit,
+    onNavigateToCart:() -> Unit
     ) {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp)
+            .padding(horizontal = 16.dp, vertical = 6.dp)
     ) {
-        Spacer(modifier = Modifier.height(10.dp))
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween
-        ) {
-            GetBackIcon(onClick = onBackClick)
-            Text(
-                text = "Product Detail",
-                style = MaterialTheme.typography.titleMedium.copy(fontSize = 17.sp, fontWeight = FontWeight.Bold),
-                modifier = Modifier.align(Alignment.CenterVertically)
-            )
-            FavouriteIcon(onClick = onFavouriteClick)
-        }
+        Spacer(modifier = Modifier.height(20.dp))
+
+        HomeHeader(
+            onBackClick = onBackClick,
+            title = "Product Detail",
+            right = true,
+            onFavouriteClick = onFavouriteClick
+        )
 
         Spacer(modifier = Modifier.height(30.dp))
 
@@ -67,7 +56,7 @@ fun ProductDetailScreen(
             )
         }
 
-        Spacer(modifier = Modifier.height(30.dp))
+        Spacer(modifier = Modifier.weight(1f))
 
         Column(){
             Text(
@@ -113,11 +102,13 @@ fun ProductDetailScreen(
             }
         }
 
-        Spacer(modifier = Modifier.height(35.dp))
+        Spacer(modifier = Modifier.height(20.dp))
 
         Row(modifier = Modifier.padding(horizontal = 20.dp)){
-            PrimaryButton(text = "Add to Cart"){}
+            PrimaryButton(text = "Add to Cart", onClick = onNavigateToCart)
         }
+
+        Spacer(modifier = Modifier.height(16.dp))
 
     }
 }

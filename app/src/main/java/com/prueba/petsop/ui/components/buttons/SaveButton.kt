@@ -1,6 +1,5 @@
 package com.prueba.petsop.ui.components.buttons
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -14,21 +13,20 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun PrimaryButton(text: String, onClick: () -> Unit) {
+fun SaveButton(text: String, enabled: Boolean, onClick: () -> Unit) {
     Button(
         onClick = onClick,
-        shape = RoundedCornerShape(50),
+        enabled = enabled,
         modifier = Modifier
             .fillMaxWidth()
             .height(55.dp),
         colors = ButtonDefaults.buttonColors(
-            containerColor = MaterialTheme.colorScheme.primary,
-            contentColor = MaterialTheme.colorScheme.onPrimary
+            containerColor = if (enabled) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.outline
         ),
+        shape = RoundedCornerShape(30.dp)
     ) {
-        Text(
-            text = text,
-            style = MaterialTheme.typography.labelMedium
-        )
+        Text(text,
+            style = MaterialTheme.typography.labelMedium,
+            color = MaterialTheme.colorScheme.background)
     }
 }

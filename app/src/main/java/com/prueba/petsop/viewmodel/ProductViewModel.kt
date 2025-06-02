@@ -1,31 +1,56 @@
 package com.prueba.petsop.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.prueba.petsop.model.Product
-import com.prueba.petsop.network.RetrofitInstance
+import com.prueba.petsop.repository.ProductRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class ProductViewModel : ViewModel() {
+@HiltViewModel
+class ProductViewModel @Inject constructor(
+    private val repository: ProductRepository
+) : ViewModel() {
     private val _products = MutableStateFlow<List<Product>>(emptyList())
     val products: StateFlow<List<Product>> = _products
 
+    private val _favoriteProducts = MutableStateFlow<List<Product>>(emptyList())
+    val favoriteProducts: StateFlow<List<Product>> = _favoriteProducts
+
     init {
-        fetchProducts()
+        loadProducts()
+        loadFavorites()
     }
 
-    private fun fetchProducts() {
+    private fun loadProducts() {
         viewModelScope.launch {
             try {
-                val response = RetrofitInstance.api.getProducts()
-                _products.value = response.products
+                _products.value = repository.getProducts()
             } catch (e: Exception) {
-                Log.e("ProductViewModel", "Error fetching products", e)
                 _products.value = emptyList()
             }
+        }
+    }
+
+    private fun loadFavorites() {
+        viewModelScope.launch {
+            try {
+                repository.getFavoriteProducts().collect { favorites ->
+                    _favoriteProducts.value = favorites
+                }
+            } catch (e: Exception) {
+                _favoriteProducts.value = emptyList()
+            }
+        }
+    }
+
+    fun toggleFavorite(product: Product) {
+        viewModelScope.launch {
+            repository.toggleFavorite(product)
+            loadFavorites()
         }
     }
 }

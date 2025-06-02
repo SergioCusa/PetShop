@@ -1,21 +1,26 @@
 package com.prueba.petsop
 
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import com.prueba.petsop.ui.navigation.MainNavigation
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.rememberNavController
+import com.prueba.petsop.ui.navigation.authNavGraph
+import com.prueba.petsop.ui.navigation.onboardingNavGraph
+import com.prueba.petsop.ui.navigation.appNavGraph
+import com.prueba.petsop.viewmodel.ProductViewModel
 import com.prueba.petsop.ui.theme.PetSopTheme
 
 @Composable
-fun AppPetShop(){
+fun AppPetShop(viewModel: ProductViewModel) {
     PetSopTheme {
-        Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-            Column(modifier = Modifier.padding(innerPadding)) {
-                MainNavigation()
-            }
+        val navController = rememberNavController()
+
+        NavHost(
+            navController = navController,
+            startDestination = "onboarding_graph"
+        ) {
+            onboardingNavGraph(navController)
+            authNavGraph(navController)
+            appNavGraph(navController)
         }
     }
 }
