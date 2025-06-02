@@ -1,22 +1,11 @@
 package com.prueba.petsop.ui.screens.paymentMethodScreen
 
-import androidx.compose.foundation.border
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.text.BasicTextField
-import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextFieldDefaults
-import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
-import androidx.compose.material3.LocalTextStyle
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -28,11 +17,11 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import com.prueba.petsop.ui.components.buttons.SaveButton
 import com.prueba.petsop.ui.components.icons.GetBackIcon
+import com.prueba.petsop.ui.components.layout.HomeHeader
 import com.prueba.petsop.ui.components.text.PaymentTextField
 
 
@@ -59,20 +48,10 @@ fun PaymentMethodScreen(
     ) {
         Spacer(modifier = Modifier.height(10.dp))
 
-        Row(
-            modifier = Modifier.fillMaxWidth()
-        ) {
-            GetBackIcon(onClick = onBackClick)
-            Spacer(modifier = Modifier.width(30.dp))
-            Text(
-                text = "Payment Method",
-                style = MaterialTheme.typography.titleMedium.copy(
-                    fontSize = 17.sp,
-                    fontWeight = FontWeight.Bold
-                ),
-                modifier = Modifier.align(Alignment.CenterVertically)
-            )
-        }
+        HomeHeader(
+            onBackClick = onBackClick,
+            title = "Payment Method"
+        )
 
         Column(modifier = Modifier
             .padding(horizontal = 20.dp)

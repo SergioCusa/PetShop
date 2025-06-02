@@ -11,13 +11,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.prueba.petsop.ui.components.buttons.PrimaryButton
 import com.prueba.petsop.ui.components.cards.CartProduct
 import com.prueba.petsop.ui.components.icons.GetBackIcon
+import com.prueba.petsop.ui.components.layout.HomeHeader
 
 @Composable
 fun CartScreen(
@@ -29,21 +29,12 @@ fun CartScreen(
             modifier = Modifier
                 .padding(16.dp)
         ) {
-            Spacer(modifier = Modifier.height(10.dp))
-            Row(
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                GetBackIcon(onClick = onBackClick)
-                Spacer(modifier = Modifier.width(65.dp))
-                Text(
-                    text = "Cart",
-                    style = MaterialTheme.typography.titleMedium.copy(
-                        fontSize = 17.sp,
-                        fontWeight = FontWeight.Bold
-                    ),
-                    modifier = Modifier.align(Alignment.CenterVertically)
-                )
-            }
+            Spacer(modifier = Modifier.height(20.dp))
+
+            HomeHeader(
+                onBackClick = onBackClick,
+                title = "Cart"
+            )
 
             LazyColumn(
                 verticalArrangement = Arrangement.spacedBy(18.dp),
@@ -98,8 +89,10 @@ fun CartScreen(
                 Text("$36.98",
                     style = MaterialTheme.typography.headlineMedium.copy(fontWeight = FontWeight.Bold))
             }
-            Spacer(modifier = Modifier.height(24.dp))
+            Spacer(modifier = Modifier.weight(1f))
+
             PrimaryButton(text = "Checkout", onClick = onNavigateToPaymentMethod)
+            Spacer(modifier = Modifier.height(16.dp))
         }
     }
 }
