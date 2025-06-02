@@ -19,6 +19,8 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.icons.filled.Notifications
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
@@ -55,11 +57,6 @@ fun HomeScreen(
                     .fillMaxWidth()
                     .padding(horizontal = 24.dp)
             ) {
-//            TopBar(
-//                location = "Jebres, Surakarta",
-//                onSearchClick = onSearchClick,
-//                onNotificationClick = onNotificationClick
-//            )
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
