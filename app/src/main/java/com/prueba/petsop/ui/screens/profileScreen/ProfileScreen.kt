@@ -22,6 +22,7 @@ import com.prueba.petsop.R
 import com.prueba.petsop.ui.components.cards.ProductCard
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import com.prueba.petsop.ui.components.buttons.ModeSwitchSelector
 import com.prueba.petsop.ui.components.tags.CategoryChip
 
 
@@ -38,9 +39,10 @@ fun ProfileScreen() {
                 contentAlignment = Alignment.Center
             ) {
                 ModeSwitchSelector(
-                    isSeller = isSellerMode,
-                    onToggle = { isSellerMode = it },
-                    modifier = Modifier.fillMaxWidth()
+                    leftText = "Profile",
+                    rightText = "Seller Mode",
+                    isRightSelected = isSellerMode,
+                    onToggle = { isSellerMode = it }
                 )
             }
         },
@@ -55,66 +57,6 @@ fun ProfileScreen() {
                 SellerProfileView()
             } else {
                 PersonalProfileView()
-            }
-        }
-    }
-}
-
-@Composable
-fun ModeSwitchSelector(
-    isSeller: Boolean,
-    onToggle: (Boolean) -> Unit,
-    modifier: Modifier = Modifier
-) {
-    Row(
-        modifier = modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.Center
-    ) {
-        Box(
-            modifier = Modifier
-                .width(240.dp)
-                .height(45.dp)
-                .background(Color(0xFFF5F5F5), RoundedCornerShape(24.dp))
-                .padding(4.dp)
-        ) {
-            Row(modifier = Modifier.fillMaxSize()) {
-                Button(
-                    onClick = { onToggle(false) },
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = if (!isSeller) MaterialTheme.colorScheme.primary else Color.Transparent,
-                        contentColor = if (!isSeller) Color.White else Color.Gray
-                    ),
-                    shape = RoundedCornerShape(20.dp),
-                    elevation = if (!isSeller) ButtonDefaults.buttonElevation(2.dp) else ButtonDefaults.buttonElevation(0.dp),
-                    modifier = Modifier.weight(1f).fillMaxHeight(),
-                    contentPadding = PaddingValues(horizontal = 6.dp, vertical = 8.dp)
-                ) {
-                    Text(
-                        "Profile",
-                        fontSize = 14.sp,
-                        fontWeight = FontWeight.Medium,
-                        lineHeight = (14 * 1.5).sp
-                    )
-                }
-
-                Button(
-                    onClick = { onToggle(true) },
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = if (isSeller) Color(0xFF6C4DF4) else Color.Transparent,
-                        contentColor = if (isSeller) Color.White else Color.Gray
-                    ),
-                    shape = RoundedCornerShape(20.dp),
-                    elevation = if (isSeller) ButtonDefaults.buttonElevation(2.dp) else ButtonDefaults.buttonElevation(0.dp),
-                    modifier = Modifier.weight(1f).fillMaxHeight(),
-                    contentPadding = PaddingValues(horizontal = 6.dp, vertical = 8.dp)
-                ) {
-                    Text(
-                        "Seller Mode",
-                        fontSize = 14.sp,
-                        fontWeight = FontWeight.Medium,
-                        lineHeight = (14 * 1.5).sp
-                    )
-                }
             }
         }
     }
