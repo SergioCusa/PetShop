@@ -14,12 +14,14 @@ import com.prueba.petsop.ui.components.cards.NotificationItem
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.KeyboardArrowLeft
+import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import com.prueba.petsop.R
 import com.prueba.petsop.ui.components.cards.NotificationItemSeller
+import com.prueba.petsop.ui.components.icons.PlaceholderIcon
 
 @Composable
 fun NotificationScreen(
@@ -32,22 +34,24 @@ fun NotificationScreen(
             .fillMaxSize()
             .padding(16.dp)
     ) {
+        Spacer(modifier = Modifier.height(10.dp))
         Row(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier.fillMaxWidth()
         ) {
             IconButton(onClick = onBackClick) {
-                Icon(
-                    imageVector = Icons.Default.KeyboardArrowLeft,
-                    contentDescription = "Back"
-                )
+//                Icon(
+//                    imageVector = Icons.Default.KeyboardArrowLeft,
+//                    contentDescription = "Back"
+//                )
+                PlaceholderIcon(onClick = onBackClick,
+                    icon = Icons.Default.KeyboardArrowLeft)
             }
             Text(
                 text = "Notification",
                 style = MaterialTheme.typography.titleMedium.copy(fontSize = 17.sp, fontWeight = FontWeight.Bold),
                 modifier = Modifier.padding(start = 93.dp)
             )
-
         }
 
         Spacer(modifier = Modifier.height(16.dp))

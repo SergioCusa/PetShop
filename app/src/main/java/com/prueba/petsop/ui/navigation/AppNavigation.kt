@@ -28,10 +28,10 @@ fun NavGraphBuilder.appNavGraph(navController: NavHostController) {
             )
         }
         composable("search") {
-            SearchScreen()
+            SearchScreen(onBackClick = { navController.popBackStack() })
         }
         composable("cart") {
-            SearchScreen()
+            SearchScreen(onBackClick = { navController.popBackStack() })
         }
     }
 }

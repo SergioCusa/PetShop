@@ -33,7 +33,7 @@ fun CategoryChip(
             .background(background, RoundedCornerShape(20.dp))
             .clickable { onClick() }
             .padding(horizontal = 22.dp, vertical = 8.dp)
-            .height(45.dp),
+            .height(35.dp),
         contentAlignment = Alignment.Center
     ) {
         Text(

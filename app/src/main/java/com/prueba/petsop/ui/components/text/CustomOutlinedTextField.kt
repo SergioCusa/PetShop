@@ -36,8 +36,8 @@ fun CustomOutlinedTextField(
 ) {
     Box(
         modifier = modifier
-            .border(1.dp, MaterialTheme.colorScheme.outline, RoundedCornerShape(20.dp))
-            .padding(horizontal = 25.dp, vertical = 20.dp)
+            .border(1.dp, MaterialTheme.colorScheme.outlineVariant, RoundedCornerShape(15.dp))
+            .padding(horizontal = 25.dp, vertical = 23.dp)
             .fillMaxWidth()
     ) {
         Row(verticalAlignment = Alignment.CenterVertically) {
@@ -46,7 +46,7 @@ fun CustomOutlinedTextField(
                     imageVector = icon,
                     contentDescription = null,
                     tint = MaterialTheme.colorScheme.outline,
-                    modifier = Modifier.padding(end = 8.dp)
+                    modifier = Modifier.padding(end = 10.dp)
                 )
                 Text(
                     text = placeholderText,

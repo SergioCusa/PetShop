@@ -55,7 +55,7 @@ fun TopBar(
             PlaceholderIcon(onClick = onSearchClick,
                 icon = Icons.Default.Search)
             PlaceholderIcon(onClick = onNotificationClick,
-                icon = Icons.Default.Notifications,)
+                icon = Icons.Default.Notifications)
         }
     }
 }

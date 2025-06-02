@@ -33,6 +33,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import com.prueba.petsop.ui.components.layout.ModalLocation
 import com.prueba.petsop.ui.components.icons.PlaceholderIcon
+import com.prueba.petsop.ui.components.tags.CategoryChipsRow
 
 
 @Composable
@@ -116,21 +117,7 @@ fun HomeScreen(
 
                 Spacer(modifier = Modifier.height(12.dp))
 
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.spacedBy(12.dp)
-                ) {
-                    Image(
-                        painter = painterResource(id = R.drawable.shufle_icon),
-                        contentDescription = "Shuffle",
-                        modifier = Modifier
-                            .height(60.dp)
-                            .width(60.dp)
-                    )
-                    CategoryChip(text = "Food", selected = true)
-                    CategoryChip(text = "Toys", selected = false)
-                    CategoryChip(text = "Accessories", selected = false)
-                }
+                CategoryChipsRow()
 
                 Spacer(modifier = Modifier.height(24.dp))
 
