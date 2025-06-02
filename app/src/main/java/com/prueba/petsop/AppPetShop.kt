@@ -28,7 +28,7 @@ fun AppPetShop(viewModel: ProductViewModel) {
             composable("onboarding") {
                 OnboardingScreen(
                     onGetStartedClick = {
-                        navController.navigate("auth_graph") {
+                        navController.navigate("auth") {
                             popUpTo("onboarding") { inclusive = true }
                         }
                     },
