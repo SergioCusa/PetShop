@@ -31,6 +31,7 @@ import kotlin.io.println
 fun ProductDetailScreen(
     onBackClick: () -> Unit,
     onFavouriteClick: () -> Unit,
+    onNavigateToCart:() -> Unit
     ) {
     Column(
         modifier = Modifier
@@ -116,7 +117,7 @@ fun ProductDetailScreen(
         Spacer(modifier = Modifier.height(35.dp))
 
         Row(modifier = Modifier.padding(horizontal = 20.dp)){
-            PrimaryButton(text = "Add to Cart"){}
+            PrimaryButton(text = "Add to Cart", onClick = onNavigateToCart)
         }
 
     }

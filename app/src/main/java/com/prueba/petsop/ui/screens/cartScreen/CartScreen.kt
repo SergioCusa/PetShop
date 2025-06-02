@@ -13,7 +13,9 @@ import androidx.compose.ui.unit.dp
 import com.prueba.petsop.ui.components.buttons.PrimaryButton
 
 @Composable
-fun CartScreen() {
+fun CartScreen(
+    onBackClick: () -> Unit,
+) {
     Column(modifier = Modifier.padding(16.dp)) {
         Text("Cart", style = MaterialTheme.typography.titleMedium)
 
@@ -28,13 +30,17 @@ fun CartScreen() {
                     .padding(bottom = 16.dp),
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                Box(modifier = Modifier.size(64.dp).background(Color.Gray)) // Image placeholder
+                Box(modifier = Modifier
+                    .size(64.dp)
+                    .background(Color.Gray)) // Image placeholder
                 Column {
                     Text("Royal Canin Adult", style = MaterialTheme.typography.bodyLarge)
                     Text("for 2–3 years", style = MaterialTheme.typography.bodySmall)
                     Text("$12.99", color = MaterialTheme.colorScheme.primary)
                 }
-                Box(modifier = Modifier.size(32.dp).background(Color.Red)) // Trash placeholder
+                Box(modifier = Modifier
+                    .size(32.dp)
+                    .background(Color.Red)) // Trash placeholder
             }
         }
 
