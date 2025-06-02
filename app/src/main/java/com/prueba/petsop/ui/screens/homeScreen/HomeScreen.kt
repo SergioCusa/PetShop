@@ -41,7 +41,8 @@ fun HomeScreen(
     onNavigateToProfile: () -> Unit,
     onNotificationClick: () -> Unit,
     onSearchClick: () -> Unit,
-    onNavigateToPurchase: () -> Unit
+    onNavigateToPurchase: () -> Unit,
+    onNavigateToBestSeller: () -> Unit
 ) {
     var showModal by remember { mutableStateOf(false) }
 
@@ -129,7 +130,10 @@ fun HomeScreen(
                     Text(
                         text = "View All",
                         style = MaterialTheme.typography.labelSmall.copy(fontSize = 12.sp),
-                        color = MaterialTheme.colorScheme.primary
+                        color = MaterialTheme.colorScheme.primary,
+                        modifier = Modifier.clickable {
+                            onNavigateToBestSeller()
+                        },
                     )
                 }
 
