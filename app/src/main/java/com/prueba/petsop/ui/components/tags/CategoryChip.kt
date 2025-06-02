@@ -21,9 +21,9 @@ fun CategoryChip(
     selected: Boolean,
     onClick: () -> Unit = {},
     selectedColor: Color = MaterialTheme.colorScheme.primary,
-    unselectedColor: Color = Color(0xFFF5F5F5),
-    selectedTextColor: Color = Color.White,
-    unselectedTextColor: Color = Color.Gray
+    unselectedColor: Color = MaterialTheme.colorScheme.surfaceVariant,
+    selectedTextColor: Color = MaterialTheme.colorScheme.background,
+    unselectedTextColor: Color = MaterialTheme.colorScheme.outline
 ) {
     val background = if (selected) selectedColor else unselectedColor
     val contentColor = if (selected) selectedTextColor else unselectedTextColor
