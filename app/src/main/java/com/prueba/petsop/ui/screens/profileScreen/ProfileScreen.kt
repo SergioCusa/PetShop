@@ -19,14 +19,16 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.prueba.petsop.R
-import com.prueba.petsop.ui.components.cards.ProductCard
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import com.prueba.petsop.ui.components.buttons.ModeSwitchSelector
+import com.prueba.petsop.ui.components.cards.ProductCardSeller
 import com.prueba.petsop.ui.components.tags.CategoryChip
 
 
 @Composable
-fun ProfileScreen() {
+fun ProfileScreen(
+    onNavigateToProductDetail: () -> Unit
+) {
     var isSellerMode by remember { mutableStateOf(false) }
 
     Scaffold(
@@ -38,9 +40,10 @@ fun ProfileScreen() {
                 contentAlignment = Alignment.Center
             ) {
                 ModeSwitchSelector(
-                    isSeller = isSellerMode,
-                    onToggle = { isSellerMode = it },
-                    modifier = Modifier.fillMaxWidth()
+                    leftText = "Profile",
+                    rightText = "Seller Mode",
+                    isRightSelected = isSellerMode,
+                    onToggle = { isSellerMode = it }
                 )
             }
         },
@@ -52,69 +55,9 @@ fun ProfileScreen() {
                 .padding(innerPadding)
         ) {
             if (isSellerMode) {
-                SellerProfileView()
+                SellerProfileView(onNavigateToProductDetail)
             } else {
-                PersonalProfileView()
-            }
-        }
-    }
-}
-
-@Composable
-fun ModeSwitchSelector(
-    isSeller: Boolean,
-    onToggle: (Boolean) -> Unit,
-    modifier: Modifier = Modifier
-) {
-    Row(
-        modifier = modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.Center
-    ) {
-        Box(
-            modifier = Modifier
-                .width(240.dp)
-                .height(45.dp)
-                .background(Color(0xFFF5F5F5), RoundedCornerShape(24.dp))
-                .padding(4.dp)
-        ) {
-            Row(modifier = Modifier.fillMaxSize()) {
-                Button(
-                    onClick = { onToggle(false) },
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = if (!isSeller) MaterialTheme.colorScheme.primary else Color.Transparent,
-                        contentColor = if (!isSeller) Color.White else Color.Gray
-                    ),
-                    shape = RoundedCornerShape(20.dp),
-                    elevation = if (!isSeller) ButtonDefaults.buttonElevation(2.dp) else ButtonDefaults.buttonElevation(0.dp),
-                    modifier = Modifier.weight(1f).fillMaxHeight(),
-                    contentPadding = PaddingValues(horizontal = 6.dp, vertical = 8.dp)
-                ) {
-                    Text(
-                        "Profile",
-                        fontSize = 14.sp,
-                        fontWeight = FontWeight.Medium,
-                        lineHeight = (14 * 1.5).sp
-                    )
-                }
-
-                Button(
-                    onClick = { onToggle(true) },
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = if (isSeller) Color(0xFF6C4DF4) else Color.Transparent,
-                        contentColor = if (isSeller) Color.White else Color.Gray
-                    ),
-                    shape = RoundedCornerShape(20.dp),
-                    elevation = if (isSeller) ButtonDefaults.buttonElevation(2.dp) else ButtonDefaults.buttonElevation(0.dp),
-                    modifier = Modifier.weight(1f).fillMaxHeight(),
-                    contentPadding = PaddingValues(horizontal = 6.dp, vertical = 8.dp)
-                ) {
-                    Text(
-                        "Seller Mode",
-                        fontSize = 14.sp,
-                        fontWeight = FontWeight.Medium,
-                        lineHeight = (14 * 1.5).sp
-                    )
-                }
+                PersonalProfileView(onNavigateToProductDetail)
             }
         }
     }
@@ -151,26 +94,30 @@ fun ProfileHeader(backgroundImageRes: Int, tintColor: Color, iconRes: Int) {
 }
 
 @Composable
-fun SellerProfileView() {
+fun SellerProfileView(
+    onNavigateToProductDetail: () -> Unit
+) {
     var selectedTab by remember { mutableStateOf("Product") }
     ProfileHeader(backgroundImageRes = R.drawable.banner_profile, tintColor = Color(0xFFFD9340), iconRes = R.drawable.profile_avatar_pittashop)
     Text("Pittashop", fontSize = 20.sp, fontWeight = FontWeight.Bold, modifier = Modifier.alignCenter().padding(top = 74.dp))
     SellerStats(followers = 109, following = 992, sales = 80)
     Spacer(modifier = Modifier.height(50.dp))
-    CategoryChip(text = "Food", selected = true)
+    CategoryChipRow(listOf("Product", "Sold", "Stats"), selected = selectedTab,onSelectedChange = { selectedTab = it }, modifier = Modifier.alignCenter())
     Spacer(modifier = Modifier.height(12.dp))
-    ProductGrid()
+    ProductGrid(onNavigateToProductDetail)
 }
 
 @Composable
-fun PersonalProfileView() {
+fun PersonalProfileView(
+    onNavigateToProductDetail: () -> Unit
+) {
     var selectedTab by remember { mutableStateOf("Saved") }
     ProfileHeader(backgroundImageRes = R.drawable.banner_profile, tintColor = Color(0xFFF8F8F8), iconRes = R.drawable.profile_avatar_abduldul)
     Text("Abduldul", fontSize = 20.sp, fontWeight = FontWeight.Bold, modifier = Modifier.alignCenter().padding(top = 74.dp))
     Spacer(modifier = Modifier.height(8.dp))
     CategoryChipRow(listOf("Saved", "Edit Profile"), selected = selectedTab,onSelectedChange = { selectedTab = it }, modifier = Modifier.alignCenter())
     Spacer(modifier = Modifier.height(12.dp))
-    ProductGrid()
+    ProductGrid(onNavigateToProductDetail)
 }
 
 @Composable
@@ -197,12 +144,12 @@ fun StatItem(value: Int, label: String) {
         Text(
             text = "$value",
             fontWeight = FontWeight.Bold,
-            fontSize = 16.sp // Agregado para mejor visibilidad
+            fontSize = 16.sp
         )
         Text(
             text = label,
             fontSize = 12.sp,
-            color = Color.Gray // Agregado para diferenciarlo del número
+            color = Color.Gray
         )
     }
 }
@@ -229,15 +176,17 @@ fun CategoryChipRow(
 }
 
 @Composable
-fun ProductGrid() {
+fun ProductGrid(
+    onNavigateToProductDetail: () -> Unit
+) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
             .padding(horizontal = 16.dp),
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
-        ProductCard(name = "RC Kitten", price = "$20,99")
-        ProductCard(name = "RC Persian", price = "$22,99")
+        ProductCardSeller(name = "RC Kitten", price = "$20.99", onNavigateToProductDetail = onNavigateToProductDetail, photo = "pink")
+        ProductCardSeller(name = "RC Persian", price = "$22.99", onNavigateToProductDetail = onNavigateToProductDetail, photo = "yellow")
     }
 }
 
