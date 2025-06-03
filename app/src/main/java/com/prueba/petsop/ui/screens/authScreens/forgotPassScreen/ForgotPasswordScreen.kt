@@ -19,13 +19,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.prueba.petsop.ui.components.buttons.PrimaryButton
-import com.prueba.petsop.ui.components.text.AuthOutlinedTextField
 import com.prueba.petsop.ui.components.text.LinkedTextRow
 import com.prueba.petsop.ui.components.text.ValidateTextField
 
 @Composable
 fun ForgotPasswordScreen(
-    onLoginClick: () -> Unit,
+    onHaveAcountClick: () -> Unit,
     onResetConfirmed: () -> Unit
 ) {
     var email by remember { mutableStateOf("") }
@@ -103,7 +102,7 @@ fun ForgotPasswordScreen(
         LinkedTextRow(
             normalText = "Have an account?",
             linkText = "Login",
-            onLinkClick = onLoginClick
+            onLinkClick = onHaveAcountClick
         )
     }
 }

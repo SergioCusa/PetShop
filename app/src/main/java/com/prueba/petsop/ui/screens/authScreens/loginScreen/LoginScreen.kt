@@ -1,39 +1,33 @@
 package com.prueba.petsop.ui.screens.authScreens.loginScreen
 
 import AuthSocialButtonWithImage
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.foundation.layout.*
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.prueba.petsop.R
 import com.prueba.petsop.ui.components.buttons.PrimaryButton
-import com.prueba.petsop.ui.components.buttons.SaveButton
-import com.prueba.petsop.ui.components.text.ValidateTextField
 import com.prueba.petsop.ui.components.text.LinkedTextRow
+import com.prueba.petsop.ui.components.text.ValidateTextField
+import com.prueba.petsop.viewmodel.LoginResult
+import com.prueba.petsop.viewmodel.LoginViewModel
+
+/*"Usuario de prueba: 'emilys'\nContraseña: 'emilyspass'"*/
 
 @Composable
 fun LoginScreen(
     onLoginClick: () -> Unit,
     onRegisterClick: () -> Unit,
-    onForgotClick: () -> Unit
+    onForgotClick: () -> Unit,
+    viewModel: LoginViewModel = viewModel()
 ) {
-    var email by remember { mutableStateOf("") }
-    var password by remember { mutableStateOf("") }
+    val email by viewModel.username.collectAsState()
+    val password by viewModel.password.collectAsState()
+    val result by viewModel.result.collectAsState()
 
     val allValid = email.isNotBlank() && password.isNotBlank()
 
@@ -50,9 +44,7 @@ fun LoginScreen(
                 style = MaterialTheme.typography.headlineLarge,
                 lineHeight = 40.sp
             )
-
             Spacer(modifier = Modifier.height(12.dp))
-
             Text(
                 text = "Water is life. Water is a basic human need. In various lines of life, humans need water.",
                 style = MaterialTheme.typography.bodyMedium
@@ -63,16 +55,22 @@ fun LoginScreen(
 
         ValidateTextField(
             value = email,
-            onValueChange = { email = it },
+            onValueChange = {
+                viewModel.username.value = it
+                viewModel.clearResult()
+            },
             placeholder = "Email",
-            showError =  email.isEmpty()
+            showError = email.isEmpty()
         )
 
         Spacer(modifier = Modifier.height(16.dp))
 
         ValidateTextField(
             value = password,
-            onValueChange = { password = it },
+            onValueChange = {
+                viewModel.password.value = it
+                viewModel.clearResult()
+            },
             placeholder = "Password",
             showError = password.isEmpty()
         )
@@ -97,7 +95,23 @@ fun LoginScreen(
             )
         }
 
-        Spacer(modifier = Modifier.height(200.dp))
+        Spacer(modifier = Modifier.height(32.dp))
+
+        when (result) {
+            is LoginResult.Success -> {
+                val response = (result as LoginResult.Success).response
+                Text("Bienvenido: ${response.username}", color = MaterialTheme.colorScheme.primary)
+            }
+            is LoginResult.Error -> {
+                Text(
+                    text = (result as LoginResult.Error).message,
+                    color = MaterialTheme.colorScheme.error
+                )
+            }
+            LoginResult.None -> {}
+        }
+
+        Spacer(modifier = Modifier.height(24.dp))
 
         LinkedTextRow(
             normalText = "Don’t have an account?",
@@ -105,7 +119,7 @@ fun LoginScreen(
             onLinkClick = onRegisterClick
         )
 
-        Spacer(modifier = Modifier.height(32.dp))
+        Spacer(modifier = Modifier.height(16.dp))
 
         LinkedTextRow(
             normalText = "",
@@ -115,10 +129,15 @@ fun LoginScreen(
 
         Spacer(modifier = Modifier.height(32.dp))
 
-        PrimaryButton(text = "Get Started", enabled = allValid, onClick = onLoginClick)
+        PrimaryButton(
+            text = "Get Started",
+            enabled = allValid,
+            onClick = {
+                if (allValid) {
+                    viewModel.login()
 
-
+                }
+            }
+        )
     }
 }
-
-
