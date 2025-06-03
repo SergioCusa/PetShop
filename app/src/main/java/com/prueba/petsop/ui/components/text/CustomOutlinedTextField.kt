@@ -25,6 +25,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
+import androidx.core.app.NotificationCompat.MessagingStyle.Message
 
 @Composable
 fun CustomOutlinedTextField(
@@ -32,7 +33,10 @@ fun CustomOutlinedTextField(
     onValueChange: (String) -> Unit,
     placeholderText: String,
     icon: ImageVector,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    isError: Boolean = false,
+    errorMessage: String = "",
+    showErrorMessage: Boolean = false
 ) {
     Box(
         modifier = modifier
@@ -62,4 +66,5 @@ fun CustomOutlinedTextField(
         )
     }
 }
+
 

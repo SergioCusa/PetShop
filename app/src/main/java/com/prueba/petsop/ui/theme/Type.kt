@@ -26,6 +26,11 @@ val AppTypography = Typography(
         fontWeight = FontWeight.Bold,
         fontSize = 57.sp
     ),
+    headlineLarge = TextStyle(
+        fontFamily = poppinsFontFamily,
+        fontWeight = FontWeight.SemiBold,
+        fontSize = 40.sp
+    ),
     titleLarge = TextStyle(
         fontFamily = poppinsFontFamily,
         fontWeight = FontWeight.SemiBold,
@@ -38,8 +43,8 @@ val AppTypography = Typography(
     ),
     bodyMedium = TextStyle(
         fontFamily = poppinsFontFamily,
-        fontWeight = FontWeight.Medium,
-        fontSize = 12.sp
+        fontWeight = FontWeight.Normal,
+        fontSize = 14.sp
     ),
     labelLarge = TextStyle(
         fontFamily = poppinsFontFamily,
@@ -53,8 +58,8 @@ val AppTypography = Typography(
     ),
     labelSmall = TextStyle(
         fontFamily = poppinsFontFamily,
-        fontWeight = FontWeight.Medium,
-        fontSize = 11.sp
+        fontWeight = FontWeight.SemiBold,
+        fontSize = 14.sp
     ),
     titleMedium = TextStyle(
         fontFamily = poppinsFontFamily,
