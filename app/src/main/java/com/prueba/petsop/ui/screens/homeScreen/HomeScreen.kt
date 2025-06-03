@@ -50,8 +50,9 @@ fun HomeScreen(
     onNavigateToBestSeller: () -> Unit,
     onNavigateToProductDetail: () -> Unit
 ) {
-    var showModal by remember { mutableStateOf(false) }
     val scrollState = rememberScrollState()
+
+    var showModal by remember { mutableStateOf(false) }
 
         Column(
             modifier = Modifier
@@ -65,7 +66,7 @@ fun HomeScreen(
                     .fillMaxWidth()
                     .padding(horizontal = 16.dp)
             ) {
-                Spacer(modifier = Modifier.height(16.dp))
+                Spacer(modifier = Modifier.height(22.dp))
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -149,8 +150,10 @@ fun HomeScreen(
                 Spacer(modifier = Modifier.height(16.dp))
 
                 Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceAround
+                    modifier = Modifier.fillMaxWidth()
+                        .padding(vertical = 8.dp),
+                    horizontalArrangement = Arrangement.SpaceAround,
+
                 ) {
                     ProductCardSeller(name = "RC Kitten", price = "$20.99", onNavigateToProductDetail = onNavigateToProductDetail, photo = "pink")
                     ProductCardSeller(name = "RC Persian", price = "$22.99", onNavigateToProductDetail = onNavigateToProductDetail, photo = "yellow")

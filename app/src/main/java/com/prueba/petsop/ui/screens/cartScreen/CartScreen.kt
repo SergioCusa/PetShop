@@ -4,7 +4,9 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -24,7 +26,12 @@ fun CartScreen(
     onBackClick: () -> Unit,
     onNavigateToPaymentMethod: () -> Unit
 ) {
-    Column() {
+    val scrollState = rememberScrollState()
+
+    Column(modifier = Modifier
+        .fillMaxWidth()
+        .height(900.dp)
+        .verticalScroll(scrollState)) {
         Column(
             modifier = Modifier
                 .padding(16.dp)
@@ -38,7 +45,9 @@ fun CartScreen(
 
             LazyColumn(
                 verticalArrangement = Arrangement.spacedBy(18.dp),
-                modifier = Modifier.padding(horizontal = 16.dp)
+                modifier = Modifier
+                    .padding(horizontal = 16.dp)
+                    .height(400.dp)
             ) {
                 items(3) {
                     CartProduct()

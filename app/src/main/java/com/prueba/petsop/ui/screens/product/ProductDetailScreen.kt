@@ -4,7 +4,9 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -26,10 +28,12 @@ fun ProductDetailScreen(
     onFavouriteClick: () -> Unit,
     onNavigateToCart:() -> Unit
     ) {
+    val scrollState = rememberScrollState()
     Column(
         modifier = Modifier
             .fillMaxSize()
             .padding(horizontal = 16.dp, vertical = 6.dp)
+            .verticalScroll(scrollState)
     ) {
         Spacer(modifier = Modifier.height(20.dp))
 
@@ -78,21 +82,21 @@ fun ProductDetailScreen(
                 horizontalArrangement = Arrangement.SpaceAround,
                 verticalAlignment = Alignment.CenterVertically
             ){
-                Spacer(modifier = Modifier.width(20.dp))
+                Spacer(modifier = Modifier.width(10.dp))
                 Row(
                     horizontalArrangement = Arrangement.SpaceAround,
                     verticalAlignment = Alignment.CenterVertically,
                     modifier = Modifier
                         .background(MaterialTheme.colorScheme.surfaceVariant, shape = RoundedCornerShape(30.dp))
                         .height(50.dp)
-                        .width(120.dp)
+                        .width(130.dp)
 
                 ){
                     Text("-")
                     Text("1")
                     Text("+")
                 }
-                Spacer(modifier = Modifier.width(120.dp))
+                Spacer(modifier = Modifier.width(80.dp))
 
                 Text(
                     text = "$12.99",
@@ -102,7 +106,7 @@ fun ProductDetailScreen(
             }
         }
 
-        Spacer(modifier = Modifier.height(20.dp))
+        Spacer(modifier = Modifier.height(24.dp))
 
         Row(modifier = Modifier.padding(horizontal = 20.dp)){
             PrimaryButton(text = "Add to Cart", onClick = onNavigateToCart)
