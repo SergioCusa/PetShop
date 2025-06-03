@@ -23,8 +23,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.prueba.petsop.R
 import com.prueba.petsop.ui.components.buttons.PrimaryButton
-import com.prueba.petsop.ui.components.text.AuthOutlinedTextField
 import com.prueba.petsop.ui.components.text.LinkedTextRow
+import com.prueba.petsop.ui.components.text.ValidateTextField
 
 @Composable
 fun RegisterScreen(
@@ -36,11 +36,7 @@ fun RegisterScreen(
     var password by remember { mutableStateOf("") }
     var fullName by remember { mutableStateOf("") }
 
-
-    var emailTouched by remember { mutableStateOf(false) }
-    var passwordTouched by remember { mutableStateOf(false) }
-    var fullNameTouched by remember { mutableStateOf(false) }
-
+    val allValid = email.isNotBlank() && password.isNotBlank() && fullName.isNotBlank()
 
     Column(
         modifier = Modifier
@@ -68,35 +64,29 @@ fun RegisterScreen(
         Spacer(modifier = Modifier.height(32.dp))
 
         // Inputs
-        AuthOutlinedTextField(
+        ValidateTextField(
             value = fullName,
             onValueChange = { fullName = it },
-            placeholderText = "Full Name",
-            isError = fullNameTouched && fullName.isBlank(),
-            errorMessage = "Required Fields",
-            showErrorMessage = fullNameTouched
+            placeholder = "fullName",
+            showError =  fullName.isEmpty()
         )
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        AuthOutlinedTextField(
+        ValidateTextField(
             value = email,
             onValueChange = { email = it },
-            placeholderText = "Email",
-            isError = emailTouched && email.isBlank(),
-            errorMessage = "Required Fields",
-            showErrorMessage = emailTouched
+            placeholder = "Email",
+            showError =  email.isEmpty()
         )
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        AuthOutlinedTextField(
+        ValidateTextField(
             value = password,
             onValueChange = { password = it },
-            placeholderText = "Password",
-            isError = passwordTouched && password.isBlank(),
-            errorMessage = "Required Fields",
-            showErrorMessage = passwordTouched
+            placeholder = "password",
+            showError =  password.isEmpty()
         )
 
         Spacer(modifier = Modifier.height(50.dp))
@@ -113,20 +103,7 @@ fun RegisterScreen(
 
         Spacer(modifier = Modifier.height(32.dp))
 
+        PrimaryButton(text = "Get Started", enabled = allValid, onClick = onHaveAcountClick)
 
-
-        // Botón principal
-        PrimaryButton(
-            text = "Get Started",
-            onClick = {
-                emailTouched = true
-                passwordTouched = true
-                fullNameTouched = true
-                if (email.isNotBlank() && password.isNotBlank()  && fullName.isNotBlank()) {
-                    onLoginClick()
-                }
-            },
-            enabled = email.isNotBlank() || password.isNotBlank() || fullName.isNotBlank()
-        )
     }
 }

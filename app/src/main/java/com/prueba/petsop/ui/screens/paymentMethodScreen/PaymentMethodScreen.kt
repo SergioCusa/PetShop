@@ -22,7 +22,7 @@ import androidx.compose.ui.unit.sp
 import com.prueba.petsop.ui.components.buttons.SaveButton
 import com.prueba.petsop.ui.components.icons.GetBackIcon
 import com.prueba.petsop.ui.components.layout.HomeHeader
-import com.prueba.petsop.ui.components.text.PaymentTextField
+import com.prueba.petsop.ui.components.text.ValidateTextField
 
 
 @Composable
@@ -67,28 +67,28 @@ fun PaymentMethodScreen(
 
             Spacer(modifier = Modifier.height(20.dp))
 
-            PaymentTextField(
+            ValidateTextField(
                 value = cardNumber,
                 onValueChange = { cardNumber = it },
                 placeholder = "Card number",
                 showError = cardNumber.isEmpty()
             )
             Spacer(modifier = Modifier.height(16.dp))
-            PaymentTextField(
+            ValidateTextField(
                 value = name,
                 onValueChange = { name = it },
                 placeholder = "Card Name",
                 showError = name.isEmpty()
             )
             Spacer(modifier = Modifier.height(16.dp))
-            PaymentTextField(
+            ValidateTextField(
                 value = expiration,
                 onValueChange = { expiration = it },
                 placeholder = "Expire",
                 showError = expiration.isEmpty()
             )
             Spacer(modifier = Modifier.height(16.dp))
-            PaymentTextField(
+            ValidateTextField(
                 value = cvv,
                 onValueChange = { cvv = it },
                 placeholder = "CVV",

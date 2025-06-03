@@ -21,6 +21,7 @@ import androidx.compose.ui.unit.sp
 import com.prueba.petsop.ui.components.buttons.PrimaryButton
 import com.prueba.petsop.ui.components.text.AuthOutlinedTextField
 import com.prueba.petsop.ui.components.text.LinkedTextRow
+import com.prueba.petsop.ui.components.text.ValidateTextField
 
 @Composable
 fun ForgotPasswordScreen(
@@ -28,14 +29,13 @@ fun ForgotPasswordScreen(
     onResetConfirmed: () -> Unit
 ) {
     var email by remember { mutableStateOf("") }
-    var emailTouched by remember { mutableStateOf(false) }
-
     var newPassword by remember { mutableStateOf("") }
     var confirmPassword by remember { mutableStateOf("") }
-    var newPasswordTouched by remember { mutableStateOf(false) }
-    var confirmPasswordTouched by remember { mutableStateOf(false) }
 
     var showResetFields by remember { mutableStateOf(false) }
+
+    val firstStepValid = email.isNotBlank()
+    val secondStepValid = newPassword.isNotBlank() && confirmPassword.isNotBlank()
 
     Column(
         modifier = Modifier
@@ -44,7 +44,6 @@ fun ForgotPasswordScreen(
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        // Título
         Text(
             text = "Forgot\nPassword",
             style = MaterialTheme.typography.headlineLarge,
@@ -61,63 +60,42 @@ fun ForgotPasswordScreen(
         Spacer(modifier = Modifier.height(32.dp))
 
         if (!showResetFields) {
-            AuthOutlinedTextField(
+            ValidateTextField(
                 value = email,
                 onValueChange = { email = it },
-                placeholderText = "Email",
-                isError = emailTouched && email.isBlank(),
-                errorMessage = "Required Fields",
-                showErrorMessage = emailTouched
+                placeholder = "Email",
+                showError = !firstStepValid
             )
-        }
-
-        if (showResetFields) {
-            AuthOutlinedTextField(
+        } else {
+            ValidateTextField(
                 value = newPassword,
                 onValueChange = { newPassword = it },
-                placeholderText = "New Password",
-                isError = newPasswordTouched && newPassword.isBlank(),
-                errorMessage = "Required Fields",
-                showErrorMessage = newPasswordTouched
+                placeholder = "New Password",
+                showError = newPassword.isEmpty()
             )
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            AuthOutlinedTextField(
+            ValidateTextField(
                 value = confirmPassword,
                 onValueChange = { confirmPassword = it },
-                placeholderText = "Confirm Password",
-                isError = confirmPasswordTouched && confirmPassword.isBlank(),
-                errorMessage = "Required Fields",
-                showErrorMessage = confirmPasswordTouched
+                placeholder = "Confirm Password",
+                showError = confirmPassword.isEmpty()
             )
         }
 
         Spacer(modifier = Modifier.height(32.dp))
 
-        // Botón
         PrimaryButton(
             text = if (showResetFields) "Reset Password" else "Next",
             onClick = {
-                if (!showResetFields) {
-                    emailTouched = true
-                    if (email.isNotBlank()) {
-                        showResetFields = true
-                    }
-                } else {
-                    newPasswordTouched = true
-                    confirmPasswordTouched = true
-                    if (newPassword.isNotBlank() && confirmPassword.isNotBlank()) {
-
-                        onResetConfirmed()
-                    }
+                if (!showResetFields && firstStepValid) {
+                    showResetFields = true
+                } else if (showResetFields && secondStepValid) {
+                    onResetConfirmed()
                 }
             },
-            enabled = if (!showResetFields) {
-                email.isNotBlank()
-            } else {
-                newPassword.isNotBlank() || confirmPassword.isNotBlank()
-            }
+            enabled = if (!showResetFields) firstStepValid else secondStepValid
         )
 
         Spacer(modifier = Modifier.height(24.dp))
@@ -125,7 +103,7 @@ fun ForgotPasswordScreen(
         LinkedTextRow(
             normalText = "Have an account?",
             linkText = "Login",
-            onLinkClick = onResetConfirmed
+            onLinkClick = onLoginClick
         )
     }
 }

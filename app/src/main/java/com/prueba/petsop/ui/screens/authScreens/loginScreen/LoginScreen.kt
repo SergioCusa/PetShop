@@ -22,7 +22,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.prueba.petsop.R
 import com.prueba.petsop.ui.components.buttons.PrimaryButton
-import com.prueba.petsop.ui.components.text.AuthOutlinedTextField
+import com.prueba.petsop.ui.components.buttons.SaveButton
+import com.prueba.petsop.ui.components.text.ValidateTextField
 import com.prueba.petsop.ui.components.text.LinkedTextRow
 
 @Composable
@@ -34,8 +35,7 @@ fun LoginScreen(
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
 
-    var emailTouched by remember { mutableStateOf(false) }
-    var passwordTouched by remember { mutableStateOf(false) }
+    val allValid = email.isNotBlank() && password.isNotBlank()
 
     Column(
         modifier = Modifier
@@ -44,7 +44,6 @@ fun LoginScreen(
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        // Título
         Column(horizontalAlignment = Alignment.Start) {
             Text(
                 text = "Hello,\nWelcome Back!",
@@ -62,33 +61,26 @@ fun LoginScreen(
 
         Spacer(modifier = Modifier.height(32.dp))
 
-        // Inputs
-        AuthOutlinedTextField(
+        ValidateTextField(
             value = email,
             onValueChange = { email = it },
-            placeholderText = "Email",
-            isError = emailTouched && email.isBlank(),
-            errorMessage = "Required Fields",
-            showErrorMessage = emailTouched
+            placeholder = "Email",
+            showError =  email.isEmpty()
         )
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        AuthOutlinedTextField(
+        ValidateTextField(
             value = password,
             onValueChange = { password = it },
-            placeholderText = "Password",
-            isError = passwordTouched && password.isBlank(),
-            errorMessage = "Required Fields",
-            showErrorMessage = passwordTouched
+            placeholder = "Password",
+            showError = password.isEmpty()
         )
 
         Spacer(modifier = Modifier.height(50.dp))
 
-        // Botones sociales
         Row(
-            modifier = Modifier
-                .fillMaxWidth(),
+            modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             AuthSocialButtonWithImage(
@@ -106,34 +98,27 @@ fun LoginScreen(
         }
 
         Spacer(modifier = Modifier.height(200.dp))
-        // Texto con link
+
         LinkedTextRow(
             normalText = "Don’t have an account?",
             linkText = "Create Account",
-            onLinkClick = { onRegisterClick() }
+            onLinkClick = onRegisterClick
         )
 
         Spacer(modifier = Modifier.height(32.dp))
 
         LinkedTextRow(
             normalText = "",
-            linkText = "forgot your password?",
-            onLinkClick = { onForgotClick() }
+            linkText = "Forgot your password?",
+            onLinkClick = onForgotClick
         )
 
         Spacer(modifier = Modifier.height(32.dp))
 
-        // Botón principal
-        PrimaryButton(
-            text = "Get Started",
-            onClick = {
-                emailTouched = true
-                passwordTouched = true
-                if (email.isNotBlank() && password.isNotBlank()) {
-                    onLoginClick()
-                }
-            },
-            enabled = email.isNotBlank() || password.isNotBlank()
-        )
+        PrimaryButton(text = "Get Started", enabled = allValid, onClick = onLoginClick)
+
+
     }
 }
+
+
