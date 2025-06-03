@@ -1,33 +1,45 @@
 package com.prueba.petsop.ui.screens.profileScreen
 
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.*
-import androidx.compose.runtime.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.statusBarsPadding
+import androidx.compose.foundation.layout.wrapContentWidth
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.BlendMode
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.ColorFilter
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.prueba.petsop.R
-import androidx.compose.material3.Text
+import com.prueba.petsop.ui.components.banners.ProfileBanner
 import com.prueba.petsop.ui.components.buttons.ModeSwitchSelector
 import com.prueba.petsop.ui.components.cards.ProductCardSeller
+import com.prueba.petsop.ui.components.icons.FooterItem
+import com.prueba.petsop.ui.components.layout.BottomNavBar
 import com.prueba.petsop.ui.components.tags.CategoryChip
 
 
 @Composable
 fun ProfileScreen(
-    onNavigateToProductDetail: () -> Unit
+    onNavigateToProductDetail: () -> Unit,
+    onNavigateToHome: () -> Unit,
+    onNavigateToPurchase: () -> Unit,
+    onNavigateToSettings: () -> Unit
 ) {
     var isSellerMode by remember { mutableStateOf(false) }
 
@@ -36,7 +48,8 @@ fun ProfileScreen(
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(60.dp),
+                    .height(100.dp)
+                    .statusBarsPadding(),
                 contentAlignment = Alignment.Center
             ) {
                 ModeSwitchSelector(
@@ -47,7 +60,19 @@ fun ProfileScreen(
                 )
             }
         },
-        containerColor = Color.White
+        bottomBar = {
+            if (!isSellerMode) {
+                BottomNavBar(
+                    selectedItem = FooterItem.PROFILE,
+                    onNavigateToHome = onNavigateToHome,
+                    onNavigateToAbout = {},
+                    onNavigateToPurchase = onNavigateToPurchase,
+                    onNavigateToProfile = {}
+                )
+            }
+        },
+        containerColor = Color.White,
+        contentWindowInsets = WindowInsets(0)
     ) { innerPadding ->
         Column(
             modifier = Modifier
@@ -57,39 +82,11 @@ fun ProfileScreen(
             if (isSellerMode) {
                 SellerProfileView(onNavigateToProductDetail)
             } else {
-                PersonalProfileView(onNavigateToProductDetail)
+                PersonalProfileView(
+                    onNavigateToProductDetail = onNavigateToProductDetail,
+                    onNavigateToSettings = onNavigateToSettings)
             }
         }
-    }
-}
-
-@Composable
-fun ProfileHeader(backgroundImageRes: Int, tintColor: Color, iconRes: Int) {
-    Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.TopCenter) {
-        Box(
-            modifier = Modifier
-                .padding(top = 16.5.dp)
-                .width(327.dp)
-                .height(159.dp)
-                .clip(RoundedCornerShape(24.dp))
-        ) {
-            Image(
-                painter = painterResource(id = backgroundImageRes),
-                contentDescription = null,
-                contentScale = ContentScale.Crop,
-                colorFilter = ColorFilter.tint(tintColor, BlendMode.Multiply),
-                modifier = Modifier.fillMaxSize()
-            )
-        }
-        Image(
-            painter = painterResource(id = iconRes),
-            contentDescription = null,
-            modifier = Modifier
-                .size(100.dp)
-                .offset(y = 125.5.dp)
-                .clip(CircleShape)
-                .background(Color.White)
-        )
     }
 }
 
@@ -98,24 +95,32 @@ fun SellerProfileView(
     onNavigateToProductDetail: () -> Unit
 ) {
     var selectedTab by remember { mutableStateOf("Product") }
-    ProfileHeader(backgroundImageRes = R.drawable.banner_profile, tintColor = Color(0xFFFD9340), iconRes = R.drawable.profile_avatar_pittashop)
-    Text("Pittashop", fontSize = 20.sp, fontWeight = FontWeight.Bold, modifier = Modifier.alignCenter().padding(top = 74.dp))
+    ProfileBanner(R.drawable.banner_profile, Color(0xFFFD9340), R.drawable.profile_avatar_pittashop, "Pittashop")
     SellerStats(followers = 109, following = 992, sales = 80)
-    Spacer(modifier = Modifier.height(50.dp))
-    CategoryChipRow(listOf("Product", "Sold", "Stats"), selected = selectedTab,onSelectedChange = { selectedTab = it }, modifier = Modifier.alignCenter())
+    Spacer(modifier = Modifier.height(8.dp))
+    CategoryChipRow(listOf("Product", "Sold", "Stats"), selectedTab, { selectedTab = it }, Modifier.alignCenter())
     Spacer(modifier = Modifier.height(12.dp))
     ProductGrid(onNavigateToProductDetail)
 }
 
 @Composable
 fun PersonalProfileView(
-    onNavigateToProductDetail: () -> Unit
+    onNavigateToProductDetail: () -> Unit,
+    onNavigateToSettings: () -> Unit
 ) {
     var selectedTab by remember { mutableStateOf("Saved") }
-    ProfileHeader(backgroundImageRes = R.drawable.banner_profile, tintColor = Color(0xFFF8F8F8), iconRes = R.drawable.profile_avatar_abduldul)
-    Text("Abduldul", fontSize = 20.sp, fontWeight = FontWeight.Bold, modifier = Modifier.alignCenter().padding(top = 74.dp))
-    Spacer(modifier = Modifier.height(8.dp))
-    CategoryChipRow(listOf("Saved", "Edit Profile"), selected = selectedTab,onSelectedChange = { selectedTab = it }, modifier = Modifier.alignCenter())
+    ProfileBanner(backgroundImageRes = R.drawable.banner_profile, tintColor = Color(0xFFF8F8F8), iconRes = R.drawable.profile_avatar_abduldul, "Abduldul")
+    CategoryChipRow(
+        listOf("Saved", "Edit Profile"),
+        selected = selectedTab,
+        onSelectedChange = { newTab ->
+            selectedTab = newTab
+            if (newTab == "Edit Profile") {
+                onNavigateToSettings()
+            }
+        },
+        modifier = Modifier.alignCenter()
+    )
     Spacer(modifier = Modifier.height(12.dp))
     ProductGrid(onNavigateToProductDetail)
 }
@@ -164,6 +169,7 @@ fun CategoryChipRow(
     Row(
         horizontalArrangement = Arrangement.spacedBy(8.dp),
         modifier = modifier
+            .padding(top = 24.dp)
     ) {
         options.forEach { option ->
             CategoryChip(
@@ -182,7 +188,8 @@ fun ProductGrid(
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 16.dp),
+            .padding(horizontal = 16.dp)
+            .padding(top = 32.dp),
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
         ProductCardSeller(name = "RC Kitten", price = "$20.99", onNavigateToProductDetail = onNavigateToProductDetail, photo = "pink")
