@@ -31,7 +31,7 @@ fun ProductCardSeller(
     }
     Column(
         modifier = Modifier
-            .width(173.dp)
+            .width(155.dp)
             .background(MaterialTheme.colorScheme.surfaceVariant, shape = RoundedCornerShape(20.dp))
             .padding(12.dp)
             .clickable {
@@ -57,7 +57,7 @@ fun ProductCardSeller(
                 Text(text = price, style = MaterialTheme.typography.bodyLarge.copy(fontSize = 20.sp, fontWeight = FontWeight.Bold))
             }
             Column(modifier = Modifier
-                .padding(start = 45.dp)){
+                .padding(start = 30.dp)){
                 Box(
                     modifier = Modifier
                         .size(35.dp)
