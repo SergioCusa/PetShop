@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Scaffold
@@ -69,6 +70,7 @@ fun AccountScreen(
                 tintColor = Color(0xFFF8F8F8),
                 iconRes = R.drawable.profile_avatar_abduldul,
                 nameUser = "Abduldul",
+                showEditButtons = true,
             )
 
             Column(
@@ -87,21 +89,15 @@ fun AccountScreen(
                 OutlinedTextField(
                     value = name,
                     onValueChange = { newValue -> name = newValue },
-                    placeholder = {
-                        Text(
-                            text = "Abdul",
-                            color = Color.Gray
-                        )
-                    },
                     modifier = Modifier
-                        .width(327.dp) // Ancho del Figma
-                        .height(60.dp), // Altura del Figma
-                    shape = RoundedCornerShape(16.dp), // Border radius del Figma
+                        .width(327.dp)
+                        .height(60.dp),
+                    shape = RoundedCornerShape(16.dp),
                     colors = OutlinedTextFieldDefaults.colors(
-                        focusedBorderColor = Color.Gray,
-                        unfocusedBorderColor = Color.LightGray,
+                        focusedBorderColor = MaterialTheme.colorScheme.outlineVariant,
+                        unfocusedBorderColor = MaterialTheme.colorScheme.outlineVariant,
                         focusedTextColor = Color.Black,
-                        unfocusedTextColor = Color.Black
+                        unfocusedTextColor = MaterialTheme.colorScheme.outlineVariant
                     )
                 )
 
@@ -116,21 +112,15 @@ fun AccountScreen(
                 OutlinedTextField(
                     value = username,
                     onValueChange = { newValue -> username = newValue },
-                    placeholder = {
-                        Text(
-                            text = "Abdul",
-                            color = Color.Gray
-                        )
-                    },
                     modifier = Modifier
                         .width(327.dp)
                         .height(60.dp),
                     shape = RoundedCornerShape(16.dp),
                     colors = OutlinedTextFieldDefaults.colors(
-                        focusedBorderColor = Color.Gray,
-                        unfocusedBorderColor = Color.LightGray,
+                        focusedBorderColor = MaterialTheme.colorScheme.outlineVariant,
+                        unfocusedBorderColor = MaterialTheme.colorScheme.outlineVariant,
                         focusedTextColor = Color.Black,
-                        unfocusedTextColor = Color.Black
+                        unfocusedTextColor = MaterialTheme.colorScheme.outlineVariant
                     )
                 )
 
@@ -145,21 +135,15 @@ fun AccountScreen(
                 OutlinedTextField(
                     value = email,
                     onValueChange = { newValue -> email = newValue },
-                    placeholder = {
-                        Text(
-                            text = "Abdul",
-                            color = Color.Gray
-                        )
-                    },
                     modifier = Modifier
                         .width(327.dp)
                         .height(60.dp),
                     shape = RoundedCornerShape(16.dp),
                     colors = OutlinedTextFieldDefaults.colors(
-                        focusedBorderColor = Color.Gray,
-                        unfocusedBorderColor = Color.LightGray,
+                        focusedBorderColor = MaterialTheme.colorScheme.outlineVariant,
+                        unfocusedBorderColor = MaterialTheme.colorScheme.outlineVariant,
                         focusedTextColor = Color.Black,
-                        unfocusedTextColor = Color.Black
+                        unfocusedTextColor = MaterialTheme.colorScheme.outlineVariant
                     )
                 )
                 Spacer(modifier = Modifier.height(32.dp))

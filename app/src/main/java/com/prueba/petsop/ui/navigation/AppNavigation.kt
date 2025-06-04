@@ -19,6 +19,12 @@ import com.prueba.petsop.ui.screens.productListScreen.ProductListScreen
 import com.prueba.petsop.ui.screens.profileScreen.ProfileScreen
 import com.prueba.petsop.ui.screens.searchScreen.SearchScreen
 import com.prueba.petsop.ui.screens.settingsScreen.AccountScreen
+import com.prueba.petsop.ui.screens.settingsScreen.ChangeEmailScreen
+import com.prueba.petsop.ui.screens.settingsScreen.ChangePasswordScreen
+import com.prueba.petsop.ui.screens.settingsScreen.FAQScreen
+import com.prueba.petsop.ui.screens.settingsScreen.PrivacyScreen
+import com.prueba.petsop.ui.screens.settingsScreen.ProfileNotificationScreen
+import com.prueba.petsop.ui.screens.settingsScreen.SecurityScreen
 import com.prueba.petsop.ui.screens.settingsScreen.SettingsScreen
 
 fun NavGraphBuilder.appNavGraph(navController: NavHostController) {
@@ -107,14 +113,11 @@ fun NavGraphBuilder.appNavGraph(navController: NavHostController) {
             SettingsScreen(
                 onBackClick = { navController.popBackStack() },
                 onNavigateToAccount = { navController.navigate("account") },
-                onNavigateToAddress = { navController.navigate("address") },
                 onNavigateToNotification = { navController.navigate("profile-notification") },
                 onNavigateToPaymentMethod = { navController.navigate("payment-method") },
                 onNavigateToPrivacy = { navController.navigate("privacy") },
                 onNavigateToSecurity = { navController.navigate("security") },
-                onNavigateToContact = { navController.navigate("contact-us") },
                 onNavigateToFAQ = { navController.navigate("faq") }
-
             )
         }
          composable("account") {
@@ -123,40 +126,44 @@ fun NavGraphBuilder.appNavGraph(navController: NavHostController) {
           )
         }
 
- /*composable("address") {
-     AddrsScreen(
-         onBackClick = { navController.popBackStack() }
-     )
- }
+        composable("profile-notification") {
+            ProfileNotificationScreen(
+                onBackClick = { navController.popBackStack() }
+            )
+        }
 
- composable("profile-notification") {
-     ProfileNotificationScreen(
-         onBackClick = { navController.popBackStack() }
-     )
- }
+        composable("privacy") {
+            PrivacyScreen(
+                onBackClick = { navController.popBackStack() }
+            )
+        }
 
- composable("privacy") {
-     PrivacyScreen(
-         onBackClick = { navController.popBackStack() }
-     )
- }
+        composable("security") {
+            SecurityScreen(
+                onBackClick = { navController.popBackStack() },
+                onNavigateToChangePassword = { navController.navigate("change-password") },
+                onNavigateToChangeEmail = { navController.navigate("change-email") }
+            )
+        }
 
- composable("security") {
-     SecurityScreen(
-         onBackClick = { navController.popBackStack() }
-     )
- }
+         composable("change-password") {
+             ChangePasswordScreen(
+                 onBackClick = { navController.popBackStack() },
+                 onNavigateToSettings = { navController.navigate("settings")}
+             )
+         }
 
- composable("contact-us") {
-     ContactUsScreen(
-         onBackClick = { navController.popBackStack() }
-     )
- }
+        composable("change-email") {
+             ChangeEmailScreen(
+                 onBackClick = { navController.popBackStack() },
+                 onNavigateToSettings = { navController.navigate("settings")}
+             )
+         }
 
- composable("faq") {
-     FAQScreen(
-         onBackClick = { navController.popBackStack() }
-     )
- }*/
+        composable("faq") {
+            FAQScreen(
+                onBackClick = { navController.popBackStack() },
+            )
+        }
     }
 }
