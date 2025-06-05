@@ -149,6 +149,7 @@ fun LoginScreen(
         LaunchedEffect(result) {
             if (result is LoginResult.Success) {
                 onLoginClick()
+                viewModel.clearResult()
             }
         }
 
