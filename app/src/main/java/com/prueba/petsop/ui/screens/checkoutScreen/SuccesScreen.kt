@@ -9,10 +9,11 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.prueba.petsop.R
 import com.prueba.petsop.ui.components.buttons.SaveButton
-import com.prueba.petsop.ui.components.layout.HomeHeader
 
 @Composable
 fun SuccesScreen(
@@ -26,21 +27,26 @@ fun SuccesScreen(
         Spacer(modifier = Modifier.height(40.dp))
 
         Text(
-            text = "Payment Success!",
+            text = stringResource(id = R.string.payment_success),
             style = MaterialTheme.typography.labelMedium.copy(fontSize = 40.sp),
         )
 
         Spacer(modifier = Modifier.height(30.dp))
 
         Text(
-            text = "your order is being prepared by the shop, the courier will send it to your address",
+            text = stringResource(id = R.string.order_preparing),
             style = MaterialTheme.typography.bodyMedium,
             color = MaterialTheme.colorScheme.outline
-
         )
 
         Spacer(modifier = Modifier.weight(1f))
-        SaveButton(text = "Go Home", enabled = true, onClick = onNavigateToHome)
+
+        SaveButton(
+            text = stringResource(id = R.string.go_home),
+            enabled = true,
+            onClick = onNavigateToHome
+        )
+
         Spacer(modifier = Modifier.height(16.dp))
     }
 }

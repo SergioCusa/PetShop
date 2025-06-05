@@ -13,6 +13,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.prueba.petsop.R
 import com.prueba.petsop.ui.components.buttons.NotificationTabSelector
@@ -36,7 +37,7 @@ fun NotificationScreen(
 
         HomeHeader(
             onBackClick = onBackClick,
-            title = "Notification"
+            title = stringResource(R.string.notification)
         )
 
         Column(modifier = Modifier.padding(20.dp)) {
@@ -51,7 +52,7 @@ fun NotificationScreen(
             Spacer(modifier = Modifier.height(24.dp))
 
             when (selectedTab) {
-                "Activity" -> {
+                stringResource(R.string.activity) -> {
                     LazyColumn(verticalArrangement = Arrangement.spacedBy(18.dp)) {
                         items(4) {
                             NotificationItem(

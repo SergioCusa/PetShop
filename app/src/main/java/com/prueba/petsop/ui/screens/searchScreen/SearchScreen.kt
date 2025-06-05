@@ -11,10 +11,11 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.prueba.petsop.ui.components.icons.GetBackIcon
+import com.prueba.petsop.R
 import com.prueba.petsop.ui.components.icons.SimpleIcon
 import com.prueba.petsop.ui.components.layout.HomeHeader
 import com.prueba.petsop.ui.components.tags.CategoryChipsRow
@@ -36,7 +37,7 @@ fun SearchScreen(
 
         HomeHeader(
             onBackClick = onBackClick,
-            title = "Search"
+            title = stringResource(R.string.search)
         )
 
         Column(modifier = Modifier.padding(horizontal = 20.dp)) {
@@ -46,7 +47,7 @@ fun SearchScreen(
             CustomOutlinedTextField(
                 value = searchProduct,
                 onValueChange = { searchProduct = it },
-                placeholderText = "Search Your Product",
+                placeholderText = stringResource(R.string.search_your_product),
                 icon = Icons.Default.Search,
                 modifier = Modifier
                     .padding(0.dp)
@@ -59,7 +60,7 @@ fun SearchScreen(
             Spacer(modifier = Modifier.height(24.dp))
 
             Text(
-                "Recent",
+                stringResource(R.string.recent),
                 style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Bold)
             )
 
@@ -73,7 +74,7 @@ fun SearchScreen(
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
                     Text(
-                        "Royal Canin Persian 500g",
+                        stringResource(R.string.royal_canin_persian_500g),
                         style = MaterialTheme.typography.bodyMedium.copy(fontSize = 15.sp),
                         color = MaterialTheme.colorScheme.outline
                     )

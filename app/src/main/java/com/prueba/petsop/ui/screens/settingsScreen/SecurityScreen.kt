@@ -14,6 +14,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -39,7 +40,7 @@ fun SecurityScreen(
             ) {
                 HomeHeader(
                     onBackClick = onBackClick,
-                    title = "Security"
+                    title = stringResource(R.string.security)
                 )
             }
         },
@@ -54,7 +55,7 @@ fun SecurityScreen(
             Spacer(modifier = Modifier.height(5.dp))
 
             Text(
-                text = "Security",
+                text = stringResource(R.string.security),
                 fontSize = 16.sp,
                 fontWeight = FontWeight.Bold,
                 color = Color.Black,
@@ -63,12 +64,12 @@ fun SecurityScreen(
 
             SettingsItem(
                 icon = R.drawable.password_icon,
-                title = "Change Password",
+                title = stringResource(R.string.change_password),
                 onClick = onNavigateToChangePassword
             )
             SettingsItem(
                 icon = R.drawable.password_icon,
-                title = "Change Email",
+                title = stringResource(R.string.change_email),
                 onClick = onNavigateToChangeEmail
             )
         }

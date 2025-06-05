@@ -13,12 +13,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
+import com.prueba.petsop.R
 import com.prueba.petsop.ui.components.buttons.PrimaryButton
 import com.prueba.petsop.ui.components.cards.CartProduct
-import com.prueba.petsop.ui.components.icons.GetBackIcon
 import com.prueba.petsop.ui.components.layout.HomeHeader
 
 @Composable
@@ -40,7 +40,7 @@ fun CartScreen(
 
             HomeHeader(
                 onBackClick = onBackClick,
-                title = "Cart"
+                title = stringResource(id = R.string.cart)
             )
 
             LazyColumn(
@@ -72,7 +72,7 @@ fun CartScreen(
         ) {
             Row(modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween) {
-                Text("3 Items",
+                Text(stringResource(id = R.string.items_count),
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.outline)
                 Text("$38.97",
@@ -82,7 +82,7 @@ fun CartScreen(
             Spacer(modifier = Modifier.height(10.dp))
             Row(modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween) {
-                Text("Tax",
+                Text(stringResource(id = R.string.tax),
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.outline)
                 Text("$1.99",
@@ -93,15 +93,16 @@ fun CartScreen(
             Row(modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically) {
-                Text("Totals",
+                Text(stringResource(id = R.string.totals),
                     style = MaterialTheme.typography.labelMedium)
                 Text("$36.98",
                     style = MaterialTheme.typography.headlineMedium.copy(fontWeight = FontWeight.Bold))
             }
             Spacer(modifier = Modifier.weight(1f))
 
-            PrimaryButton(text = "Checkout", onClick = onNavigateToPaymentMethod)
+            PrimaryButton(text = stringResource(id = R.string.checkout), onClick = onNavigateToPaymentMethod)
             Spacer(modifier = Modifier.height(16.dp))
         }
     }
 }
+

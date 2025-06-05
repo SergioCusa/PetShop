@@ -18,6 +18,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.prueba.petsop.ui.components.buttons.ModeSwitchSelector
 import com.prueba.petsop.ui.components.icons.FooterItem
@@ -45,8 +47,8 @@ fun ProfileScreen(
                 contentAlignment = Alignment.Center
             ) {
                 ModeSwitchSelector(
-                    leftText = "Profile",
-                    rightText = "Seller Mode",
+                    leftText = stringResource(id = R.string.profile),
+                    rightText = stringResource(id = R.string.seller_mode),
                     isRightSelected = isSellerMode,
                     onToggle = { isSellerMode = it }
                 )
@@ -86,3 +88,4 @@ fun ProfileScreen(
 fun Modifier.alignCenter(): Modifier = this.then(
     Modifier.fillMaxWidth().wrapContentWidth(Alignment.CenterHorizontally)
 )
+
