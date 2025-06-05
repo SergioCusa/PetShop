@@ -1,5 +1,6 @@
 package com.prueba.petsop.ui.navigation
 
+import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
@@ -25,13 +26,15 @@ fun NavGraphBuilder.authNavGraph(navController: NavHostController) {
 
         composable(NavRoutes.REGISTER) {
             RegisterScreen(
-                onBackClick = { navController.popBackStack() }
+                onHaveAcountClick = { navController.popBackStack() },
+                onLoginClick = {navController.navigate(NavRoutes.APP_GRAPH)}
             )
         }
 
         composable(NavRoutes.FORGOT) {
             ForgotPasswordScreen(
-                onBackClick = { navController.popBackStack() }
+                onLoginClick = {navController.navigate(NavRoutes.APP_GRAPH)},
+                onResetConfirmed = {navController.popBackStack() }
             )
         }
     }

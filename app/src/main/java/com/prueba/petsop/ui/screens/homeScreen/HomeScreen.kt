@@ -12,6 +12,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material.icons.filled.Search
@@ -46,20 +48,23 @@ fun HomeScreen(
     onNavigateToBestSeller: () -> Unit,
     onNavigateToProductDetail: () -> Unit
 ) {
+    val scrollState = rememberScrollState()
+
     var showModal by remember { mutableStateOf(false) }
 
         Column(
             modifier = Modifier
-                .fillMaxHeight(),
+                .fillMaxHeight()
+                .verticalScroll(scrollState),
             verticalArrangement = Arrangement.Bottom
         ) {
 
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = 24.dp)
+                    .padding(horizontal = 16.dp)
             ) {
-                Spacer(modifier = Modifier.height(24.dp))
+                Spacer(modifier = Modifier.height(22.dp))
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -89,7 +94,7 @@ fun HomeScreen(
                     }
                 }
 
-                Spacer(modifier = Modifier.height(5.dp))
+//                Spacer(modifier = Modifier.height(5.dp))
 
                 Box(
                     modifier = Modifier
@@ -105,7 +110,7 @@ fun HomeScreen(
                     )
                 }
 
-                Spacer(modifier = Modifier.height(35.dp))
+                Spacer(modifier = Modifier.height(16.dp))
 
                 Row(
                     modifier = Modifier.fillMaxWidth(),
@@ -119,11 +124,11 @@ fun HomeScreen(
                     )
                 }
 
-                Spacer(modifier = Modifier.height(20.dp))
+                Spacer(modifier = Modifier.height(8.dp))
 
                 CategoryChipsRow()
 
-                Spacer(modifier = Modifier.height(50.dp))
+                Spacer(modifier = Modifier.height(24.dp))
 
                 Row(
                     modifier = Modifier.fillMaxWidth(),
@@ -140,11 +145,13 @@ fun HomeScreen(
                     )
                 }
 
-                Spacer(modifier = Modifier.height(20.dp))
+                Spacer(modifier = Modifier.height(16.dp))
 
                 Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceEvenly
+                    modifier = Modifier.fillMaxWidth()
+                        .padding(vertical = 8.dp),
+                    horizontalArrangement = Arrangement.SpaceAround,
+
                 ) {
                     ProductCardSeller(name = "RC Kitten", price = "$20.99", onNavigateToProductDetail = onNavigateToProductDetail, photo = "pink")
                     ProductCardSeller(name = "RC Persian", price = "$22.99", onNavigateToProductDetail = onNavigateToProductDetail, photo = "yellow")

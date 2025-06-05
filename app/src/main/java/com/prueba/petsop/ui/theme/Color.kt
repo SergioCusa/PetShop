@@ -13,3 +13,7 @@ val GrayF8 = Color(0xFFE5E5E5)
 
 val White = Color(0xFFFFFFFF)
 val ErrorRed = Color(0xFFFF4D4F)
+
+val BlueLabel = Color(0xFF337EFE)
+
+val BlueLabelLink = Color(0xFF7140FD)
