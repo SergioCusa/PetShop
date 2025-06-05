@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.MaterialTheme
@@ -37,7 +38,8 @@ fun HomeScreen(
     onNavigateToPurchase: () -> Unit,
     onNavigateToBestSeller: () -> Unit,
     onNavigateToProductDetail: () -> Unit,
-    viewModel: ProductViewModel = hiltViewModel() // Inyección de Hilt
+    onNavigateToFavorites: () -> Unit,
+    viewModel: ProductViewModel = hiltViewModel()
 ) {
     val products by viewModel.products.collectAsStateWithLifecycle()
     val scrollState = rememberScrollState()
@@ -81,6 +83,10 @@ fun HomeScreen(
                     PlaceholderIcon(
                         onClick = onNotificationClick,
                         icon = Icons.Default.Notifications
+                    )
+                    PlaceholderIcon(
+                        onClick = onNavigateToFavorites,
+                        icon = Icons.Filled.Favorite
                     )
                 }
             }
