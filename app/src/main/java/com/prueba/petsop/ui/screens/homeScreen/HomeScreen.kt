@@ -40,13 +40,12 @@ fun HomeScreen(
     onNavigateToPurchase: () -> Unit,
     onNavigateToBestSeller: () -> Unit,
     onNavigateToProductDetail: () -> Unit,
+    onNavigateToFavorites: () -> Unit,
+    viewModel: ProductViewModel = hiltViewModel()
 ) {
     BackHandler {
     }
 
-    onNavigateToFavorites: () -> Unit,
-    viewModel: ProductViewModel = hiltViewModel()
-) {
     val products by viewModel.products.collectAsStateWithLifecycle()
     val scrollState = rememberScrollState()
     var showModal by remember { mutableStateOf(false) }
@@ -195,4 +194,4 @@ fun HomeScreen(
             ModalLocation()
         }
     }
-}
+} 
