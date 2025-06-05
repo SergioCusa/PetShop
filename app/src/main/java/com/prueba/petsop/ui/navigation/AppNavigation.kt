@@ -8,16 +8,24 @@ import androidx.navigation.navigation
 import com.prueba.petsop.ui.screens.cartScreen.CartScreen
 import com.prueba.petsop.ui.screens.checkoutScreen.CheckoutScreen
 import com.prueba.petsop.ui.screens.checkoutScreen.SuccesScreen
-import com.prueba.petsop.ui.screens.homeScreen.HomeScreen
-import com.prueba.petsop.ui.screens.notificationScreen.NotificationScreen
-import com.prueba.petsop.ui.screens.profileScreen.ProfileScreen
-import com.prueba.petsop.ui.screens.searchScreen.SearchScreen
-import com.prueba.petsop.ui.screens.productDetailsScreen.ProductDetailsScreen
 import com.prueba.petsop.ui.screens.favoritesScreen.FavoritesScreen
 import com.prueba.petsop.ui.screens.homeScreen.BestSellerScreen
+import com.prueba.petsop.ui.screens.homeScreen.HomeScreen
+import com.prueba.petsop.ui.screens.notificationScreen.NotificationScreen
 import com.prueba.petsop.ui.screens.paymentMethodScreen.PaymentMethodScreen
 import com.prueba.petsop.ui.screens.product.ProductDetailScreen
+import com.prueba.petsop.ui.screens.productDetailsScreen.ProductDetailsScreen
 import com.prueba.petsop.ui.screens.productListScreen.ProductListScreen
+import com.prueba.petsop.ui.screens.profileScreen.ProfileScreen
+import com.prueba.petsop.ui.screens.searchScreen.SearchScreen
+import com.prueba.petsop.ui.screens.settingsScreen.AccountScreen
+import com.prueba.petsop.ui.screens.settingsScreen.ChangeEmailScreen
+import com.prueba.petsop.ui.screens.settingsScreen.ChangePasswordScreen
+import com.prueba.petsop.ui.screens.settingsScreen.FAQScreen
+import com.prueba.petsop.ui.screens.settingsScreen.PrivacyScreen
+import com.prueba.petsop.ui.screens.settingsScreen.ProfileNotificationScreen
+import com.prueba.petsop.ui.screens.settingsScreen.SecurityScreen
+import com.prueba.petsop.ui.screens.settingsScreen.SettingsScreen
 
 fun NavGraphBuilder.appNavGraph(navController: NavHostController) {
     navigation(startDestination = "home", route = NavRoutes.APP_GRAPH) {
@@ -32,7 +40,12 @@ fun NavGraphBuilder.appNavGraph(navController: NavHostController) {
             )
         }
         composable("profile") {
-            ProfileScreen()
+            ProfileScreen(
+                onNavigateToProductDetail = { navController.navigate("product-detail") },
+                onNavigateToPurchase = { navController.navigate("cart") },
+                onNavigateToHome = { navController.navigate("home") },
+                onNavigateToSettings = { navController.navigate("settings") }
+            )
         }
         composable("notifications") {
             NotificationScreen(onBackClick = { navController.popBackStack() })
@@ -44,7 +57,7 @@ fun NavGraphBuilder.appNavGraph(navController: NavHostController) {
             CartScreen(
                 onBackClick = { navController.popBackStack() },
                 onNavigateToPaymentMethod = { navController.navigate("payment-method") }
-                )
+            )
         }
         composable(route = NavRoutes.PRODUCT_LIST) {
             ProductListScreen(
@@ -79,20 +92,78 @@ fun NavGraphBuilder.appNavGraph(navController: NavHostController) {
         }
 
         // Navegacion Payment Method
-        composable("payment-method"){
+        composable("payment-method") {
             PaymentMethodScreen(
                 onBackClick = { navController.popBackStack() },
                 onCheckoutClick = { navController.navigate("checkout") }
             )
         }
 
-        composable("checkout"){
-            CheckoutScreen(onBackClick = { navController.popBackStack() },
+        composable("checkout") {
+            CheckoutScreen(
+                onBackClick = { navController.popBackStack() },
                 onSuccesClick = { navController.navigate("succes") })
         }
 
-        composable("succes"){
-            SuccesScreen(onNavigateToHome = {navController.navigate("home")})
+        composable("succes") {
+            SuccesScreen(onNavigateToHome = { navController.navigate("home") })
+        }
+
+        composable("settings") {
+            SettingsScreen(
+                onBackClick = { navController.popBackStack() },
+                onNavigateToAccount = { navController.navigate("account") },
+                onNavigateToNotification = { navController.navigate("profile-notification") },
+                onNavigateToPaymentMethod = { navController.navigate("payment-method") },
+                onNavigateToPrivacy = { navController.navigate("privacy") },
+                onNavigateToSecurity = { navController.navigate("security") },
+                onNavigateToFAQ = { navController.navigate("faq") }
+            )
+        }
+         composable("account") {
+          AccountScreen(
+              onBackClick = { navController.popBackStack() }
+          )
+        }
+
+        composable("profile-notification") {
+            ProfileNotificationScreen(
+                onBackClick = { navController.popBackStack() }
+            )
+        }
+
+        composable("privacy") {
+            PrivacyScreen(
+                onBackClick = { navController.popBackStack() }
+            )
+        }
+
+        composable("security") {
+            SecurityScreen(
+                onBackClick = { navController.popBackStack() },
+                onNavigateToChangePassword = { navController.navigate("change-password") },
+                onNavigateToChangeEmail = { navController.navigate("change-email") }
+            )
+        }
+
+         composable("change-password") {
+             ChangePasswordScreen(
+                 onBackClick = { navController.popBackStack() },
+                 onNavigateToSettings = { navController.navigate("settings")}
+             )
+         }
+
+        composable("change-email") {
+             ChangeEmailScreen(
+                 onBackClick = { navController.popBackStack() },
+                 onNavigateToSettings = { navController.navigate("settings")}
+             )
+         }
+
+        composable("faq") {
+            FAQScreen(
+                onBackClick = { navController.popBackStack() },
+            )
         }
     }
 }
