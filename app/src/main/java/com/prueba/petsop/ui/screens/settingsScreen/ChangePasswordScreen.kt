@@ -18,7 +18,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.prueba.petsop.ui.components.buttons.SaveButton
 import com.prueba.petsop.ui.components.layout.HomeHeader
-import com.prueba.petsop.ui.components.text.PaymentTextField
+import com.prueba.petsop.ui.components.text.ValidateTextField
 
 @Composable
 fun ChangePasswordScreen(
@@ -57,7 +57,7 @@ fun ChangePasswordScreen(
                 modifier = Modifier.padding(bottom = 12.dp, top = 16.dp)
             )
 
-            PaymentTextField(
+            ValidateTextField(
                 value = newPassword,
                 onValueChange = { newPassword = it },
                 placeholder = "",
@@ -72,7 +72,7 @@ fun ChangePasswordScreen(
                 modifier = Modifier.padding(bottom = 12.dp, top = 16.dp)
             )
 
-            PaymentTextField(
+            ValidateTextField(
                 value = ConfirmPassword,
                 onValueChange = { ConfirmPassword = it },
                 placeholder = "",
