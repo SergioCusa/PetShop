@@ -17,9 +17,11 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.prueba.petsop.R
 import com.prueba.petsop.ui.components.cards.ProductCardSeller
 import com.prueba.petsop.ui.components.icons.GetBackIcon
 import com.prueba.petsop.ui.components.layout.HomeHeader
@@ -29,7 +31,6 @@ fun BestSellerScreen(
     onNavigateToProductDetail: () -> Unit,
     onBackClick: () -> Unit
 ){
-
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -39,19 +40,19 @@ fun BestSellerScreen(
 
         HomeHeader(
             onBackClick = onBackClick,
-            title = "Best Seller"
-            )
+            title = stringResource(id = R.string.best_seller)
+        )
 
         Spacer(modifier = Modifier.height(12.dp))
 
-        Row(modifier = Modifier
-            .fillMaxWidth(),
+        Row(
+            modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.Center
-        ){
+        ) {
             LazyColumn(verticalArrangement = Arrangement.spacedBy(12.dp)) {
                 items(3) {
                     ProductCardSeller(
-                        name = "RC Kitten",
+                        name = stringResource(id = R.string.rc_kitten),
                         price = "$20.99",
                         onNavigateToProductDetail = onNavigateToProductDetail,
                         photo = "pink"
@@ -62,7 +63,7 @@ fun BestSellerScreen(
             LazyColumn(verticalArrangement = Arrangement.spacedBy(12.dp)) {
                 items(3) {
                     ProductCardSeller(
-                        name = "RC Persian",
+                        name = stringResource(id = R.string.rc_persian),
                         price = "$22.99",
                         onNavigateToProductDetail = onNavigateToProductDetail,
                         photo = "yellow"
@@ -70,6 +71,5 @@ fun BestSellerScreen(
                 }
             }
         }
-
     }
 }

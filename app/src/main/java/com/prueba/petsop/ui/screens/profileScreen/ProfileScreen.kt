@@ -22,6 +22,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -53,8 +54,8 @@ fun ProfileScreen(
                 contentAlignment = Alignment.Center
             ) {
                 ModeSwitchSelector(
-                    leftText = "Profile",
-                    rightText = "Seller Mode",
+                    leftText = stringResource(id = R.string.profile),
+                    rightText = stringResource(id = R.string.seller_mode),
                     isRightSelected = isSellerMode,
                     onToggle = { isSellerMode = it }
                 )
@@ -98,7 +99,16 @@ fun SellerProfileView(
     ProfileBanner(R.drawable.banner_profile, Color(0xFFFD9340), R.drawable.profile_avatar_pittashop, "Pittashop")
     SellerStats(followers = 109, following = 992, sales = 80)
     Spacer(modifier = Modifier.height(8.dp))
-    CategoryChipRow(listOf("Product", "Sold", "Stats"), selectedTab, { selectedTab = it }, Modifier.alignCenter())
+    CategoryChipRow(
+        listOf(
+            stringResource(id = R.string.product),
+            stringResource(id = R.string.sold),
+            stringResource(id = R.string.stats)
+        ),
+        selectedTab,
+        { selectedTab = it },
+        Modifier.alignCenter()
+    )
     Spacer(modifier = Modifier.height(12.dp))
     ProductGrid(onNavigateToProductDetail)
 }
@@ -109,9 +119,17 @@ fun PersonalProfileView(
     onNavigateToSettings: () -> Unit
 ) {
     var selectedTab by remember { mutableStateOf("Saved") }
-    ProfileBanner(backgroundImageRes = R.drawable.banner_profile, tintColor = Color(0xFFF8F8F8), iconRes = R.drawable.profile_avatar_abduldul, "Abduldul")
+    ProfileBanner(
+        backgroundImageRes = R.drawable.banner_profile,
+        tintColor = Color(0xFFF8F8F8),
+        iconRes = R.drawable.profile_avatar_abduldul,
+        "Abduldul"
+    )
     CategoryChipRow(
-        listOf("Saved", "Edit Profile"),
+        listOf(
+            stringResource(id = R.string.saved),
+            stringResource(id = R.string.edit_profile)
+        ),
         selected = selectedTab,
         onSelectedChange = { newTab ->
             selectedTab = newTab
@@ -136,9 +154,9 @@ fun SellerStats(followers: Int, following: Int, sales: Int) {
         Row(
             horizontalArrangement = Arrangement.spacedBy(40.dp)
         ) {
-            StatItem(value = followers, label = "Followers")
-            StatItem(value = following, label = "Following")
-            StatItem(value = sales, label = "Sales")
+            StatItem(value = followers, label = stringResource(id = R.string.followers))
+            StatItem(value = following, label = stringResource(id = R.string.following))
+            StatItem(value = sales, label = stringResource(id = R.string.sales))
         }
     }
 }
@@ -192,8 +210,8 @@ fun ProductGrid(
             .padding(top = 32.dp),
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
-        ProductCardSeller(name = "RC Kitten", price = "$20.99", onNavigateToProductDetail = onNavigateToProductDetail, photo = "pink")
-        ProductCardSeller(name = "RC Persian", price = "$22.99", onNavigateToProductDetail = onNavigateToProductDetail, photo = "yellow")
+        ProductCardSeller(name = stringResource(id = R.string.rc_kitten), price = "$20.99", onNavigateToProductDetail = onNavigateToProductDetail, photo = "pink")
+        ProductCardSeller(name = stringResource(id = R.string.rc_persian), price = "$22.99", onNavigateToProductDetail = onNavigateToProductDetail, photo = "yellow")
     }
 }
 
@@ -201,3 +219,4 @@ fun ProductGrid(
 fun Modifier.alignCenter(): Modifier = this.then(
     Modifier.fillMaxWidth().wrapContentWidth(Alignment.CenterHorizontally)
 )
+

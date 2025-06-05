@@ -17,6 +17,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -44,8 +45,7 @@ fun HomeScreen(
     onNavigateToFavorites: () -> Unit,
     viewModel: ProductViewModel = hiltViewModel(),
 ) {
-    BackHandler {
-    }
+    BackHandler {}
 
     val products by viewModel.products.collectAsStateWithLifecycle()
     val scrollState = rememberScrollState()
@@ -55,10 +55,10 @@ fun HomeScreen(
         bottomBar = {
             BottomNavBar(
                 selectedItem = FooterItem.HOME,
-                onNavigateToHome      = {},
-                onNavigateToAbout     = {},
-                onNavigateToPurchase  = onNavigateToPurchase,
-                onNavigateToProfile   = onNavigateToProfile
+                onNavigateToHome = {},
+                onNavigateToAbout = {},
+                onNavigateToPurchase = onNavigateToPurchase,
+                onNavigateToProfile = onNavigateToProfile
             )
         }
     ) { innerPadding ->
@@ -85,12 +85,15 @@ fun HomeScreen(
                 ) {
                     Column {
                         Text(
-                            text = "Location",
+                            text = stringResource(id = R.string.location),
                             style = MaterialTheme.typography.labelSmall,
                             color = MaterialTheme.colorScheme.outline,
                             modifier = Modifier.clickable { showModal = true }
                         )
-                        Text(text = "Jebres, Surakarta", style = MaterialTheme.typography.bodyLarge)
+                        Text(
+                            text = "Jebres, Surakarta",
+                            style = MaterialTheme.typography.bodyLarge
+                        )
                     }
 
                     Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
@@ -117,20 +120,24 @@ fun HomeScreen(
                 ) {
                     Image(
                         painter = painterResource(id = R.drawable.promo_image_2),
-                        contentDescription = "Promo",
+                        contentDescription = stringResource(id = R.string.promo),
                         modifier = Modifier.fillMaxSize()
                     )
                 }
 
                 Spacer(modifier = Modifier.height(16.dp))
+
                 // ---------- CATEGORÍAS ----------
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
-                    Text(text = "Category", style = MaterialTheme.typography.labelMedium)
                     Text(
-                        text = "View All",
+                        text = stringResource(id = R.string.category),
+                        style = MaterialTheme.typography.labelMedium
+                    )
+                    Text(
+                        text = stringResource(id = R.string.view_all),
                         style = MaterialTheme.typography.labelSmall.copy(fontSize = 13.sp),
                         color = MaterialTheme.colorScheme.primary
                     )
@@ -140,14 +147,18 @@ fun HomeScreen(
                 CategoryChipsRow()
 
                 Spacer(modifier = Modifier.height(12.dp))
+
                 // ---------- BEST SELLER ----------
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
-                    Text(text = "Best Seller", style = MaterialTheme.typography.labelMedium)
                     Text(
-                        text = "View All",
+                        text = stringResource(id = R.string.best_seller),
+                        style = MaterialTheme.typography.labelMedium
+                    )
+                    Text(
+                        text = stringResource(id = R.string.view_all),
                         style = MaterialTheme.typography.labelSmall.copy(fontSize = 13.sp),
                         color = MaterialTheme.colorScheme.primary,
                         modifier = Modifier.clickable { onNavigateToBestSeller() }
@@ -162,13 +173,13 @@ fun HomeScreen(
                     horizontalArrangement = Arrangement.SpaceAround
                 ) {
                     ProductCardSeller(
-                        name = "RC Kitten",
+                        name = stringResource(id = R.string.rc_kitten),
                         price = "$20.99",
                         onNavigateToProductDetail = onNavigateToProductDetail,
                         photo = "pink"
                     )
                     ProductCardSeller(
-                        name = "RC Persian",
+                        name = stringResource(id = R.string.rc_persian),
                         price = "$22.99",
                         onNavigateToProductDetail = onNavigateToProductDetail,
                         photo = "yellow"
@@ -177,7 +188,10 @@ fun HomeScreen(
 
                 // ---------- NUEVA LISTA DE PRODUCTOS ----------
                 Spacer(modifier = Modifier.height(12.dp))
-                Text(text = "Productos", style = MaterialTheme.typography.labelMedium)
+                Text(
+                    text = stringResource(id = R.string.products),
+                    style = MaterialTheme.typography.labelMedium
+                )
                 Spacer(modifier = Modifier.height(8.dp))
 
                 products.forEach { product ->
@@ -199,4 +213,4 @@ fun HomeScreen(
             ModalLocation()
         }
     }
-} 
+}

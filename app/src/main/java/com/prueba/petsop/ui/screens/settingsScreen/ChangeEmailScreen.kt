@@ -13,9 +13,11 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.prueba.petsop.R
 import com.prueba.petsop.ui.components.buttons.SaveButton
 import com.prueba.petsop.ui.components.layout.HomeHeader
 import com.prueba.petsop.ui.components.text.ValidateTextField
@@ -38,17 +40,15 @@ fun ChangeEmailScreen(
 
         HomeHeader(
             onBackClick = onBackClick,
-            title = "Change Email"
+            title = stringResource(R.string.change_email)
         )
 
         Column(
-
             modifier = Modifier
                 .padding(horizontal = 20.dp)
         ) {
-
             Text(
-                text = "New Password",
+                text = stringResource(R.string.new_email),
                 fontSize = 14.sp,
                 fontWeight = FontWeight.Medium,
                 color = Color.Black,
@@ -64,7 +64,7 @@ fun ChangeEmailScreen(
 
             Spacer(modifier = Modifier.weight(1f))
 
-            SaveButton(text = "Change Email", enabled = allValid, onClick = onNavigateToSettings)
+            SaveButton(text = stringResource(R.string.change_email), enabled = allValid, onClick = onNavigateToSettings)
 
             Spacer(modifier = Modifier.height(16.dp))
         }

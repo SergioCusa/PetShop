@@ -29,9 +29,11 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.prueba.petsop.R
 import com.prueba.petsop.ui.components.layout.HomeHeader
 
 
@@ -42,13 +44,9 @@ fun FAQScreen(
 ) {
     var expandedItems by remember { mutableStateOf(setOf(0)) } // Primer item expandido por defecto
 
-    val faqItems = listOf(
-        "Security" to "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris interdum sapien sodales mi sagittis hendrerit. Curabitur ut lectus nec orci cursus rhoncus.",
-        "Security" to "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris interdum sapien sodales mi sagittis hendrerit. Curabitur ut lectus nec orci cursus rhoncus.",
-        "Security" to "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris interdum sapien sodales mi sagittis hendrerit. Curabitur ut lectus nec orci cursus rhoncus.",
-        "Security" to "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris interdum sapien sodales mi sagittis hendrerit. Curabitur ut lectus nec orci cursus rhoncus.",
-        "Security" to "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris interdum sapien sodales mi sagittis hendrerit. Curabitur ut lectus nec orci cursus rhoncus."
-    )
+    val faqItems = List(5) {
+        stringResource(R.string.security) to stringResource(R.string.faq_content_placeholder)
+    }
 
     Scaffold(
         topBar = {
@@ -62,7 +60,7 @@ fun FAQScreen(
             ) {
                 HomeHeader(
                     onBackClick = onBackClick,
-                    title = "FAQ"
+                    title = stringResource(R.string.faq)
                 )
             }
         },
@@ -105,13 +103,13 @@ fun FAQItem(
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(vertical = 4.dp) // Reducido de 8.dp a 4.dp
+            .padding(vertical = 4.dp)
     ) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
                 .clickable { onToggle() }
-                .padding(vertical = 8.dp), // Reducido de 12.dp a 8.dp
+                .padding(vertical = 8.dp),
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
@@ -138,7 +136,7 @@ fun FAQItem(
                 fontSize = 14.sp,
                 lineHeight = 21.sp,
                 color = Color.Gray,
-                modifier = Modifier.padding(bottom = 12.dp, top = 4.dp) // Reducido padding
+                modifier = Modifier.padding(bottom = 12.dp, top = 4.dp)
             )
         }
     }
