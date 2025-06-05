@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">PetSop</string>
+    <string name="welcome_title">Hello,\nWelcome Back!</string>
+    <string name="subtitle">Water is life. Water is a basic human need. In various lines of life, humans need water.</string>
+    <string name="createAcount_title"> Create New Account</string>
+    <string name="forgotPass_title">Forgot Password</string>
+    <string name="onboarding_title">Meet your animal needs here</string>
+    <string name="onboarding_subtitle">Get interesting promos here, register your account immediately so you can meet your animal needs.</string>
 </resources>

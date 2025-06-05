@@ -7,11 +7,13 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.prueba.petsop.R
 import com.prueba.petsop.ui.components.buttons.PrimaryButton
+import com.prueba.petsop.ui.components.screnHeader.ScreenHeader
 import com.prueba.petsop.ui.components.text.LinkedTextRow
 import com.prueba.petsop.ui.components.text.ValidateTextField
 import com.prueba.petsop.viewmodel.LoginResult
@@ -44,18 +46,11 @@ fun LoginScreen(
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Column(horizontalAlignment = Alignment.Start) {
-            Text(
-                text = "Hello,\nWelcome Back!",
-                style = MaterialTheme.typography.headlineLarge,
-                lineHeight = 40.sp
-            )
-            Spacer(modifier = Modifier.height(12.dp))
-            Text(
-                text = "Water is life. Water is a basic human need. In various lines of life, humans need water.",
-                style = MaterialTheme.typography.bodyMedium
-            )
-        }
+        ScreenHeader(
+            title = stringResource(id = R.string.welcome_title),
+            subtitle = stringResource(id = R.string.subtitle),
+            modifier = Modifier.padding(vertical = 24.dp)
+        )
 
         Spacer(modifier = Modifier.height(32.dp))
 
@@ -111,7 +106,7 @@ fun LoginScreen(
             }
             is LoginResult.Error -> {
                 Text(
-                    text = (result as LoginResult.Error).message,
+                    text = "Error de autenticación,\n por favor verifique los datos ingresados",
                     color = MaterialTheme.colorScheme.error
                 )
             }

@@ -19,10 +19,12 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.prueba.petsop.R
 import com.prueba.petsop.ui.components.buttons.PrimaryButton
+import com.prueba.petsop.ui.components.screnHeader.ScreenHeader
 import com.prueba.petsop.ui.components.text.LinkedTextRow
 import com.prueba.petsop.ui.components.text.ValidateTextField
 
@@ -46,20 +48,10 @@ fun RegisterScreen(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         // Título
-        Column(horizontalAlignment = Alignment.Start) {
-            Text(
-                text = "Create New\nAccount",
-                style = MaterialTheme.typography.headlineLarge,
-                lineHeight = 40.sp
-            )
-
-            Spacer(modifier = Modifier.height(12.dp))
-
-            Text(
-                text = "Water is life. Water is a basic human need. In various lines of life, humans need water.",
-                style = MaterialTheme.typography.bodyMedium
-            )
-        }
+        ScreenHeader(
+            title = stringResource(id = R.string.createAcount_title),
+            subtitle = stringResource(id = R.string.subtitle)
+        )
 
         Spacer(modifier = Modifier.height(32.dp))
 
