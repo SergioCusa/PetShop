@@ -36,7 +36,8 @@ fun SettingsScreen(
     onNavigateToPrivacy: () -> Unit,
     onNavigateToSecurity: () -> Unit,
     onNavigateToFAQ: () -> Unit,
-    onLogOutClick: () -> Unit
+    onLogOutClick: () -> Unit,
+    onNavigateToContact: () -> Unit
 ) {
     Scaffold(
         topBar = {
@@ -77,7 +78,7 @@ fun SettingsScreen(
 
             Text(text = "Help", fontSize = 16.sp, fontWeight = FontWeight.Bold, color = Color.Black, modifier = Modifier.padding(bottom = 16.dp))
 
-            SettingsItem(icon = R.drawable.call_icon, title = "Contact Us", onClick = {})
+            SettingsItem(icon = R.drawable.call_icon, title = "Contact Us", onClick = onNavigateToContact)
             SettingsItem(icon = R.drawable.document_icon, title = "FAQ", onClick = onNavigateToFAQ)
 
             Spacer(modifier = Modifier.weight(1f))
