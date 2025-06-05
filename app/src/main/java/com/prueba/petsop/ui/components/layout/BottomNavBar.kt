@@ -29,10 +29,9 @@ fun BottomNavBar(
             .fillMaxWidth()
             .height(70.dp)
             .background(
-                color = MaterialTheme.colorScheme.surfaceVariant,
+                MaterialTheme.colorScheme.surface.copy(alpha = 0.9f),
                 shape = RoundedCornerShape(topStart = 24.dp, topEnd = 24.dp)
-            )
-            ,
+            ),
         contentAlignment = Alignment.Center
     ) {
         Row(
@@ -46,7 +45,7 @@ fun BottomNavBar(
                 onClick = onNavigateToHome
             )
             FooterIcon(
-                icon = R.drawable.chat_icon,
+                icon = R.drawable.schedule,
                 isSelected = selectedItem == FooterItem.ABOUT,
                 onClick = onNavigateToAbout
             )
