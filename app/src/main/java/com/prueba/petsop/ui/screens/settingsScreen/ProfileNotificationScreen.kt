@@ -19,9 +19,11 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.prueba.petsop.R
 import com.prueba.petsop.ui.components.buttons.NotificationSwitch
 import com.prueba.petsop.ui.components.layout.HomeHeader
 
@@ -45,7 +47,7 @@ fun ProfileNotificationScreen(
             ) {
                 HomeHeader(
                     onBackClick = onBackClick,
-                    title = "Notification"
+                    title = stringResource(R.string.notification)
                 )
             }
         },
@@ -60,13 +62,12 @@ fun ProfileNotificationScreen(
             Spacer(modifier = Modifier.height(16.dp))
 
             Text(
-                text = "Social",
+                text = stringResource(R.string.social),
                 fontSize = 16.sp,
                 fontWeight = FontWeight.Bold,
                 color = Color.Black,
                 modifier = Modifier.padding(bottom = 16.dp)
             )
-
 
             Row(
                 modifier = Modifier
@@ -76,7 +77,7 @@ fun ProfileNotificationScreen(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
-                    text = "Liked Post",
+                    text = stringResource(R.string.liked_post),
                     fontSize = 14.sp,
                     color = Color.Black
                 )
@@ -86,7 +87,6 @@ fun ProfileNotificationScreen(
                 )
             }
 
-
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -95,7 +95,7 @@ fun ProfileNotificationScreen(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
-                    text = "New Message",
+                    text = stringResource(R.string.new_message),
                     fontSize = 14.sp,
                     color = Color.Black
                 )
@@ -105,15 +105,13 @@ fun ProfileNotificationScreen(
                 )
             }
 
-
             Text(
-                text = "Store",
+                text = stringResource(R.string.store),
                 fontSize = 16.sp,
                 fontWeight = FontWeight.Bold,
                 color = Color.Black,
                 modifier = Modifier.padding(bottom = 16.dp)
             )
-
 
             Row(
                 modifier = Modifier
@@ -123,7 +121,7 @@ fun ProfileNotificationScreen(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
-                    text = "Item Sold",
+                    text = stringResource(R.string.item_sold),
                     fontSize = 14.sp,
                     color = Color.Black
                 )

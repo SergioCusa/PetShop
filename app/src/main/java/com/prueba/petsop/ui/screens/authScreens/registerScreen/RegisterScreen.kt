@@ -1,17 +1,12 @@
 package com.prueba.petsop.ui.screens.authScreens.registerScreen
 
 
-import AuthSocialButtonWithImage
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -21,7 +16,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.prueba.petsop.R
 import com.prueba.petsop.ui.components.buttons.PrimaryButton
 import com.prueba.petsop.ui.components.screnHeader.ScreenHeader
@@ -32,7 +26,6 @@ import com.prueba.petsop.ui.components.text.ValidateTextField
 fun RegisterScreen(
     onHaveAcountClick: () -> Unit,
     onLoginClick: () -> Unit,
-
 ) {
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
@@ -59,7 +52,7 @@ fun RegisterScreen(
         ValidateTextField(
             value = fullName,
             onValueChange = { fullName = it },
-            placeholder = "fullName",
+            placeholder = stringResource(id = R.string.full_name),
             showError =  fullName.isEmpty()
         )
 
@@ -68,7 +61,7 @@ fun RegisterScreen(
         ValidateTextField(
             value = email,
             onValueChange = { email = it },
-            placeholder = "Email",
+            placeholder = stringResource(id = R.string.email),
             showError =  email.isEmpty()
         )
 
@@ -77,26 +70,28 @@ fun RegisterScreen(
         ValidateTextField(
             value = password,
             onValueChange = { password = it },
-            placeholder = "password",
+            placeholder = stringResource(id = R.string.password),
             showError =  password.isEmpty(),
             isPassword = true
         )
 
         Spacer(modifier = Modifier.height(50.dp))
 
-
         Spacer(modifier = Modifier.height(200.dp))
+
         // Texto con link
         LinkedTextRow(
-            normalText = "have an account?",
-            linkText = "Login",
+            normalText = stringResource(id = R.string.have_account),
+            linkText = stringResource(id = R.string.login),
             onLinkClick = { onHaveAcountClick() }
         )
 
-
         Spacer(modifier = Modifier.height(32.dp))
 
-        PrimaryButton(text = "Get Started", enabled = allValid, onClick = onHaveAcountClick)
-
+        PrimaryButton(
+            text = stringResource(id = R.string.get_started),
+            enabled = allValid,
+            onClick = onHaveAcountClick
+        )
     }
 }
