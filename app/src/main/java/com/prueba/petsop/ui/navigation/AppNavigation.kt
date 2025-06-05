@@ -39,7 +39,7 @@ fun NavGraphBuilder.appNavGraph(navController: NavHostController) {
                 onNavigateToPurchase = { navController.navigate("cart") },
                 onNavigateToBestSeller = { navController.navigate("best-seller") },
                 onNavigateToProductDetail = { navController.navigate("product-detail") },
-                onNavigateToFavorites = { navController.navigate("favorites") } // ← sólo acá
+                onNavigateToFavorites = { navController.navigate("favorites") }
             )
         }
         composable("profile") {
