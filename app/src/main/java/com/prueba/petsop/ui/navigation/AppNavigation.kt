@@ -37,8 +37,8 @@ fun NavGraphBuilder.appNavGraph(navController: NavHostController) {
                 onSearchClick = { navController.navigate("search") },
                 onNavigateToPurchase = { navController.navigate("cart") },
                 onNavigateToBestSeller = { navController.navigate("best-seller") },
-                onNavigateToProductDetail = { navController.navigate("product-detail") }
-            )
+                onNavigateToProductDetail = { navController.navigate("product-detail") } ,
+                )
         }
         composable("profile") {
             ProfileScreen(

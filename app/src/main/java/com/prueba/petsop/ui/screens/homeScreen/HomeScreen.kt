@@ -1,5 +1,6 @@
 package com.prueba.petsop.ui.screens.homeScreen
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -39,6 +40,7 @@ import com.prueba.petsop.ui.components.layout.ModalLocation
 import com.prueba.petsop.ui.components.tags.CategoryChipsRow
 
 
+
 @Composable
 fun HomeScreen(
     onNavigateToProfile: () -> Unit,
@@ -46,8 +48,11 @@ fun HomeScreen(
     onSearchClick: () -> Unit,
     onNavigateToPurchase: () -> Unit,
     onNavigateToBestSeller: () -> Unit,
-    onNavigateToProductDetail: () -> Unit
+    onNavigateToProductDetail: () -> Unit,
 ) {
+    BackHandler {
+    }
+
     val scrollState = rememberScrollState()
 
     var showModal by remember { mutableStateOf(false) }
