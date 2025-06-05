@@ -34,9 +34,11 @@ class ProductRepository @Inject constructor(
             val allProducts = apiService.getProducts().products
             favoriteDao.getAllFavorites().collect { favorites ->
                 val favoriteIds = favorites.map { it.productId }
-                val favoriteProducts = allProducts.filter { product ->
-                    favoriteIds.contains(product.id)
-                }
+
+                val favoriteProducts = allProducts
+                    .filter { favoriteIds.contains(it.id) }
+                    .map { it.copy(isFavorite = true) } 
+
                 emit(favoriteProducts)
             }
         } catch (e: Exception) {
