@@ -10,10 +10,12 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.prueba.petsop.viewmodel.ProductViewModel
+import com.prueba.petsop.R
 import com.prueba.petsop.ui.components.items.ProductItem
+import com.prueba.petsop.viewmodel.ProductViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -26,12 +28,12 @@ fun ProductListScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Productos") },
+                title = { Text(stringResource(id = R.string.products)) },
                 actions = {
                     IconButton(onClick = onNavigateToFavorites) {
                         Icon(
                             imageVector = Icons.Filled.Favorite,
-                            contentDescription = "Ver favoritos"
+                            contentDescription = stringResource(id = R.string.view_favorites)
                         )
                     }
                 }

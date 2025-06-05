@@ -9,7 +9,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.prueba.petsop.R
 import com.prueba.petsop.ui.components.buttons.PrimaryButton
@@ -60,7 +59,7 @@ fun LoginScreen(
                 viewModel.username.value = it
                 viewModel.clearResult()
             },
-            placeholder = "Email",
+            placeholder = stringResource(id = R.string.email),
             showError = email.isEmpty()
         )
 
@@ -72,7 +71,7 @@ fun LoginScreen(
                 viewModel.password.value = it
                 viewModel.clearResult()
             },
-            placeholder = "Password",
+            placeholder = stringResource(id = R.string.password),
             showError = password.isEmpty(),
             isPassword = true
         )
@@ -84,7 +83,7 @@ fun LoginScreen(
             horizontalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             AuthSocialButtonWithImage(
-                text = "Google",
+                text = stringResource(id = R.string.google),
                 iconResId = R.drawable.google_icon,
                 onClick = {},
                 modifier = Modifier.weight(1f)
@@ -116,8 +115,8 @@ fun LoginScreen(
         Spacer(modifier = Modifier.height(24.dp))
 
         LinkedTextRow(
-            normalText = "Don’t have an account?",
-            linkText = "Create Account",
+            normalText = stringResource(id = R.string.have_account),
+            linkText = stringResource(id = R.string.create_account),
             onLinkClick = onRegisterClick
         )
 
@@ -125,19 +124,18 @@ fun LoginScreen(
 
         LinkedTextRow(
             normalText = "",
-            linkText = "Forgot your password?",
+            linkText = stringResource(id = R.string.forgot_password),
             onLinkClick = onForgotClick
         )
 
         Spacer(modifier = Modifier.height(32.dp))
 
         PrimaryButton(
-            text = "Get Started",
+            text = stringResource(id = R.string.get_started),
             enabled = allValid,
             onClick = {
                 if (allValid) {
                     viewModel.login()
-
                 }
             }
         )

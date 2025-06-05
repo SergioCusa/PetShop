@@ -25,6 +25,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -53,7 +54,7 @@ fun AccountScreen(
             ) {
                 HomeHeader(
                     onBackClick = onBackClick,
-                    title = "Account"
+                    title = stringResource(R.string.account)
                 )
             }
         },
@@ -79,7 +80,7 @@ fun AccountScreen(
                     .padding(horizontal = 24.dp, vertical = 16.dp)
             ) {
                 Text(
-                    text = "Name",
+                    text = stringResource(R.string.name),
                     fontSize = 14.sp,
                     fontWeight = FontWeight.Medium,
                     color = Color.Black,
@@ -102,7 +103,7 @@ fun AccountScreen(
                 )
 
                 Text(
-                    text = "Username",
+                    text = stringResource(R.string.username),
                     fontSize = 14.sp,
                     fontWeight = FontWeight.Medium,
                     color = Color.Black,
@@ -125,7 +126,7 @@ fun AccountScreen(
                 )
 
                 Text(
-                    text = "Email",
+                    text = stringResource(R.string.email),
                     fontSize = 14.sp,
                     fontWeight = FontWeight.Medium,
                     color = Color.Black,
@@ -147,7 +148,7 @@ fun AccountScreen(
                     )
                 )
                 Spacer(modifier = Modifier.height(32.dp))
-                PrimaryButton("Save Changes", onBackClick)
+                PrimaryButton(stringResource(R.string.save_changes), onBackClick)
             }
         }
     }
