@@ -2,6 +2,15 @@
 
 PetShop es una aplicación Android desarrollada con **Jetpack Compose** que utiliza **Retrofit** para la comunicación con APIs, **Room** para el almacenamiento local y **Hilt** para la inyección de dependencias.
 
+### Credenciales para pruebas
+
+- Para probar la aplicación, utilice las siguientes credenciales para iniciar sesión contra **dummyjson**:
+  - **Usuario:** `emilys`
+  - **Contraseña:** `emilyspass`
+- Alternativamente, para evitar el inicio de sesión contra **dummyjson**, puede usar las credenciales:
+  - **Usuario:** `test`
+  - **Contraseña:** `test`
+
 ## Estructura del proyecto
 
 ```text
@@ -100,7 +109,7 @@ class PetShopApplication : Application()
 1. Clonar repositorio.
 2. Abrir proyecto en **Android Studio**.
 3. Sincronizar dependencias de Gradle.
-4. Ejecutar la app
+4. Ejecutar la app.
 
 ## Dependencias clave
 
