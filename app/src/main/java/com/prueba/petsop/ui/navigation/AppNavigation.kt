@@ -22,6 +22,7 @@ import com.prueba.petsop.ui.screens.searchScreen.SearchScreen
 import com.prueba.petsop.ui.screens.settingsScreen.AccountScreen
 import com.prueba.petsop.ui.screens.settingsScreen.ChangeEmailScreen
 import com.prueba.petsop.ui.screens.settingsScreen.ChangePasswordScreen
+import com.prueba.petsop.ui.screens.settingsScreen.ContactScreen
 import com.prueba.petsop.ui.screens.settingsScreen.FAQScreen
 import com.prueba.petsop.ui.screens.settingsScreen.PrivacyScreen
 import com.prueba.petsop.ui.screens.settingsScreen.ProfileNotificationScreen
@@ -121,6 +122,7 @@ fun NavGraphBuilder.appNavGraph(navController: NavHostController) {
                 onNavigateToPrivacy = { navController.navigate("privacy") },
                 onNavigateToSecurity = { navController.navigate("security") },
                 onNavigateToFAQ = { navController.navigate("faq") },
+                onNavigateToContact = { navController.navigate(("contact")) },
                 onLogOutClick = {
                     navController.navigate(NavRoutes.LOGIN) {
                         popUpTo(NavRoutes.APP_GRAPH) {
@@ -174,6 +176,12 @@ fun NavGraphBuilder.appNavGraph(navController: NavHostController) {
         composable("faq") {
             FAQScreen(
                 onBackClick = { navController.popBackStack() },
+            )
+        }
+
+        composable("contact"){
+            ContactScreen(
+                onBackClick = { navController.popBackStack() }
             )
         }
 
