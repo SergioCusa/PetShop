@@ -5,6 +5,7 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
+import com.prueba.petsop.ui.screens.authScreens.loginScreen.LoginScreen
 import com.prueba.petsop.ui.screens.cartScreen.CartScreen
 import com.prueba.petsop.ui.screens.checkoutScreen.CheckoutScreen
 import com.prueba.petsop.ui.screens.checkoutScreen.SuccesScreen
@@ -171,6 +172,15 @@ fun NavGraphBuilder.appNavGraph(navController: NavHostController) {
         composable("faq") {
             FAQScreen(
                 onBackClick = { navController.popBackStack() },
+            )
+        }
+
+        composable(NavRoutes.LOGIN) {
+            LoginScreen(
+                onLoginClick = { navController.navigate(NavRoutes.APP_GRAPH) },
+                onRegisterClick = { navController.navigate(NavRoutes.REGISTER) },
+                onForgotClick = { navController.navigate(NavRoutes.FORGOT) },
+                onBackClick = { navController.popBackStack() } 
             )
         }
     }

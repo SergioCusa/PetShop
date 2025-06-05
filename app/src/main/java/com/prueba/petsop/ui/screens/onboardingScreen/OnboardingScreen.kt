@@ -1,5 +1,6 @@
 package com.prueba.petsop.ui.screens.onboardingScreen
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -21,6 +22,9 @@ fun OnboardingScreen(
     onProductListClick: () -> Unit,
     onLoginTestClick: () -> Unit
 ) {
+    BackHandler {
+    }
+
     Column(
         modifier = Modifier
             .fillMaxSize()

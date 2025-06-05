@@ -1,6 +1,7 @@
 package com.prueba.petsop.ui.screens.authScreens.loginScreen
 
 import AuthSocialButtonWithImage
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -23,6 +24,7 @@ fun LoginScreen(
     onLoginClick: () -> Unit,
     onRegisterClick: () -> Unit,
     onForgotClick: () -> Unit,
+    onBackClick: () -> Unit,
     viewModel: LoginViewModel = viewModel()
 ) {
     val email by viewModel.username.collectAsState()
@@ -30,6 +32,10 @@ fun LoginScreen(
     val result by viewModel.result.collectAsState()
 
     val allValid = email.isNotBlank() && password.isNotBlank()
+
+    BackHandler {
+        onBackClick()
+    }
 
     Column(
         modifier = Modifier
@@ -146,5 +152,6 @@ fun LoginScreen(
                 viewModel.clearResult()
             }
         }
+
     }
 }

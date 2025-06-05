@@ -11,9 +11,7 @@ fun NavGraphBuilder.onboardingNavGraph(navController: NavHostController) {
         composable(route = NavRoutes.ONBOARDING) {
             OnboardingScreen(
                 onGetStartedClick = {
-                    navController.navigate(NavRoutes.AUTH_GRAPH) {
-                        popUpTo(NavRoutes.ONBOARDING_GRAPH) { inclusive = true }
-                    }
+                    navController.navigate(NavRoutes.AUTH_GRAPH)
                 },
                 onProductListClick = {
                     navController.navigate(NavRoutes.PRODUCT_LIST) 
