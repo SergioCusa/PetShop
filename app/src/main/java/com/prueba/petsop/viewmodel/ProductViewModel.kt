@@ -49,7 +49,16 @@ class ProductViewModel @Inject constructor(
 
     fun toggleFavorite(product: Product) {
         viewModelScope.launch {
-            repository.toggleFavorite(product)
+            _products.value = _products.value.map { current ->
+                if (current.id == product.id) {
+                    current.copy(isFavorite = !current.isFavorite) 
+                } else current
+            }
+
+            runCatching {
+                repository.toggleFavorite(product)
+            }
+
             loadFavorites()
         }
     }

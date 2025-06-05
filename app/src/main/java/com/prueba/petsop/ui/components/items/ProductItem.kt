@@ -13,6 +13,7 @@ import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.outlined.FavoriteBorder
 import coil.compose.AsyncImage
 import com.prueba.petsop.model.Product
+import androidx.compose.foundation.clickable
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -58,25 +59,21 @@ fun ProductItem(
                     )
                 }
             }
-            IconButton(onClick = { onFavoriteClick(!product.isFavorite) }) {
-                Icon(
-                    imageVector = if (product.isFavorite) {
-                        Icons.Filled.Favorite
-                    } else {
-                        Icons.Outlined.FavoriteBorder
-                    },
-                    contentDescription = if (product.isFavorite) {
-                        "Remove from favorites"
-                    } else {
-                        "Add to favorites"
-                    },
-                    tint = if (product.isFavorite) {
-                        MaterialTheme.colorScheme.primary
-                    } else {
-                        MaterialTheme.colorScheme.onSurface
-                    }
-                )
-            }
+            Icon(
+                imageVector = if (product.isFavorite)
+                    Icons.Filled.Favorite
+                else
+                    Icons.Outlined.FavoriteBorder,
+                contentDescription = if (product.isFavorite)
+                    "Remove from favorites"
+                else
+                    "Add to favorites",
+                tint = if (product.isFavorite)
+                    MaterialTheme.colorScheme.primary
+                else
+                    MaterialTheme.colorScheme.onSurface,
+                modifier = Modifier.clickable { onFavoriteClick(!product.isFavorite) }
+            )
         }
     }
 }
