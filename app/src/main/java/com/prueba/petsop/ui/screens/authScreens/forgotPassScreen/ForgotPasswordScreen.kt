@@ -70,7 +70,8 @@ fun ForgotPasswordScreen(
                 value = newPassword,
                 onValueChange = { newPassword = it },
                 placeholder = "New Password",
-                showError = newPassword.isEmpty()
+                showError = newPassword.isEmpty(),
+                isPassword = true
             )
 
             Spacer(modifier = Modifier.height(16.dp))
@@ -79,7 +80,8 @@ fun ForgotPasswordScreen(
                 value = confirmPassword,
                 onValueChange = { confirmPassword = it },
                 placeholder = "Confirm Password",
-                showError = confirmPassword.isEmpty()
+                showError = confirmPassword.isEmpty(),
+                isPassword = true
             )
         }
 

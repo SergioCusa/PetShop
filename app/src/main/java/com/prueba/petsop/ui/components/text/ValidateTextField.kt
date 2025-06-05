@@ -19,13 +19,16 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 
 @Composable
 fun ValidateTextField(
     value: String,
     onValueChange: (String) -> Unit,
     placeholder: String,
-    showError: Boolean
+    showError: Boolean,
+    isPassword: Boolean = false
 ) {
     Column(modifier = Modifier.fillMaxWidth()) {
 
@@ -59,6 +62,7 @@ fun ValidateTextField(
                 },
                 textStyle = LocalTextStyle.current.copy(color = MaterialTheme.colorScheme.primary),
                 modifier = Modifier.fillMaxWidth(),
+                visualTransformation = if (isPassword) PasswordVisualTransformation() else VisualTransformation.None,
                 decorationBox = { innerTextField ->
                     if (value.isEmpty()) {
                         Text(

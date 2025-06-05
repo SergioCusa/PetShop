@@ -117,7 +117,15 @@ fun NavGraphBuilder.appNavGraph(navController: NavHostController) {
                 onNavigateToPaymentMethod = { navController.navigate("payment-method") },
                 onNavigateToPrivacy = { navController.navigate("privacy") },
                 onNavigateToSecurity = { navController.navigate("security") },
-                onNavigateToFAQ = { navController.navigate("faq") }
+                onNavigateToFAQ = { navController.navigate("faq") },
+                onLogOutClick = {
+                    navController.navigate(NavRoutes.LOGIN) {
+                        popUpTo(NavRoutes.APP_GRAPH) {
+                            inclusive = true
+                        }
+                    }
+                }
+
             )
         }
          composable("account") {

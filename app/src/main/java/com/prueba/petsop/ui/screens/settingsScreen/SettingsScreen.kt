@@ -22,6 +22,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.prueba.petsop.R
+import com.prueba.petsop.ui.components.buttons.LogoutButton
 import com.prueba.petsop.ui.components.items.SettingsItem
 import com.prueba.petsop.ui.components.layout.HomeHeader
 
@@ -34,7 +35,8 @@ fun SettingsScreen(
     onNavigateToPaymentMethod: () -> Unit,
     onNavigateToPrivacy: () -> Unit,
     onNavigateToSecurity: () -> Unit,
-    onNavigateToFAQ: () -> Unit
+    onNavigateToFAQ: () -> Unit,
+    onLogOutClick: () -> Unit
 ) {
     Scaffold(
         topBar = {
@@ -80,23 +82,10 @@ fun SettingsScreen(
 
             Spacer(modifier = Modifier.weight(1f))
 
-            OutlinedButton(
-                onClick = { /* Log out action */ },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(60.dp),
-                shape = RoundedCornerShape(30.dp),
-                border = BorderStroke(1.dp, Color(0xFF6C4DF4)),
-                colors = ButtonDefaults.outlinedButtonColors(
-                    contentColor = Color(0xFF6C4DF4)
-                )
-            ) {
-                Text(
-                    text = "Log Out",
-                    fontSize = 16.sp,
-                    fontWeight = FontWeight.Medium
-                )
-            }
+            LogoutButton(
+                onClick = onLogOutClick
+            )
+
             Spacer(modifier = Modifier.height(32.dp))
         }
     }

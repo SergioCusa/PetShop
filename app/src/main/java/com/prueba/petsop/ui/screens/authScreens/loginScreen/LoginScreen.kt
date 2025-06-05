@@ -72,7 +72,8 @@ fun LoginScreen(
                 viewModel.clearResult()
             },
             placeholder = "Password",
-            showError = password.isEmpty()
+            showError = password.isEmpty(),
+            isPassword = true
         )
 
         Spacer(modifier = Modifier.height(50.dp))
@@ -139,5 +140,11 @@ fun LoginScreen(
                 }
             }
         )
+        LaunchedEffect(result) {
+            if (result is LoginResult.Success) {
+                onLoginClick()
+                viewModel.clearResult()
+            }
+        }
     }
 }

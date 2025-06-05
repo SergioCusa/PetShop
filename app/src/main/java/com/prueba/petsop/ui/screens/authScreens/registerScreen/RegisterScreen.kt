@@ -86,7 +86,8 @@ fun RegisterScreen(
             value = password,
             onValueChange = { password = it },
             placeholder = "password",
-            showError =  password.isEmpty()
+            showError =  password.isEmpty(),
+            isPassword = true
         )
 
         Spacer(modifier = Modifier.height(50.dp))
