@@ -3,42 +3,34 @@ package com.prueba.petsop.ui.screens.homeScreen
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.prueba.petsop.R
 import com.prueba.petsop.ui.components.cards.ProductCardSeller
 import com.prueba.petsop.ui.components.icons.FooterItem
 import com.prueba.petsop.ui.components.icons.PlaceholderIcon
+import com.prueba.petsop.ui.components.items.ProductItem
 import com.prueba.petsop.ui.components.layout.BottomNavBar
 import com.prueba.petsop.ui.components.layout.ModalBottomSheet
 import com.prueba.petsop.ui.components.layout.ModalLocation
 import com.prueba.petsop.ui.components.tags.CategoryChipsRow
-
+import com.prueba.petsop.viewmodel.ProductViewModel
 
 
 @Composable
@@ -49,27 +41,41 @@ fun HomeScreen(
     onNavigateToPurchase: () -> Unit,
     onNavigateToBestSeller: () -> Unit,
     onNavigateToProductDetail: () -> Unit,
+    onNavigateToFavorites: () -> Unit,
+    viewModel: ProductViewModel = hiltViewModel(),
 ) {
     BackHandler {
     }
 
+    val products by viewModel.products.collectAsStateWithLifecycle()
     val scrollState = rememberScrollState()
-
     var showModal by remember { mutableStateOf(false) }
+
+    Scaffold(
+        bottomBar = {
+            BottomNavBar(
+                selectedItem = FooterItem.HOME,
+                onNavigateToHome      = {},
+                onNavigateToAbout     = {},
+                onNavigateToPurchase  = onNavigateToPurchase,
+                onNavigateToProfile   = onNavigateToProfile
+            )
+        }
+    ) { innerPadding ->
 
         Column(
             modifier = Modifier
-                .fillMaxHeight()
-                .verticalScroll(scrollState),
-            verticalArrangement = Arrangement.Bottom
+                .fillMaxSize()
+                .verticalScroll(scrollState)
+                .padding(innerPadding),
         ) {
-
+            // ---------- ENCABEZADO Y PROMO ----------
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 16.dp)
             ) {
-                Spacer(modifier = Modifier.height(22.dp))
+                Spacer(modifier = Modifier.height(8.dp))
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -94,12 +100,14 @@ fun HomeScreen(
                         )
                         PlaceholderIcon(
                             onClick = onNotificationClick,
-                            icon = Icons.Default.Notifications,
+                            icon = Icons.Default.Notifications
+                        )
+                        PlaceholderIcon(
+                            onClick = onNavigateToFavorites,
+                            icon = Icons.Filled.Favorite
                         )
                     }
                 }
-
-//                Spacer(modifier = Modifier.height(5.dp))
 
                 Box(
                     modifier = Modifier
@@ -110,13 +118,12 @@ fun HomeScreen(
                     Image(
                         painter = painterResource(id = R.drawable.promo_image_2),
                         contentDescription = "Promo",
-                        modifier = Modifier
-                            .fillMaxSize()
+                        modifier = Modifier.fillMaxSize()
                     )
                 }
 
                 Spacer(modifier = Modifier.height(16.dp))
-
+                // ---------- CATEGORÍAS ----------
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceBetween
@@ -130,11 +137,10 @@ fun HomeScreen(
                 }
 
                 Spacer(modifier = Modifier.height(8.dp))
-
                 CategoryChipsRow()
 
-                Spacer(modifier = Modifier.height(24.dp))
-
+                Spacer(modifier = Modifier.height(12.dp))
+                // ---------- BEST SELLER ----------
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceBetween
@@ -144,45 +150,53 @@ fun HomeScreen(
                         text = "View All",
                         style = MaterialTheme.typography.labelSmall.copy(fontSize = 13.sp),
                         color = MaterialTheme.colorScheme.primary,
-                        modifier = Modifier.clickable {
-                            onNavigateToBestSeller()
-                        },
+                        modifier = Modifier.clickable { onNavigateToBestSeller() }
                     )
                 }
 
                 Spacer(modifier = Modifier.height(16.dp))
-
                 Row(
-                    modifier = Modifier.fillMaxWidth()
-                        .padding(vertical = 8.dp),
-                    horizontalArrangement = Arrangement.SpaceAround,
-
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(vertical = 4.dp),
+                    horizontalArrangement = Arrangement.SpaceAround
                 ) {
-                    ProductCardSeller(name = "RC Kitten", price = "$20.99", onNavigateToProductDetail = onNavigateToProductDetail, photo = "pink")
-                    ProductCardSeller(name = "RC Persian", price = "$22.99", onNavigateToProductDetail = onNavigateToProductDetail, photo = "yellow")
+                    ProductCardSeller(
+                        name = "RC Kitten",
+                        price = "$20.99",
+                        onNavigateToProductDetail = onNavigateToProductDetail,
+                        photo = "pink"
+                    )
+                    ProductCardSeller(
+                        name = "RC Persian",
+                        price = "$22.99",
+                        onNavigateToProductDetail = onNavigateToProductDetail,
+                        photo = "yellow"
+                    )
                 }
-            }
-            Spacer(modifier = Modifier.weight(1f))
 
-            BottomNavBar(
-                selectedItem = FooterItem.HOME,
-                onNavigateToHome = {},
-                onNavigateToAbout = {},
-                onNavigateToPurchase = onNavigateToPurchase,
-                onNavigateToProfile = onNavigateToProfile
-            )
+                // ---------- NUEVA LISTA DE PRODUCTOS ----------
+                Spacer(modifier = Modifier.height(12.dp))
+                Text(text = "Productos", style = MaterialTheme.typography.labelMedium)
+                Spacer(modifier = Modifier.height(8.dp))
 
-        }
-    Box(
-    ){
-        ModalBottomSheet(
-            visible = showModal,
-            onDismiss = { showModal = false }
-        ) {
-            Column() {
-                ModalLocation()
+                products.forEach { product ->
+                    ProductItem(
+                        product = product,
+                        onFavoriteClick = { viewModel.toggleFavorite(product) }
+                    )
+                    Spacer(modifier = Modifier.height(8.dp))
+                }
             }
         }
     }
 
-}
+    if (showModal) {
+        ModalBottomSheet(
+            visible = true,
+            onDismiss = { showModal = false }
+        ) {
+            ModalLocation()
+        }
+    }
+} 

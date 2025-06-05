@@ -32,13 +32,15 @@ fun NavGraphBuilder.appNavGraph(navController: NavHostController) {
     navigation(startDestination = "home", route = NavRoutes.APP_GRAPH) {
         composable("home") {
             HomeScreen(
+                viewModel = hiltViewModel(),
                 onNavigateToProfile = { navController.navigate("profile") },
                 onNotificationClick = { navController.navigate("notifications") },
                 onSearchClick = { navController.navigate("search") },
                 onNavigateToPurchase = { navController.navigate("cart") },
                 onNavigateToBestSeller = { navController.navigate("best-seller") },
-                onNavigateToProductDetail = { navController.navigate("product-detail") } ,
-                )
+                onNavigateToProductDetail = { navController.navigate("product-detail") },
+                onNavigateToFavorites = { navController.navigate("favorites") }
+            )
         }
         composable("profile") {
             ProfileScreen(

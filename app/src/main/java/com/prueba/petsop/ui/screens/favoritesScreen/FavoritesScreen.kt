@@ -45,9 +45,7 @@ fun FavoritesScreen(
             ) { product ->
                 ProductItem(
                     product = product,
-                    onFavoriteClick = {
-                        viewModel.toggleFavorite(product)
-                    }
+                    onFavoriteClick = { viewModel.toggleFavorite(product) }
                 )
                 Spacer(modifier = Modifier.height(8.dp))
             }

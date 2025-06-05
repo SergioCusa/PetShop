@@ -14,6 +14,7 @@ import javax.inject.Inject
 class ProductViewModel @Inject constructor(
     private val repository: ProductRepository
 ) : ViewModel() {
+
     private val _products = MutableStateFlow<List<Product>>(emptyList())
     val products: StateFlow<List<Product>> = _products
 
@@ -22,35 +23,36 @@ class ProductViewModel @Inject constructor(
 
     init {
         loadProducts()
-        loadFavorites()
+        observeFavorites() 
     }
 
-    private fun loadProducts() {
-        viewModelScope.launch {
-            try {
-                _products.value = repository.getProducts()
-            } catch (e: Exception) {
-                _products.value = emptyList()
+    private fun loadProducts() = viewModelScope.launch {
+        _products.value = runCatching { repository.getProducts() }
+            .getOrElse { emptyList() }
+    }
+
+    private fun observeFavorites() = viewModelScope.launch {
+        repository.getFavoriteProducts().collect { favs ->
+            _favoriteProducts.value = favs
+
+            val favIds = favs.map { it.id }.toSet()
+            _products.value = _products.value.map { p ->
+                p.copy(isFavorite = favIds.contains(p.id))
             }
         }
     }
 
-    private fun loadFavorites() {
-        viewModelScope.launch {
-            try {
-                repository.getFavoriteProducts().collect { favorites ->
-                    _favoriteProducts.value = favorites
-                }
-            } catch (e: Exception) {
-                _favoriteProducts.value = emptyList()
-            }
+    fun toggleFavorite(product: Product) = viewModelScope.launch {
+        _products.value = _products.value.map { cur ->
+            if (cur.id == product.id) cur.copy(isFavorite = !cur.isFavorite) else cur
         }
-    }
+        _favoriteProducts.value =
+            if (product.isFavorite)
+                _favoriteProducts.value.filterNot { it.id == product.id }
+            else
+                _favoriteProducts.value + product.copy(isFavorite = true)
 
-    fun toggleFavorite(product: Product) {
-        viewModelScope.launch {
-            repository.toggleFavorite(product)
-            loadFavorites()
-        }
+        repository.toggleFavorite(product)
+
     }
 }
