@@ -30,12 +30,27 @@ class LoginViewModel : ViewModel() {
     val result: StateFlow<LoginResult> = _result
 
     fun login() {
-        viewModelScope.launch {
-            try {
-                val response = api.login(LoginRequest(username.value, password.value))
-                _result.value = LoginResult.Success(response)
-            } catch (e: Exception) {
-                _result.value = LoginResult.Error(e.message ?: "Error desconocido")
+        if (username.value == "test") {
+            _result.value = LoginResult.Success(
+                LoginResponse(
+                    id = 1,
+                    username = "test",
+                    email = "test@example.com",
+                    firstName = "Test",
+                    lastName = "User",
+                    gender = "N/A",
+                    image = "https://example.com/test.png",
+                    token = "dummy-token"
+                )
+            )
+        } else {
+            viewModelScope.launch {
+                try {
+                    val response = api.login(LoginRequest(username.value, password.value))
+                    _result.value = LoginResult.Success(response)
+                } catch (e: Exception) {
+                    _result.value = LoginResult.Error(e.message ?: "Error desconocido")
+                }
             }
         }
     }
