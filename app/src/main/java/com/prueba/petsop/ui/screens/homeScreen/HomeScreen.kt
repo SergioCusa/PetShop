@@ -11,6 +11,7 @@ import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -41,7 +42,7 @@ fun HomeScreen(
     onNavigateToBestSeller: () -> Unit,
     onNavigateToProductDetail: () -> Unit,
     onNavigateToFavorites: () -> Unit,
-    viewModel: ProductViewModel = hiltViewModel()
+    viewModel: ProductViewModel = hiltViewModel(),
 ) {
     BackHandler {
     }
@@ -50,140 +51,144 @@ fun HomeScreen(
     val scrollState = rememberScrollState()
     var showModal by remember { mutableStateOf(false) }
 
-    Column(
-        modifier = Modifier
-            .fillMaxHeight()
-            .verticalScroll(scrollState),
-        verticalArrangement = Arrangement.Bottom
-    ) {
-        // ---------- ENCABEZADO Y PROMO ----------
+    Scaffold(
+        bottomBar = {
+            BottomNavBar(
+                selectedItem = FooterItem.HOME,
+                onNavigateToHome      = {},
+                onNavigateToAbout     = {},
+                onNavigateToPurchase  = onNavigateToPurchase,
+                onNavigateToProfile   = onNavigateToProfile
+            )
+        }
+    ) { innerPadding ->
+
         Column(
             modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 16.dp)
+                .fillMaxSize()
+                .verticalScroll(scrollState)
+                .padding(innerPadding),
         ) {
-            Spacer(modifier = Modifier.height(22.dp))
-            Row(
+            // ---------- ENCABEZADO Y PROMO ----------
+            Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(16.dp),
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically
+                    .padding(horizontal = 16.dp)
             ) {
-                Column {
-                    Text(
-                        text = "Location",
-                        style = MaterialTheme.typography.labelSmall,
-                        color = MaterialTheme.colorScheme.outline,
-                        modifier = Modifier.clickable { showModal = true }
-                    )
-                    Text(text = "Jebres, Surakarta", style = MaterialTheme.typography.bodyLarge)
-                }
-
-                Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-                    PlaceholderIcon(
-                        onClick = onSearchClick,
-                        icon = Icons.Default.Search
-                    )
-                    PlaceholderIcon(
-                        onClick = onNotificationClick,
-                        icon = Icons.Default.Notifications
-                    )
-                    PlaceholderIcon(
-                        onClick = onNavigateToFavorites,
-                        icon = Icons.Filled.Favorite
-                    )
-                }
-            }
-
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(200.dp),
-                contentAlignment = Alignment.Center
-            ) {
-                Image(
-                    painter = painterResource(id = R.drawable.promo_image_2),
-                    contentDescription = "Promo",
-                    modifier = Modifier.fillMaxSize()
-                )
-            }
-
-            Spacer(modifier = Modifier.height(16.dp))
-            // ---------- CATEGORÍAS ----------
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween
-            ) {
-                Text(text = "Category", style = MaterialTheme.typography.labelMedium)
-                Text(
-                    text = "View All",
-                    style = MaterialTheme.typography.labelSmall.copy(fontSize = 13.sp),
-                    color = MaterialTheme.colorScheme.primary
-                )
-            }
-
-            Spacer(modifier = Modifier.height(8.dp))
-            CategoryChipsRow()
-
-            Spacer(modifier = Modifier.height(24.dp))
-            // ---------- BEST SELLER ----------
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween
-            ) {
-                Text(text = "Best Seller", style = MaterialTheme.typography.labelMedium)
-                Text(
-                    text = "View All",
-                    style = MaterialTheme.typography.labelSmall.copy(fontSize = 13.sp),
-                    color = MaterialTheme.colorScheme.primary,
-                    modifier = Modifier.clickable { onNavigateToBestSeller() }
-                )
-            }
-
-            Spacer(modifier = Modifier.height(16.dp))
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(vertical = 8.dp),
-                horizontalArrangement = Arrangement.SpaceAround
-            ) {
-                ProductCardSeller(
-                    name = "RC Kitten",
-                    price = "$20.99",
-                    onNavigateToProductDetail = onNavigateToProductDetail,
-                    photo = "pink"
-                )
-                ProductCardSeller(
-                    name = "RC Persian",
-                    price = "$22.99",
-                    onNavigateToProductDetail = onNavigateToProductDetail,
-                    photo = "yellow"
-                )
-            }
-
-            // ---------- NUEVA LISTA DE PRODUCTOS ----------
-            Spacer(modifier = Modifier.height(24.dp))
-            Text(text = "Productos", style = MaterialTheme.typography.labelMedium)
-            Spacer(modifier = Modifier.height(8.dp))
-
-            products.forEach { product ->
-                ProductItem(
-                    product = product,
-                    onFavoriteClick = { viewModel.toggleFavorite(product) }
-                )
                 Spacer(modifier = Modifier.height(8.dp))
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(16.dp),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Column {
+                        Text(
+                            text = "Location",
+                            style = MaterialTheme.typography.labelSmall,
+                            color = MaterialTheme.colorScheme.outline,
+                            modifier = Modifier.clickable { showModal = true }
+                        )
+                        Text(text = "Jebres, Surakarta", style = MaterialTheme.typography.bodyLarge)
+                    }
+
+                    Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+                        PlaceholderIcon(
+                            onClick = onSearchClick,
+                            icon = Icons.Default.Search
+                        )
+                        PlaceholderIcon(
+                            onClick = onNotificationClick,
+                            icon = Icons.Default.Notifications
+                        )
+                        PlaceholderIcon(
+                            onClick = onNavigateToFavorites,
+                            icon = Icons.Filled.Favorite
+                        )
+                    }
+                }
+
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(200.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Image(
+                        painter = painterResource(id = R.drawable.promo_image_2),
+                        contentDescription = "Promo",
+                        modifier = Modifier.fillMaxSize()
+                    )
+                }
+
+                Spacer(modifier = Modifier.height(16.dp))
+                // ---------- CATEGORÍAS ----------
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
+                    Text(text = "Category", style = MaterialTheme.typography.labelMedium)
+                    Text(
+                        text = "View All",
+                        style = MaterialTheme.typography.labelSmall.copy(fontSize = 13.sp),
+                        color = MaterialTheme.colorScheme.primary
+                    )
+                }
+
+                Spacer(modifier = Modifier.height(8.dp))
+                CategoryChipsRow()
+
+                Spacer(modifier = Modifier.height(12.dp))
+                // ---------- BEST SELLER ----------
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
+                    Text(text = "Best Seller", style = MaterialTheme.typography.labelMedium)
+                    Text(
+                        text = "View All",
+                        style = MaterialTheme.typography.labelSmall.copy(fontSize = 13.sp),
+                        color = MaterialTheme.colorScheme.primary,
+                        modifier = Modifier.clickable { onNavigateToBestSeller() }
+                    )
+                }
+
+                Spacer(modifier = Modifier.height(16.dp))
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(vertical = 4.dp),
+                    horizontalArrangement = Arrangement.SpaceAround
+                ) {
+                    ProductCardSeller(
+                        name = "RC Kitten",
+                        price = "$20.99",
+                        onNavigateToProductDetail = onNavigateToProductDetail,
+                        photo = "pink"
+                    )
+                    ProductCardSeller(
+                        name = "RC Persian",
+                        price = "$22.99",
+                        onNavigateToProductDetail = onNavigateToProductDetail,
+                        photo = "yellow"
+                    )
+                }
+
+                // ---------- NUEVA LISTA DE PRODUCTOS ----------
+                Spacer(modifier = Modifier.height(12.dp))
+                Text(text = "Productos", style = MaterialTheme.typography.labelMedium)
+                Spacer(modifier = Modifier.height(8.dp))
+
+                products.forEach { product ->
+                    ProductItem(
+                        product = product,
+                        onFavoriteClick = { viewModel.toggleFavorite(product) }
+                    )
+                    Spacer(modifier = Modifier.height(8.dp))
+                }
             }
         }
-
-        Spacer(modifier = Modifier.weight(1f))
-        BottomNavBar(
-            selectedItem = FooterItem.HOME,
-            onNavigateToHome = {},
-            onNavigateToAbout = {},
-            onNavigateToPurchase = onNavigateToPurchase,
-            onNavigateToProfile = onNavigateToProfile
-        )
     }
 
     if (showModal) {

@@ -66,9 +66,6 @@ fun OnboardingScreen(
             Spacer(modifier = Modifier.height(24.dp))
 
             PrimaryButton(text = "Get Started", onClick = onGetStartedClick)
-            Spacer(modifier = Modifier.height(16.dp))
-            PrimaryButton(text = "Ver Productos", onClick = onProductListClick)
-
         }
     }
 }
